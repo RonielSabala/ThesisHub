@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ThesisHub.Web.Data;
-using ThesisHub.Web.Models.Entities;
+using ThesisHub.Domain.Entities;
+using ThesisHub.Persistence;
 
 namespace ThesisHub.Web.Controllers
 {
@@ -43,12 +43,12 @@ namespace ThesisHub.Web.Controllers
         }
 
         // GET: Entities/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Entities/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Department entity)
@@ -59,6 +59,7 @@ namespace ThesisHub.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(entity);
         }
 
@@ -75,6 +76,7 @@ namespace ThesisHub.Web.Controllers
             {
                 return NotFound();
             }
+
             return View(entity);
         }
 

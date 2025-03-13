@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ThesisHub.Web.Models.Entities
+namespace ThesisHub.Domain.Entities
 {
     [Table("departments")]
     public class Department

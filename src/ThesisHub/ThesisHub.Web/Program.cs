@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ThesisHub.Web.Data;
 using Microsoft.Extensions.DependencyInjection;
+using ThesisHub.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

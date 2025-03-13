@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ThesisHub.Web.Models.Entities;
+using ThesisHub.Domain.Entities;
 
-namespace ThesisHub.Web.Data
+namespace ThesisHub.Persistence
 {
     public class ThesisHubContext : DbContext
     {

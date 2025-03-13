@@ -1,4 +1,4 @@
-﻿@model ThesisHub.Web.Models.Entities.Department
+﻿@model Department
 
 @{
     ViewData["Title"] = "Details";
@@ -9,27 +9,17 @@
 <div>
     <h4>Department</h4>
     <hr />
+
     <dl class="row">
-        <dt class = "col-sm-2">
-            DeptName
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.DeptName
-        </dd>
-        <dt class = "col-sm-2">
-            FacultyHead
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.FacultyHead)
-        </dd>
-        <dt class = "col-sm-2">
-            Email
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.Email)
-        </dd>
+        <dt class = "col-sm-2">DeptName</dt>
+        <dd class = "col-sm-10">@Model.DeptName</dd>
+        <dt class = "col-sm-2">FacultyHead</dt>
+        <dd class = "col-sm-10">@Model.FacultyHead)</dd>
+        <dt class = "col-sm-2">Email</dt>
+        <dd class = "col-sm-10">@Model.Email)</dd>
     </dl>
 </div>
+
 <div>
     <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

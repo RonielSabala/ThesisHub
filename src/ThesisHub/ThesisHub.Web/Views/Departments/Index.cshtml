@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ThesisHub.Web.Models.Entities.Department>
+﻿@model IEnumerable<Department>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,41 +9,30 @@
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>
-                Department name
-            </th>
-            <th>
-                Faculty head
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Actions
-            </th>
+            <th>Department name</th>
+            <th>Faculty head</th>
+            <th>Email</th>
+            <th>Actions</th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
-            <td>
-                @item.DeptName
-            </td>
-            <td>
-                @item.FacultyHead
-            </td>
-            <td>
-                @item.Email
-            </td>
+            <td>@item.DeptName</td>
+            <td>@item.FacultyHead</td>
+            <td>@item.Email</td>
             <td>
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a class="btn btn-info"  asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
+
 </table>
