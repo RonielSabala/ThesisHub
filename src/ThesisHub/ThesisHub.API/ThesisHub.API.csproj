@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ThesisHub.Domain\ThesisHub.Domain.csproj" />
-    <ProjectReference Include="..\ThesisHub.Persistence2\ThesisHub.Persistence.csproj" />
+    <ProjectReference Include="..\ThesisHub.Persistence\ThesisHub.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
