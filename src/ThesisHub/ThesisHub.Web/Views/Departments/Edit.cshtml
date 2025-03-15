@@ -43,7 +43,24 @@
 
 @section Scripts {
 <script>
-    function editDepartment(id) {
+    API = "https://localhost:7149/Departments";
+
+    $(document).ready(function () {
+        loadDepartments();
+    });
+
+    function loadDepartments() {
+        $.get(
+            `${API}/Get/${@Model.Id}`,
+            function (entity) {
+                $("#deptName").val(entity.deptName);
+                $("#facultyHead").val(entity.facultyHead);
+                $("#email").val(entity.email);
+            }
+        );
+    }
+
+    function editDepartment() {
         let entity = {
             id: $("#id").val(),
             deptName: $("#deptName").val(),
@@ -52,7 +69,7 @@
         };
 
         $.ajax({
-            url: `https://localhost:7149/Departments/Edit`,
+            url: `${API}/Edit`,
             type: "PUT",
             contentType: "application/json",
             data: JSON.stringify(entity),

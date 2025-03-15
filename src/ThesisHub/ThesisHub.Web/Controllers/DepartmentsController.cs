@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using ThesisHub.Domain.Entities;
 using ThesisHub.Persistence;
 
 namespace ThesisHub.Web.Controllers
@@ -25,39 +25,17 @@ namespace ThesisHub.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var entity = await _context.Departments
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (entity == null)
-            {
-                return NotFound();
-            }
-
-            return View(entity);
+            return View(new Department { Id = id });
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var entity = await _context.Departments.FindAsync(id);
-            if (entity == null)
-            {
-                return NotFound();
-            }
-
-            return View(entity);
+            return View(new Department { Id = id});
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var entity = await _context.Departments
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (entity == null)
-            {
-                return NotFound();
-            }
-
-            return View(entity);
+            return View(new Department { Id = id });
         }
     }
 }

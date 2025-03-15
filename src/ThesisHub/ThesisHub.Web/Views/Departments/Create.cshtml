@@ -40,6 +40,8 @@
 
 @section Scripts {
 <script>
+    API = "https://localhost:7149/Departments";
+
     function saveDepartment() {
         let entity = {
             facultyHead: $("#facultyHead").val(),
@@ -48,7 +50,7 @@
         };
 
         $.ajax({
-            url: `https://localhost:7149/Departments/Add`,
+            url: `${API}/Add`,
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(entity),

@@ -33,6 +33,8 @@
 
 @section Scripts {
 <script>
+    API = "https://localhost:7149/Departments";
+
     $(document).ready(function () {
         loadDepartments();
     });
@@ -41,7 +43,7 @@
         let filter = $("#search").val();
 
         $.get(
-            `https://localhost:7149/Departments/GetAll`,
+            `${API}/GetAll`,
             { filter: filter },
             function (data) {
                 let rows = "";
