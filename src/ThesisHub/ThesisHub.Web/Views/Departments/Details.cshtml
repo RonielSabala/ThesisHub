@@ -11,16 +11,18 @@
     <hr />
 
     <dl class="row">
-        <dt class = "col-sm-2">DeptName</dt>
-        <dd class = "col-sm-10">@Model.DeptName</dd>
-        <dt class = "col-sm-2">FacultyHead</dt>
-        <dd class = "col-sm-10">@Model.FacultyHead)</dd>
-        <dt class = "col-sm-2">Email</dt>
-        <dd class = "col-sm-10">@Model.Email)</dd>
+        @* Department name *@
+        <dt class="col-sm-2">Department name</dt>
+        <dd class="col-sm-10" id="deptName">@Model.DeptName</dd>
+
+        @* Faculty head *@
+        <dt class="col-sm-2">Faculty head</dt>
+        <dd class="col-sm-10" id="facultyHead">@Model.FacultyHead</dd>
+
+        @* Email *@
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10" id="email">@Model.Email</dd>
     </dl>
 </div>
 
-<div>
-    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

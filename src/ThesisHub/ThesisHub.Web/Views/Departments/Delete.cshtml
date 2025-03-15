@@ -12,17 +12,41 @@
     <hr />
 
     <dl class="row">
-        <dt class = "col-sm-2">DeptName</dt>
-        <dd class = "col-sm-10">@Model.DeptName</dd>
-        <dt class = "col-sm-2">FacultyHead</dt>
-        <dd class = "col-sm-10">@Model.FacultyHead</dd>
-        <dt class = "col-sm-2">Email</dt>
-        <dd class = "col-sm-10">@Model.Email</dd>
+        @* Department name *@
+        <dt class="col-sm-2">DeptName</dt>
+        <dd class="col-sm-10">@Model.DeptName</dd>
+
+        @* Faculty head *@
+        <dt class="col-sm-2">FacultyHead</dt>
+        <dd class="col-sm-10">@Model.FacultyHead</dd>
+
+        @* Email *@
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+
+    @* Delete button *@
+    <div class="form-group">
+        <button onclick="deleteDepartment()" class="btn btn-danger">Delete</button> |
         <a asp-action="Index">Back to List</a>
-    </form>
+    </div>
 </div>
+
+@section Scripts {
+<script>
+    function deleteDepartment() {
+        $.ajax({
+            url: `https://localhost:7149/Departments/Delete/${@Model.Id}`,
+            type: "DELETE",
+            contentType: "application/json",
+            success: function (response) {
+                if (response.success) {
+                    window.location.href = "/Departments/Index";
+                } else {
+                    alert("Error: " + response.message);
+                }
+            }
+        });
+    }
+</script>
+}

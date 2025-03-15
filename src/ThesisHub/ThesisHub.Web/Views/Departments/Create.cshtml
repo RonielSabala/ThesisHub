@@ -10,34 +10,56 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DeptName" class="control-label"></label>
-                <input asp-for="DeptName" class="form-control" />
-                <span asp-validation-for="DeptName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FacultyHead" class="control-label"></label>
-                <input asp-for="FacultyHead" class="form-control" />
-                <span asp-validation-for="FacultyHead" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        @* Department name *@
+        <div class="form-group">
+            <label asp-for="DeptName" class="control-label"></label>
+            <input asp-for="DeptName" class="form-control" id="deptName" />
+        </div>
+
+        @* Faculty head *@
+        <div class="form-group">
+            <label asp-for="FacultyHead" class="control-label"></label>
+            <input asp-for="FacultyHead" class="form-control" id="facultyHead" />
+        </div>
+
+        @* Email *@
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" id="email" />
+        </div>
+
+        @* Create button *@
+        <div class="form-group">
+            <button onclick="saveDepartment()" class="btn btn-primary">Create</button>
+        </div>
+
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    function saveDepartment() {
+        let entity = {
+            facultyHead: $("#facultyHead").val(),
+            deptName: $("#deptName").val(),
+            email: $("#email").val()
+        };
+
+        $.ajax({
+            url: `https://localhost:7149/Departments/Add`,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(entity),
+            success: function (response) {
+                if (response.success) {
+                    window.location.href = "/Departments/Index";
+                } else {
+                    alert("Error: " + response.message);
+                }
+            }
+        });
+    }
+</script>
 }
