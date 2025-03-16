@@ -1,4 +1,4 @@
-﻿@model Department
+﻿@model DepartmentViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -37,12 +37,12 @@
     API = "https://localhost:7149/Departments";
 
     $(document).ready(function () {
-        loadDepartments();
+        loadDelete(@Model.Id);
     });
 
-    function loadDepartments() {
+    function loadDelete(id) {
         $.get(
-            `${API}/Get/${@Model.Id}`,
+            `${API}/Get/${id}`,
             function (entity) {
                 $("#deptName").html(entity.deptName);
                 $("#facultyHead").html(entity.facultyHead);

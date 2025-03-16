@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ThesisHub.API.Dtos;
 using ThesisHub.Domain.Entities;
 using ThesisHub.Persistence;
 
@@ -16,16 +17,24 @@ public class DepartmentsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("GetAll")]
+    [HttpGet(nameof(GetAll))]
     public async Task<IActionResult> GetAll(string filter = "")
     {
-        var list = await _context.Departments.ToListAsync();
+        var entities = await _context.Departments.ToListAsync();
 
         if (!string.IsNullOrEmpty(filter))
         {
             filter = filter.ToLower();
-            list = list.Where(d => d.DeptName.ToLower().Contains(filter)).ToList();
+            entities = entities.Where(d => d.DeptName.ToLower().Contains(filter)).ToList();
         }
+        
+        var list = entities.Select(entity => new DepartmentDto
+        {
+            Id = entity.Id,
+            DeptName = entity.DeptName,
+            FacultyHead = entity.FacultyHead,
+            Email = entity.Email
+        }).ToList();
 
         return Ok(list);
     }
@@ -33,35 +42,58 @@ public class DepartmentsController : ControllerBase
     [HttpGet("Get/{id}")]
     public async Task<IActionResult> Get(int id)
     {
-        var entity = await _context.Departments.FindAsync(id);
-        if (entity == null)
+        var entitydb = await _context.Departments.FindAsync(id);
+        if (entitydb == null)
         {
             return BadRequest("Not found");
         }
+
+        var entity = new DepartmentDto
+        {
+            Id = entitydb.Id,
+            DeptName = entitydb.DeptName,
+            FacultyHead = entitydb.FacultyHead,
+            Email = entitydb.Email,
+        };
 
         return Ok(entity);
     }
 
     [HttpPost("Add")]
-    public async Task<IActionResult> Create([FromBody] Department entity)
+    public async Task<IActionResult> Create([FromBody] DepartmentDto dto)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest("The entity is invalid");
         }
+
+        var entity = new Department { 
+            Id=dto.Id,
+            DeptName=dto.DeptName,
+            FacultyHead=dto.FacultyHead,
+            Email=dto.Email,
+        };
 
         _context.Departments.Add(entity);
         await _context.SaveChangesAsync();
         return Ok(new { success = true, message = "Created successfully!" });
     }
 
-    [HttpPut("Edit")]
-    public async Task<IActionResult> Edit([FromBody] Department entity)
+    [HttpPut(nameof(Update))]
+    public async Task<IActionResult> Update([FromBody] DepartmentDto dto)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest("The entity is invalid");
         }
+
+        var entity = new Department
+        {
+            Id = dto.Id,
+            DeptName = dto.DeptName,
+            FacultyHead = dto.FacultyHead,
+            Email = dto.Email,
+        };
 
         try
         {
@@ -86,13 +118,13 @@ public class DepartmentsController : ControllerBase
     [HttpDelete("Delete/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var entity = await _context.Departments.FindAsync(id);
-        if (entity == null)
+        var entityDb = await _context.Departments.FindAsync(id);
+        if (entityDb == null)
         {
             return BadRequest("Not found");
         }
 
-        _context.Departments.Remove(entity);
+        _context.Departments.Remove(entityDb);
         await _context.SaveChangesAsync();
         return Ok(new { success = true, message = "Deleted successfully!" });
     }

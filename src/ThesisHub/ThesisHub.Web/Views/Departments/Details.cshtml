@@ -1,4 +1,4 @@
-﻿@model Department
+﻿@model DepartmentViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -32,16 +32,16 @@
     API = "https://localhost:7149/Departments";
 
     $(document).ready(function () {
-        loadDepartments();
+        loadDetails(@Model.Id);
     });
 
-    function loadDepartments() {
+    function loadDetails(id) {
         $.get(
-            `${API}/Get/${@Model.Id}`,
+            `${API}/Get/${id}`,
             function (entity) {
-                $("#deptName").html(entity.deptName);
-                $("#facultyHead").html(entity.facultyHead);
-                $("#email").html(entity.email);
+                $("#deptName").text(entity.deptName);
+                $("#facultyHead").text(entity.facultyHead);
+                $("#email").text(entity.email);
             }
         );
     }

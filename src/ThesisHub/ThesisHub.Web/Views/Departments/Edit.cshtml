@@ -1,4 +1,4 @@
-﻿@model Department
+﻿@model DepartmentViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -10,10 +10,10 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" id="id" value="@Model.Id" />
+        <input type="hidden" id="modelId" value="@Model.Id" />
 
         @* Department name *@
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="DeptName" class="control-label"></label>
             <input asp-for="DeptName" class="form-control" id="deptName" />
@@ -46,12 +46,12 @@
     API = "https://localhost:7149/Departments";
 
     $(document).ready(function () {
-        loadDepartments();
+        loadEdit(@Model.Id);
     });
 
-    function loadDepartments() {
+    function loadEdit(id) {
         $.get(
-            `${API}/Get/${@Model.Id}`,
+            `${API}/Get/${id}`,
             function (entity) {
                 $("#deptName").val(entity.deptName);
                 $("#facultyHead").val(entity.facultyHead);
@@ -62,14 +62,14 @@
 
     function editDepartment() {
         let entity = {
-            id: $("#id").val(),
+            id: $("#modelId").val(),
             deptName: $("#deptName").val(),
             facultyHead: $("#facultyHead").val(),
             email: $("#email").val()
         };
 
         $.ajax({
-            url: `${API}/Edit`,
+            url: `${API}/Update`,
             type: "PUT",
             contentType: "application/json",
             data: JSON.stringify(entity),

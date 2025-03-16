@@ -1,6 +1,4 @@
-﻿@model Department
-
-@{
+﻿@{
     ViewData["Title"] = "Create";
 }
 
@@ -14,20 +12,20 @@
 
         @* Department name *@
         <div class="form-group">
-            <label asp-for="DeptName" class="control-label"></label>
-            <input asp-for="DeptName" class="form-control" id="deptName" />
+            <label class="control-label">Dept. name</label>
+            <input class="form-control" id="deptName" />
         </div>
 
         @* Faculty head *@
         <div class="form-group">
-            <label asp-for="FacultyHead" class="control-label"></label>
-            <input asp-for="FacultyHead" class="form-control" id="facultyHead" />
+            <label class="control-label">Faculty head</label>
+            <input class="form-control" id="facultyHead" />
         </div>
 
         @* Email *@
         <div class="form-group">
-            <label asp-for="Email" class="control-label"></label>
-            <input asp-for="Email" class="form-control" id="email" />
+            <label class="control-label">Email</label>
+            <input class="form-control" id="email" />
         </div>
 
         @* Create button *@
