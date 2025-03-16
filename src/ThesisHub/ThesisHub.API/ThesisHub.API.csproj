@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ThesisHub.Domain\ThesisHub.Domain.csproj" />
     <ProjectReference Include="..\ThesisHub.Persistence\ThesisHub.Persistence.csproj" />
+    <ProjectReference Include="..\ThesisHub.Presentation\ThesisHub.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

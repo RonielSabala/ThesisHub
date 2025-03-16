@@ -1,4 +1,4 @@
-﻿namespace ThesisHub.API.Dtos
+﻿namespace ThesisHub.Presentation.Dtos
 {
     public class DepartmentDto
     {

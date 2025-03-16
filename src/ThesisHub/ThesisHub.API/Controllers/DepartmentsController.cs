@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ThesisHub.API.Dtos;
 using ThesisHub.Domain.Entities;
 using ThesisHub.Persistence;
+using ThesisHub.Presentation.Dtos;
 
 namespace ThesisHub.API.Controllers;
 

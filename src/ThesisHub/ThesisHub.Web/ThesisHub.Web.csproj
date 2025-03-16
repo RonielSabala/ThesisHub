@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ThesisHub.Persistence\ThesisHub.Persistence.csproj" />
+    <ProjectReference Include="..\ThesisHub.Presentation\ThesisHub.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
