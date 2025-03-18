@@ -1,0 +1,97 @@
+﻿@model StudentViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <input type="hidden" id="modelId" value="@Model.Id" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label class="control-label">First name</label>
+            <input class="form-control" id="firstName" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Last name</label>
+            <input class="form-control" id="lastName" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Email</label>
+            <input class="form-control" id="email" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Phone</label>
+            <input class="form-control" id="phone" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Department id</label>
+            <input class="form-control" id="departmentId" />
+        </div>
+
+        @* Save button *@
+        <div class="form-group">
+            <button onclick="editStudent()" class="btn btn-primary">Update</button>
+        </div>
+
+    </div>
+</div>
+
+<a asp-action="Index">Back to List</a>
+
+@section Scripts {
+<script>
+    API = "https://localhost:7149/Students";
+
+    $(document).ready(function () {
+        loadStudent(@Model.Id);
+    });
+
+    function loadStudent(id) {
+        $.get(
+            `${API}/Get/${id}`,
+            function (entity) {
+                $("#firstName").val(entity.firstName);
+                $("#lastName").val(entity.lastName);
+                $("#email").val(entity.email);
+                $("#phone").val(entity.phone);
+                $("#departmentId").val(entity.departmentId);
+            }
+        );
+    }
+
+    function editStudent() {
+        let entity = {
+            id: $("#modelId").val(),
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            email: $("#email").val(),
+            phone: $("#phone").val(),
+            departmentId: $("#departmentId").val()
+        };
+
+        $.ajax({
+            url: `${API}/Update`,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(entity),
+            success: function (response) {
+                if (response.success) {
+                    window.location.href = "/Students/Index";
+                } else {
+                    alert("Error: " + response.message);
+                }
+            },
+        });
+    }
+</script>
+}

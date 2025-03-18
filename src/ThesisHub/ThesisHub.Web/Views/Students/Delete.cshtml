@@ -1,0 +1,74 @@
+﻿@model StudentViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-2">First name</dt>
+        <dd class="col-sm-10" id="firstName"></dd>
+
+        <dt class="col-sm-2">Last name</dt>
+        <dd class="col-sm-10" id="lastName"></dd>
+
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10" id="email"></dd>
+
+        <dt class="col-sm-2">Phone</dt>
+        <dd class="col-sm-10" id="phone"></dd>
+
+        <dt class="col-sm-2">Department id</dt>
+        <dd class="col-sm-10" id="departmentId"></dd>
+    </dl>
+
+    @* Delete button *@
+    <div class="form-group">
+        <button onclick="deleteStudent()" class="btn btn-danger">Delete</button> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    API = "https://localhost:7149/Students";
+
+    $(document).ready(function () {
+        loadStudent(@Model.Id);
+    });
+
+    function loadStudent(id) {
+        $.get(
+            `${API}/Get/${id}`,
+            function (entity) {
+                $("#firstName").html(entity.firstName);
+                $("#lastName").html(entity.lastName);
+                $("#email").html(entity.email);
+                $("#phone").html(entity.phone);
+                $("#departmentId").html(entity.departmentId);
+            }
+        );
+    }
+
+    function deleteStudent() {
+        $.ajax({
+            url: `${API}/Delete/${@Model.Id}`,
+            type: "DELETE",
+            contentType: "application/json",
+            success: function (response) {
+                if (response.success) {
+                    window.location.href = "/Students/Index";
+                } else {
+                    alert("Error: " + response.message);
+                }
+            }
+        });
+    }
+</script>
+}

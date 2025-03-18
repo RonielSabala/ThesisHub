@@ -1,0 +1,54 @@
+﻿@model StudentViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-2">First name</dt>
+        <dd class="col-sm-10" id="firstName"></dd>
+
+        <dt class="col-sm-2">Last name</dt>
+        <dd class="col-sm-10" id="lastName"></dd>
+
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10" id="email"></dd>
+
+        <dt class="col-sm-2">Phone</dt>
+        <dd class="col-sm-10" id="phone"></dd>
+
+        <dt class="col-sm-2">Department id</dt>
+        <dd class="col-sm-10" id="departmentId"></dd>
+    </dl>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+
+@section Scripts {
+<script>
+    API = "https://localhost:7149/Students";
+
+    $(document).ready(function () {
+        loadDetails(@Model.Id);
+    });
+
+    function loadDetails(id) {
+        $.get(
+            `${API}/Get/${id}`,
+            function (entity) {
+                $("#firstName").text(entity.firstName);
+                $("#lastName").text(entity.lastName);
+                $("#email").text(entity.email);
+                $("#phone").text(entity.phone);
+                $("#departmentId").text(entity.departmentId);
+            }
+        );
+    }
+</script>
+}

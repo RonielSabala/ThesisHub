@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btn-primary" href="/Students/Create">Create New</a>
+</p>
+
+@* Search box *@
+<div class="row mb-3">
+    <div class="col-md-4">
+        <input id="search" class="form-control" placeholder="Search a student..." onkeyup="loadStudents()"/>
+    </div>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Department id</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody id="studentTable">
+        @*Here AJAX will display the info*@
+    </tbody>
+</table>
+
+
+@section Scripts {
+<script>
+    API = "https://localhost:7149/Students";
+
+    $(document).ready(function () {
+        loadStudents();
+    });
+
+    function loadStudents() {
+        let filter = $("#search").val();
+
+        $.get(
+            `${API}/GetAll`,
+            { filter: filter },
+            function (data) {
+                let rows = "";
+                data.forEach(
+                    (item) => {
+                        rows += `
+                        <tr>
+                            <td>${item.firstName}</td>
+                            <td>${item.lastName}</td>
+                            <td>${item.email}</td>
+                            <td>${item.phone}</td>
+                            <td>${item.departmentId}</td>
+                            <td>
+                                <a href="/Students/Details/${item.id}" class="btn btn-info">Details</a> |
+                                <a href="/Students/Edit/${item.id}" class="btn btn-warning">Edit</a> |
+                                <a href="/Students/Delete/${item.id}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>`;
+                    }
+                );
+
+                $("#studentTable").html(rows);
+            }
+        );
+    }
+</script>
+}
