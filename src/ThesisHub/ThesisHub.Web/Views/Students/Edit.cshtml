@@ -34,13 +34,13 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label">Department id</label>
-            <input class="form-control" id="departmentId" />
+            <label class="control-label">Department</label>
+            <select id="departmentId" class="form-control"></select>
         </div>
 
         @* Save button *@
         <div class="form-group">
-            <button onclick="editStudent()" class="btn btn-primary">Update</button>
+            <button onclick="updateStudent()" class="btn btn-primary">Update</button>
         </div>
 
     </div>
@@ -50,26 +50,53 @@
 
 @section Scripts {
 <script>
-    API = "https://localhost:7149/Students";
+    let modelDeptId = -1;
 
     $(document).ready(function () {
         loadStudent(@Model.Id);
+        loadSelect();
     });
 
     function loadStudent(id) {
-        $.get(
-            `${API}/Get/${id}`,
-            function (entity) {
-                $("#firstName").val(entity.firstName);
-                $("#lastName").val(entity.lastName);
-                $("#email").val(entity.email);
-                $("#phone").val(entity.phone);
-                $("#departmentId").val(entity.departmentId);
-            }
-        );
+        $.get(`${studentAPI}/Get/${id}`, function (entity) {
+            $("#firstName").val(entity.firstName);
+            $("#lastName").val(entity.lastName);
+            $("#email").val(entity.email);
+            $("#phone").val(entity.phone);
+            modelDeptId = entity.departmentId;
+        });
     }
 
-    function editStudent() {
+    function loadSelect() {
+        $.ajax({
+            url: `${departmentAPI}/GetAll`,
+            type: "GET",
+            success: function (entities) {
+                const $select = $("#departmentId");
+                $select.empty();
+
+                let firstOption = "";
+                let otherOptions = [];
+
+                $.each(entities, function (i, entity) {
+                    let option = `<option value="${entity.id}">${entity.deptName}</option>`;
+
+                    if (entity.id == modelDeptId) {
+                        firstOption = option;
+                    } else {
+                        otherOptions.push(option);
+                    }
+                });
+
+                $select.append(firstOption);
+                $.each(otherOptions, function (i, option) {
+                    $select.append(option);
+                });
+            }
+        });
+    }
+
+    function updateStudent() {
         let entity = {
             id: $("#modelId").val(),
             firstName: $("#firstName").val(),
@@ -80,7 +107,7 @@
         };
 
         $.ajax({
-            url: `${API}/Update`,
+            url: `${studentAPI}/Update`,
             type: "PUT",
             contentType: "application/json",
             data: JSON.stringify(entity),

@@ -11,15 +11,12 @@
     <hr />
 
     <dl class="row">
-        @* Department name *@
         <dt class="col-sm-2">Dept. name</dt>
         <dd class="col-sm-10" id="deptName"></dd>
 
-        @* Faculty head *@
         <dt class="col-sm-2">Faculty head</dt>
         <dd class="col-sm-10" id="facultyHead"></dd>
 
-        @* Email *@
         <dt class="col-sm-2">Email</dt>
         <dd class="col-sm-10" id="email"></dd>
     </dl>
@@ -29,21 +26,16 @@
 
 @section Scripts {
 <script>
-    API = "https://localhost:7149/Departments";
-
     $(document).ready(function () {
         loadDetails(@Model.Id);
     });
 
     function loadDetails(id) {
-        $.get(
-            `${API}/Get/${id}`,
-            function (entity) {
-                $("#deptName").text(entity.deptName);
-                $("#facultyHead").text(entity.facultyHead);
-                $("#email").text(entity.email);
-            }
-        );
+        $.get(`${departmentAPI}/Get/${id}`, function (entity) {
+            $("#deptName").text(entity.deptName);
+            $("#facultyHead").text(entity.facultyHead);
+            $("#email").text(entity.email);
+        });
     }
 </script>
 }

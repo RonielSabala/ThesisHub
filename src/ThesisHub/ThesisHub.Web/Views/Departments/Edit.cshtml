@@ -12,28 +12,25 @@
     <div class="col-md-4">
         <input type="hidden" id="modelId" value="@Model.Id" />
 
-        @* Department name *@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="DeptName" class="control-label"></label>
-            <input asp-for="DeptName" class="form-control" id="deptName" />
+            <label class="control-label">Dept. name</label>
+            <input class="form-control" id="deptName" />
         </div>
 
-        @* Faculty head *@
         <div class="form-group">
-            <label asp-for="FacultyHead" class="control-label"></label>
-            <input asp-for="FacultyHead" class="form-control" id="facultyHead" />
+            <label class="control-label">Faculty head</label>
+            <input class="form-control" id="facultyHead" />
         </div>
 
-        @* Email *@
         <div class="form-group">
-            <label asp-for="Email" class="control-label"></label>
-            <input asp-for="Email" class="form-control" id="email" />
+            <label class="control-label">Email</label>
+            <input class="form-control" id="email" />
         </div>
 
         @* Save button *@
         <div class="form-group">
-            <button onclick="editDepartment()" class="btn btn-primary">Update</button>
+            <button onclick="updateDepartment()" class="btn btn-primary">Update</button>
         </div>
 
     </div>
@@ -43,24 +40,19 @@
 
 @section Scripts {
 <script>
-    API = "https://localhost:7149/Departments";
-
     $(document).ready(function () {
         loadEdit(@Model.Id);
     });
 
     function loadEdit(id) {
-        $.get(
-            `${API}/Get/${id}`,
-            function (entity) {
-                $("#deptName").val(entity.deptName);
-                $("#facultyHead").val(entity.facultyHead);
-                $("#email").val(entity.email);
-            }
-        );
+        $.get(`${departmentAPI}/Get/${id}`, function (entity) {
+            $("#deptName").val(entity.deptName);
+            $("#facultyHead").val(entity.facultyHead);
+            $("#email").val(entity.email);
+        });
     }
 
-    function editDepartment() {
+    function updateDepartment() {
         let entity = {
             id: $("#modelId").val(),
             deptName: $("#deptName").val(),
@@ -69,7 +61,7 @@
         };
 
         $.ajax({
-            url: `${API}/Update`,
+            url: `${departmentAPI}/Update`,
             type: "PUT",
             contentType: "application/json",
             data: JSON.stringify(entity),

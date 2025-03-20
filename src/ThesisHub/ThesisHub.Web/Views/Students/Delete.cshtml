@@ -24,7 +24,7 @@
         <dt class="col-sm-2">Phone</dt>
         <dd class="col-sm-10" id="phone"></dd>
 
-        <dt class="col-sm-2">Department id</dt>
+        <dt class="col-sm-2">Department</dt>
         <dd class="col-sm-10" id="departmentId"></dd>
     </dl>
 
@@ -37,28 +37,26 @@
 
 @section Scripts {
 <script>
-    API = "https://localhost:7149/Students";
-
     $(document).ready(function () {
         loadStudent(@Model.Id);
     });
 
     function loadStudent(id) {
-        $.get(
-            `${API}/Get/${id}`,
-            function (entity) {
-                $("#firstName").html(entity.firstName);
-                $("#lastName").html(entity.lastName);
-                $("#email").html(entity.email);
-                $("#phone").html(entity.phone);
-                $("#departmentId").html(entity.departmentId);
-            }
-        );
+        $.get(`${studentAPI}/Get/${id}`, function (entity) {
+            $("#firstName").html(entity.firstName);
+            $("#lastName").html(entity.lastName);
+            $("#email").html(entity.email);
+            $("#phone").html(entity.phone);
+
+            $.get(`${departmentAPI}/Get/${entity.departmentId}`, function (deptEntity) {
+                $("#departmentId").text(deptEntity.deptName);
+            });
+        });
     }
 
     function deleteStudent() {
         $.ajax({
-            url: `${API}/Delete/${@Model.Id}`,
+            url: `${studentAPI}/Delete/${@Model.Id}`,
             type: "DELETE",
             contentType: "application/json",
             success: function (response) {

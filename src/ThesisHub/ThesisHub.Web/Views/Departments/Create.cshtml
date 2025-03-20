@@ -10,19 +10,16 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        @* Department name *@
         <div class="form-group">
             <label class="control-label">Dept. name</label>
             <input class="form-control" id="deptName" />
         </div>
 
-        @* Faculty head *@
         <div class="form-group">
             <label class="control-label">Faculty head</label>
             <input class="form-control" id="facultyHead" />
         </div>
 
-        @* Email *@
         <div class="form-group">
             <label class="control-label">Email</label>
             <input class="form-control" id="email" />
@@ -30,7 +27,7 @@
 
         @* Create button *@
         <div class="form-group">
-            <button onclick="saveDepartment()" class="btn btn-primary">Create</button>
+            <button onclick="addDepartment()" class="btn btn-primary">Create</button>
         </div>
 
     </div>
@@ -38,9 +35,7 @@
 
 @section Scripts {
 <script>
-    API = "https://localhost:7149/Departments";
-
-    function saveDepartment() {
+    function addDepartment() {
         let entity = {
             facultyHead: $("#facultyHead").val(),
             deptName: $("#deptName").val(),
@@ -48,7 +43,7 @@
         };
 
         $.ajax({
-            url: `${API}/Add`,
+            url: `${departmentAPI}/Add`,
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(entity),
