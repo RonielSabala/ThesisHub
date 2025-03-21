@@ -1,15 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ThesisHub.Domain.Core;
 
 namespace ThesisHub.Domain.Entities
 {
     [Table("students")]
-    public class Student
+    public class Student : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [Required]
         [Column("first_name")]
         [StringLength(50, MinimumLength = 3)]

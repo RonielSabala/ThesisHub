@@ -1,4 +1,4 @@
-﻿namespace ThesisHub.Presentation.ViewModels
+﻿namespace ThesisHub.Web.Models.ViewModels
 {
     public class DepartmentViewModel
     {

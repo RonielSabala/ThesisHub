@@ -1,6 +1,6 @@
-﻿namespace ThesisHub.Presentation.Dtos
+﻿namespace ThesisHub.Common.Requests
 {
-    public class StudentDto
+    public class UpdateStudentRequest
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ThesisHub.Common\ThesisHub.Common.csproj" />
+    <ProjectReference Include="..\ThesisHub.Persistence\ThesisHub.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace ThesisHub.Presentation.Models
+﻿namespace ThesisHub.Infrastructure.Models
 {
     public class StudentModel
     {

@@ -92,6 +92,10 @@
                 $.each(otherOptions, function (i, option) {
                     $select.append(option);
                 });
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", status, error);
+                alert("An error occurred. Please try again.");
             }
         });
     }
@@ -118,6 +122,10 @@
                     alert("Error: " + response.message);
                 }
             },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", status, error);
+                alert("An error occurred. Please try again.");
+            }
         });
     }
 </script>
