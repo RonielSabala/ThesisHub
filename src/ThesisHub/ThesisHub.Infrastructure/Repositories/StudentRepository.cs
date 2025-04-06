@@ -1,42 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ThesisHub.Common.Dtos;
+﻿using ThesisHub.Common.Dtos;
 using ThesisHub.Common.Requests;
 using ThesisHub.Common.Responses;
 using ThesisHub.Domain.Entities;
-using ThesisHub.Infrastructure.Interfaces;
+using ThesisHub.Infrastructure.Core;
 using ThesisHub.Persistence;
 
 namespace ThesisHub.Infrastructure.Repositories
 {
-    public class StudentRepository : IStudentRepository
+    public class StudentRepository : BaseRepository<Student, AddStudentResponse, UpdateStudentResponse, DeleteStudentResponse>
     {
-        private readonly ThesisHubContext _context;
-
-        public StudentRepository(ThesisHubContext context)
-        {
-            _context = context;
-        }
-
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.Id == id);
-        }
+        public StudentRepository(ThesisHubContext context) : base(context) { }
 
         public async Task<List<StudentDto>> GetAll(string filter = "")
         {
-            var entitiesDb = await _context.Students.ToListAsync();
-            if (!entitiesDb.Any())
-            {
-                throw new Exception("No data found");
-            }
+            List<Student> dbEntities = await GetAllEntities();
 
             if (!string.IsNullOrEmpty(filter))
             {
                 filter = filter.ToLower();
-                entitiesDb = entitiesDb.Where(d => d.FirstName.ToLower().Contains(filter)).ToList();
+                dbEntities = dbEntities.Where(d => d.FirstName.ToLower().Contains(filter)).ToList();
             }
 
-            var entities = entitiesDb.Select(entity => new StudentDto
+            var entities = dbEntities.Select(entity => new StudentDto
             {
                 Id = entity.Id,
                 FirstName = entity.FirstName,
@@ -51,23 +36,16 @@ namespace ThesisHub.Infrastructure.Repositories
 
         public async Task<StudentDto> Get(int id)
         {
-            var entityDb = await _context.Students.FindAsync(id);
-            if (entityDb == null)
-            {
-                throw new Exception("Not found");
-            }
-
+            var dbEntity = await GetEntity(id);
             return new StudentDto
             {
-                Id = entityDb.Id,
-                FirstName = entityDb.FirstName,
-                LastName = entityDb.LastName,
-                Email = entityDb.Email,
-                Phone = entityDb.Phone,
-                DepartmentId = entityDb.DepartmentId,
+                Id = dbEntity.Id,
+                FirstName = dbEntity.FirstName,
+                LastName = dbEntity.LastName,
+                Email = dbEntity.Email,
+                Phone = dbEntity.Phone,
+                DepartmentId = dbEntity.DepartmentId,
             };
-
-
         }
 
         public async Task<AddStudentResponse> Add(AddStudentRequest request)
@@ -82,9 +60,7 @@ namespace ThesisHub.Infrastructure.Repositories
                 DepartmentId = request.DepartmentId,
             };
 
-            _context.Students.Add(dbEntity);
-            await _context.SaveChangesAsync();
-            return new AddStudentResponse();
+            return await AddEntityToDb(dbEntity);
         }
 
         public async Task<UpdateStudentResponse> Update(UpdateStudentRequest request)
@@ -99,37 +75,13 @@ namespace ThesisHub.Infrastructure.Repositories
                 DepartmentId = request.DepartmentId,
             };
 
-            try
-            {
-                _context.Update(dbEntity);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StudentExists(dbEntity.Id))
-                {
-                    throw new Exception("Not found");
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return new UpdateStudentResponse();
+            return await UpdateEntityInDb(dbEntity);
         }
 
         public async Task<DeleteStudentResponse> Delete(int id)
         {
-            var entityDb = await _context.Students.FindAsync(id);
-            if (entityDb == null)
-            {
-                throw new Exception("Not found");
-            }
-
-            _context.Students.Remove(entityDb);
-            await _context.SaveChangesAsync();
-            return new DeleteStudentResponse();
+            var dbEntity = await GetEntity(id);
+            return await DeleteEntityFromDb(dbEntity);
         }
     }
 }

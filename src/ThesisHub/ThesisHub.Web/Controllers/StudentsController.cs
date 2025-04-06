@@ -5,27 +5,27 @@ namespace ThesisHub.Web.Controllers
 {
     public class StudentsController : Controller
     {
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
 
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
             return View(new StudentViewModel { Id = id });
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
             return View(new StudentViewModel { Id = id});
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             return View(new StudentViewModel { Id = id });
         }

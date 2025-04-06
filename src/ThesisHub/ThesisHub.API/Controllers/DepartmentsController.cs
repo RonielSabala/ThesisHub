@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ThesisHub.Common.Dtos;
 using ThesisHub.Common.Requests;
 using ThesisHub.Common.Responses;
-using ThesisHub.Infrastructure.Interfaces;
+using ThesisHub.Infrastructure.Repositories;
 
 namespace ThesisHub.API.Controllers;
 
@@ -10,39 +10,39 @@ namespace ThesisHub.API.Controllers;
 [Route("[controller]")]
 public class DepartmentsController : ControllerBase
 {
-    private readonly IDepartmentRepository _repo;
+    private readonly DepartmentRepository _repo;
 
-    public DepartmentsController(IDepartmentRepository repo)
+    public DepartmentsController(DepartmentRepository repo)
     {
         _repo = repo;
     }
 
     [HttpGet(nameof(GetAll))]
-    public async Task<ActionResult<List<DepartmentDto>>> GetAll(string filter = "")
+    public async Task<List<DepartmentDto>> GetAll(string filter = "")
     {
-        return await _repo.GetAll();
+        return await _repo.GetAll(filter);
     }
 
     [HttpGet("Get/{id}")]
-    public async Task<ActionResult<DepartmentDto>> Get(int id)
+    public async Task<DepartmentDto> Get(int id)
     {
         return await _repo.Get(id);
     }
 
     [HttpPost(nameof(Add))]
-    public async Task<ActionResult<AddDepartmentResponse>> Add([FromBody] AddDepartmentRequest request)
+    public async Task<AddDepartmentResponse> Add([FromBody] AddDepartmentRequest request)
     {
         return await _repo.Add(request);
     }
 
     [HttpPut(nameof(Update))]
-    public async Task<ActionResult<UpdateDepartmentResponse>> Update([FromBody] UpdateDepartmentRequest request)
+    public async Task<UpdateDepartmentResponse> Update([FromBody] UpdateDepartmentRequest request)
     {
         return await _repo.Update(request);
     }
 
     [HttpDelete("Delete/{id}")]
-    public async Task<ActionResult<DeleteDepartmentResponse>> Delete(int id)
+    public async Task<DeleteDepartmentResponse> Delete(int id)
     {
         return await _repo.Delete(id);
     }

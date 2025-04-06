@@ -71,17 +71,17 @@
         $.ajax({
             url: `${departmentAPI}/GetAll`,
             type: "GET",
-            success: function (entities) {
+            success: function (deptEntities) {
                 const $select = $("#departmentId");
                 $select.empty();
 
                 let firstOption = "";
                 let otherOptions = [];
 
-                $.each(entities, function (i, entity) {
-                    let option = `<option value="${entity.id}">${entity.deptName}</option>`;
+                $.each(deptEntities, function (i, deptEntity) {
+                    let option = `<option value="${deptEntity.id}">${deptEntity.deptName}</option>`;
 
-                    if (entity.id == modelDeptId) {
+                    if (deptEntity.id == modelDeptId) {
                         firstOption = option;
                     } else {
                         otherOptions.push(option);

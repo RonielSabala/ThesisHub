@@ -1,8 +1,9 @@
-﻿namespace ThesisHub.Common.Requests
+﻿using ThesisHub.Common.core;
+
+namespace ThesisHub.Common.Requests
 {
-    public class AddStudentRequest
+    public class AddStudentRequest : BaseRequest
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

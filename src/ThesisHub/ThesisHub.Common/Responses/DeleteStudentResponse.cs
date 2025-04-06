@@ -1,8 +1,9 @@
-﻿namespace ThesisHub.Common.Responses
+﻿using ThesisHub.Common.core;
+
+namespace ThesisHub.Common.Responses
 {
-    public class DeleteStudentResponse
+    public class DeleteStudentResponse : BaseResponse
     {
-        public bool success { get; set; } = true;
         public string message { get; set; } = "Deleted successfully!";
     }
 }

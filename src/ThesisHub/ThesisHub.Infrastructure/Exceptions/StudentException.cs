@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ThesisHub.Infrastructure.Exceptions
 {
-    class StudentException
+    public class StudentException
     {
     }
 }

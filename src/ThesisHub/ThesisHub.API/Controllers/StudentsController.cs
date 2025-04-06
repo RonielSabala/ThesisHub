@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ThesisHub.Common.Dtos;
 using ThesisHub.Common.Requests;
 using ThesisHub.Common.Responses;
-using ThesisHub.Infrastructure.Interfaces;
+using ThesisHub.Infrastructure.Repositories;
 
 namespace ThesisHub.API.Controllers;
 
@@ -10,39 +10,39 @@ namespace ThesisHub.API.Controllers;
 [Route("[controller]")]
 public class StudentsController : ControllerBase
 {
-    private readonly IStudentRepository _repo;
+    private readonly StudentRepository _repo;
 
-    public StudentsController(IStudentRepository repo)
+    public StudentsController(StudentRepository repo)
     {
         _repo = repo;
     }
 
     [HttpGet(nameof(GetAll))]
-    public async Task<ActionResult<List<StudentDto>>> GetAll(string filter = "")
+    public async Task<List<StudentDto>> GetAll(string filter = "")
     {
-        return await _repo.GetAll();
+        return await _repo.GetAll(filter);
     }
 
     [HttpGet("Get/{id}")]
-    public async Task<ActionResult<StudentDto>> Get(int id)
+    public async Task<StudentDto> Get(int id)
     {
         return await _repo.Get(id);
     }
 
     [HttpPost(nameof(Add))]
-    public async Task<ActionResult<AddStudentResponse>> Add([FromBody] AddStudentRequest request)
+    public async Task<AddStudentResponse> Add([FromBody] AddStudentRequest request)
     {
         return await _repo.Add(request);
     }
 
     [HttpPut(nameof(Update))]
-    public async Task<ActionResult<UpdateStudentResponse>> Update([FromBody] UpdateStudentRequest request)
+    public async Task<UpdateStudentResponse> Update([FromBody] UpdateStudentRequest request)
     {
         return await _repo.Update(request);
     }
 
     [HttpDelete("Delete/{id}")]
-    public async Task<ActionResult<DeleteStudentResponse>> Delete(int id)
+    public async Task<DeleteStudentResponse> Delete(int id)
     {
         return await _repo.Delete(id);
     }

@@ -1,42 +1,39 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ThesisHub.Common.Dtos;
+﻿using ThesisHub.Common.Dtos;
 using ThesisHub.Common.Requests;
 using ThesisHub.Common.Responses;
 using ThesisHub.Domain.Entities;
-using ThesisHub.Infrastructure.Interfaces;
+using ThesisHub.Infrastructure.Core;
 using ThesisHub.Persistence;
 
 namespace ThesisHub.Infrastructure.Repositories
 {
-    public class DepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository : BaseRepository<Department, AddDepartmentResponse, UpdateDepartmentResponse, DeleteDepartmentResponse>
     {
-        private readonly ThesisHubContext _context;
+        public DepartmentRepository(ThesisHubContext context) : base(context) { }
 
-        public DepartmentRepository(ThesisHubContext context)
+        public async Task<DepartmentDto> Get(int id)
         {
-            _context = context;
-        }
-
-        private bool DepartmentExists(int id)
-        {
-            return _context.Departments.Any(e => e.Id == id);
+            var dbEntity = await GetEntity(id);
+            return new DepartmentDto
+            {
+                Id = dbEntity.Id,
+                DeptName = dbEntity.DeptName,
+                FacultyHead = dbEntity.FacultyHead,
+                Email = dbEntity.Email,
+            };
         }
 
         public async Task<List<DepartmentDto>> GetAll(string filter = "")
         {
-            var entitiesDb = await _context.Departments.ToListAsync();
-            if (!entitiesDb.Any())
-            {
-                throw new Exception("No data found");
-            }
+            var dbEntities = await GetAllEntities();
 
             if (!string.IsNullOrEmpty(filter))
             {
                 filter = filter.ToLower();
-                entitiesDb = entitiesDb.Where(d => d.DeptName.ToLower().Contains(filter)).ToList();
+                dbEntities = dbEntities.Where(d => d.DeptName.ToLower().Contains(filter)).ToList();
             }
 
-            var entities = entitiesDb.Select(entity => new DepartmentDto
+            var entities = dbEntities.Select(entity => new DepartmentDto
             {
                 Id = entity.Id,
                 DeptName = entity.DeptName,
@@ -45,25 +42,6 @@ namespace ThesisHub.Infrastructure.Repositories
             }).ToList();
 
             return entities;
-        }
-
-        public async Task<DepartmentDto> Get(int id)
-        {
-            var entityDb = await _context.Departments.FindAsync(id);
-            if (entityDb == null)
-            {
-                throw new Exception("Not found");
-            }
-
-            return new DepartmentDto
-            {
-                Id = entityDb.Id,
-                DeptName = entityDb.DeptName,
-                FacultyHead = entityDb.FacultyHead,
-                Email = entityDb.Email,
-            };
-
-
         }
 
         public async Task<AddDepartmentResponse> Add(AddDepartmentRequest request)
@@ -76,9 +54,7 @@ namespace ThesisHub.Infrastructure.Repositories
                 Email = request.Email,
             };
 
-            _context.Departments.Add(dbEntity);
-            await _context.SaveChangesAsync();
-            return new AddDepartmentResponse();
+            return await AddEntityToDb(dbEntity);
         }
 
         public async Task<UpdateDepartmentResponse> Update(UpdateDepartmentRequest request)
@@ -91,37 +67,13 @@ namespace ThesisHub.Infrastructure.Repositories
                 Email = request.Email,
             };
 
-            try
-            {
-                _context.Update(dbEntity);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DepartmentExists(dbEntity.Id))
-                {
-                    throw new Exception("Not found");
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return new UpdateDepartmentResponse();
+            return await UpdateEntityInDb(dbEntity);
         }
 
         public async Task<DeleteDepartmentResponse> Delete(int id)
         {
-            var entityDb = await _context.Departments.FindAsync(id);
-            if (entityDb == null)
-            {
-                throw new Exception("Not found");
-            }
-
-            _context.Departments.Remove(entityDb);
-            await _context.SaveChangesAsync();
-            return new DeleteDepartmentResponse();
+            var dbEntity = await GetEntity(id);
+            return await DeleteEntityFromDb(dbEntity);
         }
     }
 }
