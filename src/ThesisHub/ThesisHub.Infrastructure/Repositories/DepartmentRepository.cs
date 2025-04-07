@@ -7,7 +7,7 @@ using ThesisHub.Persistence;
 
 namespace ThesisHub.Infrastructure.Repositories
 {
-    public class DepartmentRepository : BaseRepository<Department, AddDepartmentResponse, UpdateDepartmentResponse, DeleteDepartmentResponse>
+    public class DepartmentRepository : BaseRepository<Department>
     {
         public DepartmentRepository(ThesisHubContext context) : base(context) { }
 
@@ -44,33 +44,19 @@ namespace ThesisHub.Infrastructure.Repositories
             return entities;
         }
 
-        public async Task<AddDepartmentResponse> Add(AddDepartmentRequest request)
+        public async Task<Response<Department>> Add(Request<Department> request)
         {
-            var dbEntity = new Department
-            {
-                Id = request.Id,
-                DeptName = request.DeptName,
-                FacultyHead = request.FacultyHead,
-                Email = request.Email,
-            };
-
+            var dbEntity = request.Data;
             return await AddEntityToDb(dbEntity);
         }
 
-        public async Task<UpdateDepartmentResponse> Update(UpdateDepartmentRequest request)
+        public async Task<Response<Department>> Update(Request<Department> request)
         {
-            var dbEntity = new Department
-            {
-                Id = request.Id,
-                DeptName = request.DeptName,
-                FacultyHead = request.FacultyHead,
-                Email = request.Email,
-            };
-
+            var dbEntity = request.Data;
             return await UpdateEntityInDb(dbEntity);
         }
 
-        public async Task<DeleteDepartmentResponse> Delete(int id)
+        public async Task<Response<Department>> Delete(int id)
         {
             var dbEntity = await GetEntity(id);
             return await DeleteEntityFromDb(dbEntity);

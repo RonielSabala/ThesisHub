@@ -1,15 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ThesisHub.Common.core;
+using ThesisHub.Common.Responses;
 using ThesisHub.Domain.Core;
 using ThesisHub.Persistence;
 
 namespace ThesisHub.Infrastructure.Core
 {
-    public class BaseRepository<Entity, AddResponse, UpdateResponse, DeleteResponse>
-        where Entity : BaseEntity
-        where AddResponse : BaseResponse, new()
-        where UpdateResponse : BaseResponse, new()
-        where DeleteResponse : BaseResponse, new()
+    public class BaseRepository<T> where T : BaseEntity
     {
         protected ThesisHubContext Context;
 
@@ -20,12 +16,12 @@ namespace ThesisHub.Infrastructure.Core
 
         protected bool EntityExists(int id)
         {
-            return Context.Set<Entity>().Any(e => e.Id == id);
+            return Context.Set<T>().Any(e => e.Id == id);
         }
 
-        protected async Task<Entity> GetEntity(int id)
+        protected async Task<T> GetEntity(int id)
         {
-            var entityDb = await Context.Set<Entity>().FindAsync(id);
+            var entityDb = await Context.Set<T>().FindAsync(id);
             if (entityDb == null)
             {
                 throw new Exception("Not found");
@@ -34,9 +30,9 @@ namespace ThesisHub.Infrastructure.Core
             return entityDb;
         }
 
-        protected async Task<List<Entity>> GetAllEntities()
+        protected async Task<List<T>> GetAllEntities()
         {
-            var entitiesDb = await Context.Set<Entity>().ToListAsync();
+            var entitiesDb = await Context.Set<T>().ToListAsync();
             if (!entitiesDb.Any())
             {
                 throw new Exception("No data found");
@@ -45,40 +41,49 @@ namespace ThesisHub.Infrastructure.Core
             return entitiesDb;
         }
 
-        protected async Task<AddResponse> AddEntityToDb(Entity dbEntity)
+        protected async Task<Response<T>> AddEntityToDb(T dbEntity)
         {
-            Context.Set<Entity>().Add(dbEntity);
+            Context.Set<T>().Add(dbEntity);
             await Context.SaveChangesAsync();
-            return new AddResponse();
+            return new Response<T> { Success = true, Message = "Added successfully!" };
         }
 
-        public async Task<UpdateResponse> UpdateEntityInDb(Entity dbEntity)
+        public async Task<Response<T>> UpdateEntityInDb(T dbEntity)
         {
+            var response = new Response<T>();
+
             try
             {
                 Context.Update(dbEntity);
                 await Context.SaveChangesAsync();
+
+                response.Success = true;
+                response.Message = "Updated successfully!";
             }
             catch (DbUpdateConcurrencyException)
             {
+                response.Success = false;
+
                 if (!EntityExists(dbEntity.Id))
                 {
-                    throw new Exception("Not found");
+                    response.Message = "Entity not found!";
                 }
                 else
                 {
-                    throw;
+                    response.Message = "Concurrency error!";
                 }
+
+                throw;
             }
 
-            return new UpdateResponse();
+            return response;
         }
 
-        public async Task<DeleteResponse> DeleteEntityFromDb(Entity dbEntity)
+        public async Task<Response<T>> DeleteEntityFromDb(T dbEntity)
         {
-            Context.Set<Entity>().Remove(dbEntity);
+            Context.Set<T>().Remove(dbEntity);
             await Context.SaveChangesAsync();
-            return new DeleteResponse();
+            return new Response<T> { Success = true, Message = "deleted successfully!" };
         }
     }
 }
