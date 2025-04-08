@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using ThesisHub.Common.Responses;
+﻿using ThesisHub.Common.Responses;
 using ThesisHub.Domain.Core;
 
 namespace ThesisHub.Infrastructure.Contracts
