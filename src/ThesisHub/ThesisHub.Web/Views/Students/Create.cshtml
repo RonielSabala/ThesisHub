@@ -57,6 +57,7 @@
                 const $select = $("#departmentId");
                 $select.empty();
                 $select.append('<option value="">-- Select department --</option>');
+                
                 $.each(entities, function (i, entity) {
                     $select.append(`<option value="${entity.id}">${entity.deptName}</option>`);
                 });

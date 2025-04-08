@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ThesisHub.Web.Models.ViewModels;
+using ThesisHub.Web.ViewModels;
 
 namespace ThesisHub.Web.Controllers
 {

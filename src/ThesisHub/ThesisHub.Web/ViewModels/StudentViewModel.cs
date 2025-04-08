@@ -1,4 +1,4 @@
-﻿namespace ThesisHub.Web.Models.ViewModels
+﻿namespace ThesisHub.Web.ViewModels
 {
     public class StudentViewModel
     {

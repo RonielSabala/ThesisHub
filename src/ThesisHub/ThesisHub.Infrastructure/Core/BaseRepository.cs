@@ -50,15 +50,12 @@ namespace ThesisHub.Infrastructure.Core
 
         public async Task<Response<T>> UpdateEntityInDb(T dbEntity)
         {
-            var response = new Response<T>();
+            var response = new Response<T>() { Success = true, Message = "Updated successfully!" };
 
             try
             {
                 Context.Update(dbEntity);
                 await Context.SaveChangesAsync();
-
-                response.Success = true;
-                response.Message = "Updated successfully!";
             }
             catch (DbUpdateConcurrencyException)
             {

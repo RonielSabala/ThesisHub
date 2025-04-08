@@ -18,6 +18,19 @@ public class DepartmentsController : ControllerBase
         _repo = repo;
     }
 
+    private static Request<Department> GetRequestFromDto(DepartmentDto request)
+    {
+        var dbEntity = new Department
+        {
+            Id = request.Id,
+            DeptName = request.DeptName,
+            FacultyHead = request.FacultyHead,
+            Email = request.Email,
+        };
+
+        return new Request<Department> { Data = dbEntity };
+    }
+
     [HttpGet("Get/{id}")]
     public async Task<DepartmentDto> Get(int id)
     {
@@ -31,33 +44,17 @@ public class DepartmentsController : ControllerBase
     }
 
     [HttpPost(nameof(Add))]
-    public async Task<Response<Department>> Add([FromBody] DepartmentDto request)
+    public async Task<Response<Department>> Add([FromBody] DepartmentDto dto)
     {
-        var entity = new Department
-        {
-            Id = request.Id,
-            DeptName = request.DeptName,
-            FacultyHead = request.FacultyHead,
-            Email = request.Email,
-        };
-
-        var new_request = new Request<Department> { Data = entity };
-        return await _repo.Add(new_request);
+        var request = GetRequestFromDto(dto);
+        return await _repo.Add(request);
     }
 
     [HttpPut(nameof(Update))]
-    public async Task<Response<Department>> Update([FromBody] DepartmentDto request)
+    public async Task<Response<Department>> Update([FromBody] DepartmentDto dto)
     {
-        var entity = new Department
-        {
-            Id = request.Id,
-            DeptName = request.DeptName,
-            FacultyHead = request.FacultyHead,
-            Email = request.Email,
-        };
-
-        var new_request = new Request<Department> { Data = entity };
-        return await _repo.Update(new_request);
+        var request = GetRequestFromDto(dto);
+        return await _repo.Update(request);
     }
 
     [HttpDelete("Delete/{id}")]

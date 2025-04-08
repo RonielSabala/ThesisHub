@@ -1,4 +1,3 @@
-using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using ThesisHub.Common.Dtos;
 using ThesisHub.Common.Requests;
@@ -19,6 +18,21 @@ public class StudentsController : ControllerBase
         _repo = repo;
     }
 
+    private static Request<Student> GetRequestFromDto(StudentDto request)
+    {
+        var dbEntity = new Student
+        {
+            Id = request.Id,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            Phone = request.Phone,
+            DepartmentId = request.DepartmentId
+        };
+
+        return new Request<Student> { Data = dbEntity };
+    }
+
     [HttpGet("Get/{id}")]
     public async Task<StudentDto> Get(int id)
     {
@@ -32,37 +46,17 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPost(nameof(Add))]
-    public async Task<Response<Student>> Add([FromBody] StudentDto request)
+    public async Task<Response<Student>> Add([FromBody] StudentDto dto)
     {
-        var entity = new Student
-        {
-            Id = request.Id,
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Email = request.Email,
-            Phone = request.Phone,
-            DepartmentId = request.DepartmentId
-        };
-
-        var new_request = new Request<Student> { Data = entity };
-        return await _repo.Add(new_request);
+        var request = GetRequestFromDto(dto);
+        return await _repo.Add(request);
     }
 
     [HttpPut(nameof(Update))]
-    public async Task<Response<Student>> Update([FromBody] Student request)
+    public async Task<Response<Student>> Update([FromBody] StudentDto dto)
     {
-        var entity = new Student
-        {
-            Id = request.Id,
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Email = request.Email,
-            Phone = request.Phone,
-            DepartmentId = request.DepartmentId
-        };
-
-        var new_request = new Request<Student> { Data = entity };
-        return await _repo.Update(new_request);
+        var request = GetRequestFromDto(dto);
+        return await _repo.Update(request);
     }
 
     [HttpDelete("Delete/{id}")]
