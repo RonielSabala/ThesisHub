@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using ThesisHub.Infrastructure.Contracts;
+using ThesisHub.Infrastructure.Core;
 using ThesisHub.Infrastructure.Repositories;
 using ThesisHub.Persistence;
 
@@ -11,8 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<StudentRepository>();
-builder.Services.AddScoped<DepartmentRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IStudentRepository,StudentRepository>();
 
 var MyAllowSpecificOrigins = "AllowSpecificOrigins";
 builder.Services.AddCors(

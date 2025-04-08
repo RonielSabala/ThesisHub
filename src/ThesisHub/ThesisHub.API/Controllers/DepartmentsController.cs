@@ -3,7 +3,7 @@ using ThesisHub.Common.Dtos;
 using ThesisHub.Common.Requests;
 using ThesisHub.Common.Responses;
 using ThesisHub.Domain.Entities;
-using ThesisHub.Infrastructure.Repositories;
+using ThesisHub.Infrastructure.Contracts;
 
 namespace ThesisHub.API.Controllers;
 
@@ -11,10 +11,12 @@ namespace ThesisHub.API.Controllers;
 [Route("[controller]")]
 public class DepartmentsController : ControllerBase
 {
-    private readonly DepartmentRepository _repo;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IDepartmentRepository _repo;
 
-    public DepartmentsController(DepartmentRepository repo)
+    public DepartmentsController(IUnitOfWork unitOfWork, IDepartmentRepository repo)
     {
+        _unitOfWork = unitOfWork;
         _repo = repo;
     }
 
@@ -46,20 +48,92 @@ public class DepartmentsController : ControllerBase
     [HttpPost(nameof(Add))]
     public async Task<Response<Department>> Add([FromBody] DepartmentDto dto)
     {
-        var request = GetRequestFromDto(dto);
-        return await _repo.Add(request);
+        var response = new Response<Department> { Success = false };
+
+        if (!ModelState.IsValid)
+        {
+            response.Message = "The Model is Invalid";
+            return response;
+        }
+
+        try
+        {
+            await _unitOfWork.BeginTransactionAsync();
+
+            var request = GetRequestFromDto(dto);
+            var repo_response = await _repo.Add(request);
+
+            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.CommitTransactionAsync();
+
+            response.Success = true;
+            response.Message = repo_response.Message;
+        }
+        catch (Exception e)
+        {
+            response.Message = $"Creation error! {e}";
+            await _unitOfWork.RollbackTransactionAsync();
+        }
+
+        return response;
     }
 
     [HttpPut(nameof(Update))]
     public async Task<Response<Department>> Update([FromBody] DepartmentDto dto)
     {
-        var request = GetRequestFromDto(dto);
-        return await _repo.Update(request);
+        var response = new Response<Department> { Success = false };
+
+        if (!ModelState.IsValid)
+        {
+            response.Message = "The Model is Invalid";
+            return response;
+        }
+
+        try
+        {
+            await _unitOfWork.BeginTransactionAsync();
+
+            var request = GetRequestFromDto(dto);
+            var repo_response = await _repo.Update(request);
+
+            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.CommitTransactionAsync();
+
+            response.Success = true;
+            response.Message = repo_response.Message;
+        }
+        catch (Exception e)
+        {
+            response.Message = $"Updating error! {e}";
+            await _unitOfWork.RollbackTransactionAsync();
+        }
+
+        return response;
     }
 
     [HttpDelete("Delete/{id}")]
     public async Task<Response<Department>> Delete(int id)
     {
-        return await _repo.Delete(id);
+        var response = new Response<Department> { Success = false };
+
+        try
+        {
+            await _unitOfWork.BeginTransactionAsync();
+
+            var repo_response = await _repo.Delete(id);
+
+            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.CommitTransactionAsync();
+
+            response.Success = true;
+            response.Message = repo_response.Message;
+        }
+        catch (Exception e)
+        {
+            response.Message = $"Deleting error! {e}";
+            await _unitOfWork.RollbackTransactionAsync();
+        }
+
+        return response;
     }
 }

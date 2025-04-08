@@ -2,12 +2,13 @@
 using ThesisHub.Common.Requests;
 using ThesisHub.Common.Responses;
 using ThesisHub.Domain.Entities;
+using ThesisHub.Infrastructure.Contracts;
 using ThesisHub.Infrastructure.Core;
 using ThesisHub.Persistence;
 
 namespace ThesisHub.Infrastructure.Repositories
 {
-    public class DepartmentRepository : BaseRepository<Department>
+    public class DepartmentRepository : BaseRepository<Department>, IDepartmentRepository
     {
         public DepartmentRepository(ThesisHubContext context) : base(context) { }
 
