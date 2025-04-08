@@ -33,13 +33,17 @@ namespace ThesisHub.Infrastructure.Repositories
                 dbEntities = dbEntities.Where(d => d.DeptName.ToLower().Contains(filter)).ToList();
             }
 
-            var entities = dbEntities.Select(entity => new DepartmentDto
+            var entities = new List<DepartmentDto>();
+            foreach (var dbEntity in dbEntities)
             {
-                Id = entity.Id,
-                DeptName = entity.DeptName,
-                FacultyHead = entity.FacultyHead,
-                Email = entity.Email
-            }).ToList();
+                entities.Add(new DepartmentDto
+                {
+                    Id = dbEntity.Id,
+                    DeptName = dbEntity.DeptName,
+                    FacultyHead = dbEntity.FacultyHead,
+                    Email = dbEntity.Email,
+                });
+            }
 
             return entities;
         }

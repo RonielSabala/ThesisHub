@@ -1,11 +1,12 @@
-﻿using ThesisHub.Common.Dtos;
+﻿using ThesisHub.Application.Contracts;
+using ThesisHub.Common.Dtos;
 using ThesisHub.Common.Requests;
 using ThesisHub.Domain.Entities;
 using ThesisHub.Infrastructure.Contracts;
 
 namespace ThesisHub.Application.Services
 {
-    public class DepartmentService
+    public class DepartmentService : IDepartmentService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDepartmentRepository _repo;
