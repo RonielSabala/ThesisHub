@@ -41,25 +41,20 @@
         let filter = $("#search").val();
 
         $.get(`${departmentAPI}/GetAll`, { filter: filter }, function (entities) {
-                let rows = "";
+            const rows = entities.map(entity => `
+                <tr>
+                    <td>${entity.deptName}</td>
+                    <td>${entity.facultyHead}</td>
+                    <td>${entity.email}</td>
+                    <td>
+                        <a href="/Departments/Details/${entity.id}" class="btn btn-info">Details</a> |
+                        <a href="/Departments/Edit/${entity.id}" class="btn btn-warning">Edit</a> |
+                        <a href="/Departments/Delete/${entity.id}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>`).join('');
 
-                entities.forEach((entity) => {
-                    rows += `
-                    <tr>
-                        <td>${entity.deptName}</td>
-                        <td>${entity.facultyHead}</td>
-                        <td>${entity.email}</td>
-                        <td>
-                            <a href="/Departments/Details/${entity.id}" class="btn btn-info">Details</a> |
-                            <a href="/Departments/Edit/${entity.id}" class="btn btn-warning">Edit</a> |
-                            <a href="/Departments/Delete/${entity.id}" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>`;
-                });
-
-                $("#entityTable").html(rows);
-            }
-        );
+            $("#entityTable").html(rows);
+        });
     }
 </script>
 }

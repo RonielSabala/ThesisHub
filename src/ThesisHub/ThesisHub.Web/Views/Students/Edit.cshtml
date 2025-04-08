@@ -50,11 +50,8 @@
 
 @section Scripts {
 <script>
-    let modelDeptId = -1;
-
     $(document).ready(function () {
         loadStudent(@Model.Id);
-        loadSelect();
     });
 
     function loadStudent(id) {
@@ -63,33 +60,34 @@
             $("#lastName").val(entity.lastName);
             $("#email").val(entity.email);
             $("#phone").val(entity.phone);
-            modelDeptId = entity.departmentId;
+
+            loadSelect(entity.departmentId);
         });
     }
 
-    function loadSelect() {
+    function loadSelect(mainOption) {
         $.ajax({
             url: `${departmentAPI}/GetAll`,
             type: "GET",
-            success: function (deptEntities) {
+            success: function (departments) {
                 const $select = $("#departmentId");
                 $select.empty();
 
                 let firstOption = "";
-                let otherOptions = [];
+                let Options = [];
 
-                $.each(deptEntities, function (i, deptEntity) {
-                    let option = `<option value="${deptEntity.id}">${deptEntity.deptName}</option>`;
+                $.each(departments, function (i, dept) {
+                    let item = `<option value="${dept.id}">${dept.deptName}</option>`;
 
-                    if (deptEntity.id == modelDeptId) {
-                        firstOption = option;
+                    if (dept.id == mainOption) {
+                        firstOption = item;
                     } else {
-                        otherOptions.push(option);
+                        Options.push(item);
                     }
                 });
 
                 $select.append(firstOption);
-                $.each(otherOptions, function (i, option) {
+                $.each(Options, function (i, option) {
                     $select.append(option);
                 });
             },

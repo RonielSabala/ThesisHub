@@ -1,4 +1,6 @@
-﻿namespace ThesisHub.Common.Dtos
+﻿using ThesisHub.Domain.Entities;
+
+namespace ThesisHub.Common.Dtos
 {
     public class StudentDto
     {
@@ -8,5 +10,6 @@
         public string Email { get; set; }
         public string Phone { get; set; }
         public int DepartmentId { get; set; }
+        public Department? Department { get; set; }
     }
 }

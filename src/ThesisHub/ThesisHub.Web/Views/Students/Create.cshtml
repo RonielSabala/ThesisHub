@@ -53,13 +53,13 @@
         $.ajax({
             url: `${departmentAPI}/GetAll`,
             type: "GET",
-            success: function (entities) {
+            success: function (departments) {
                 const $select = $("#departmentId");
                 $select.empty();
                 $select.append('<option value="">-- Select department --</option>');
                 
-                $.each(entities, function (i, entity) {
-                    $select.append(`<option value="${entity.id}">${entity.deptName}</option>`);
+                $.each(departments, function (i, dept) {
+                    $select.append(`<option value="${dept.id}">${dept.deptName}</option>`);
                 });
             }
         });

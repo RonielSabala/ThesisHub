@@ -33,12 +33,26 @@ namespace ThesisHub.Application.Services
 
         public async Task<StudentDto> Get(int id)
         {
-            return await _repo.Get(id);
+            await _unitOfWork.BeginTransactionAsync();
+
+            var dto = await _repo.Get(id);
+
+            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.CommitTransactionAsync();
+
+            return dto;
         }
 
         public async Task<List<StudentDto>> GetAll(string filter = "")
         {
-            return await _repo.GetAll(filter);
+            await _unitOfWork.BeginTransactionAsync();
+
+            var dtos = await _repo.GetAll(filter);
+
+            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.CommitTransactionAsync();
+
+            return dtos;
         }
 
         public async Task<bool> Add(StudentDto dto)

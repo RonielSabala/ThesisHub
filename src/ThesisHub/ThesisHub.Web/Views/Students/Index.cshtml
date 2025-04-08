@@ -43,35 +43,22 @@
         let filter = $("#search").val();
 
         $.get(`${studentAPI}/GetAll`, { filter: filter }, function (entities) {
-                let rows = "";
+            const rows = entities.map(entity => `
+                <tr>
+                    <td>${entity.firstName}</td>
+                    <td>${entity.lastName}</td>
+                    <td>${entity.email}</td>
+                    <td>${entity.phone}</td>
+                    <td>${entity.department.deptName}</td>
+                    <td>
+                        <a href="/Students/Details/${entity.id}" class="btn btn-info">Details</a> |
+                        <a href="/Students/Edit/${entity.id}" class="btn btn-warning">Edit</a> |
+                        <a href="/Students/Delete/${entity.id}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>`).join('');
 
-                entities.forEach((entity, i) => {
-                    let entityColumnId = `student${i}`;
-                    rows += `
-                    <tr>
-                        <td>${entity.firstName}</td>
-                        <td>${entity.lastName}</td>
-                        <td>${entity.email}</td>
-                        <td>${entity.phone}</td>
-                        <td id="${entityColumnId}"></td>
-                        <td>
-                            <a href="/Students/Details/${entity.id}" class="btn btn-info">Details</a> |
-                            <a href="/Students/Edit/${entity.id}" class="btn btn-warning">Edit</a> |
-                            <a href="/Students/Delete/${entity.id}" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>`;
-                });
-
-                $("#entityTable").html(rows);
-                entities.forEach((entity, i) => {
-                    let entityColumnId = `student${i}`;
-
-                    $.get(`${departmentAPI}/Get/${entity.departmentId}`, function (deptEntity) {
-                        $(`#${entityColumnId}`).html(deptEntity.deptName);
-                    });
-                });
-            }
-        );
+            $("#entityTable").html(rows);
+        });
     }
 </script>
 }

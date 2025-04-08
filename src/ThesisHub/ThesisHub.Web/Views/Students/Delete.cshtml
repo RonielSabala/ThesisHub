@@ -47,10 +47,7 @@
             $("#lastName").html(entity.lastName);
             $("#email").html(entity.email);
             $("#phone").html(entity.phone);
-
-            $.get(`${departmentAPI}/Get/${entity.departmentId}`, function (deptEntity) {
-                $("#department").text(deptEntity.deptName);
-            });
+            $("#department").text(entity.department.deptName);
         });
     }
 

@@ -11,9 +11,20 @@ namespace ThesisHub.Infrastructure.Repositories
     {
         public StudentRepository(ThesisHubContext context) : base(context) { }
 
+        public async Task UpdateEntityDepartment(Student dbEntity)
+        {
+            var department = await Context.Departments.FindAsync(dbEntity.DepartmentId);
+            dbEntity.Department = department;
+        }
+
         public async Task<StudentDto> Get(int id)
         {
             var dbEntity = await GetEntity(id);
+            if (dbEntity.Department == null)
+            {
+                await UpdateEntityDepartment(dbEntity);
+            }
+            
             return new StudentDto
             {
                 Id = dbEntity.Id,
@@ -22,6 +33,7 @@ namespace ThesisHub.Infrastructure.Repositories
                 Email = dbEntity.Email,
                 Phone = dbEntity.Phone,
                 DepartmentId = dbEntity.DepartmentId,
+                Department = dbEntity.Department,
             };
         }
 
@@ -35,15 +47,25 @@ namespace ThesisHub.Infrastructure.Repositories
                 dbEntities = dbEntities.Where(d => d.FirstName.ToLower().Contains(filter)).ToList();
             }
 
-            var entities = dbEntities.Select(entity => new StudentDto
+            var entities = new List<StudentDto>();
+            foreach (var dbEntity in dbEntities)
             {
-                Id = entity.Id,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                Email = entity.Email,
-                Phone = entity.Phone,
-                DepartmentId = entity.DepartmentId,
-            }).ToList();
+                if (dbEntity.Department == null)
+                {
+                    await UpdateEntityDepartment(dbEntity);
+                }
+
+                entities.Add(new StudentDto
+                {
+                    Id = dbEntity.Id,
+                    FirstName = dbEntity.FirstName,
+                    LastName = dbEntity.LastName,
+                    Email = dbEntity.Email,
+                    Phone = dbEntity.Phone,
+                    DepartmentId = dbEntity.DepartmentId,
+                    Department = dbEntity.Department,
+                });
+            }
 
             return entities;
         }
@@ -51,12 +73,14 @@ namespace ThesisHub.Infrastructure.Repositories
         public async Task<bool> Add(Request<Student> request)
         {
             var dbEntity = request.Data;
+            await UpdateEntityDepartment(dbEntity);
             return await AddEntityToDb(dbEntity);
         }
 
         public async Task<bool> Update(Request<Student> request)
         {
             var dbEntity = request.Data;
+            await UpdateEntityDepartment(dbEntity);
             return await UpdateEntityInDb(dbEntity);
         }
 

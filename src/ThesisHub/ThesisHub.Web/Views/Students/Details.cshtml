@@ -42,10 +42,7 @@
             $("#lastName").text(entity.lastName);
             $("#email").text(entity.email);
             $("#phone").text(entity.phone);
-
-            $.get(`${departmentAPI}/Get/${entity.departmentId}`, function (deptEntity) {
-                $("#department").text(deptEntity.deptName);
-            });
+            $("#department").text(entity.department.deptName);
         });
     }
 </script>

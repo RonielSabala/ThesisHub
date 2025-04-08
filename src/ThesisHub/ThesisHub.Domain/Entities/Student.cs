@@ -32,5 +32,7 @@ namespace ThesisHub.Domain.Entities
         [Column("department_id")]
         [Range(1, int.MaxValue)]
         public int DepartmentId { get; set; }
+
+        public Department? Department { get; set; }
     }
 }
