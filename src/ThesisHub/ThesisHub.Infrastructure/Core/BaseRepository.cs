@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ThesisHub.Common.Responses;
 using ThesisHub.Domain.Core;
 using ThesisHub.Infrastructure.Contracts;
 using ThesisHub.Persistence;
@@ -44,22 +43,22 @@ namespace ThesisHub.Infrastructure.Core
             return entitiesDb;
         }
 
-        public async Task<Response<T>> AddEntityToDb(T dbEntity)
+        public async Task<bool> AddEntityToDb(T dbEntity)
         {
             DbSet.Add(dbEntity);
-            return new Response<T> { Success = true, Message = "Added successfully!" };
+            return true;
         }
 
-        public async Task<Response<T>> UpdateEntityInDb(T dbEntity)
+        public async Task<bool> UpdateEntityInDb(T dbEntity)
         {
             DbSet.Update(dbEntity);
-            return new Response<T> { Success = true, Message = "Updated successfully!" };
+            return true;
         }
 
-        public async Task<Response<T>> DeleteEntityFromDb(T dbEntity)
+        public async Task<bool> DeleteEntityFromDb(T dbEntity)
         {
             DbSet.Remove(dbEntity);
-            return new Response<T> { Success = true, Message = "deleted successfully!" };
+            return true;
         }
     }
 }

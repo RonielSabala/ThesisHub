@@ -1,5 +1,4 @@
-﻿using ThesisHub.Common.Responses;
-using ThesisHub.Domain.Core;
+﻿using ThesisHub.Domain.Core;
 
 namespace ThesisHub.Infrastructure.Contracts
 {
@@ -11,10 +10,10 @@ namespace ThesisHub.Infrastructure.Contracts
 
         Task<List<T>> GetAllEntities();
 
-        Task<Response<T>> AddEntityToDb(T dbEntity);
+        Task<bool> AddEntityToDb(T dbEntity);
 
-        Task<Response<T>> UpdateEntityInDb(T dbEntity);
+        Task<bool> UpdateEntityInDb(T dbEntity);
 
-        Task<Response<T>> DeleteEntityFromDb(T dbEntity);
+        Task<bool> DeleteEntityFromDb(T dbEntity);
     }
 }

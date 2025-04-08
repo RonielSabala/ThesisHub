@@ -22,7 +22,7 @@ namespace ThesisHub.Web.Controllers
 
         public IActionResult Edit(int id)
         {
-            return View(new StudentViewModel { Id = id});
+            return View(new StudentViewModel { Id = id });
         }
 
         public IActionResult Delete(int id)

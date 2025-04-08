@@ -1,6 +1,5 @@
 ﻿using ThesisHub.Common.Dtos;
 using ThesisHub.Common.Requests;
-using ThesisHub.Common.Responses;
 using ThesisHub.Domain.Entities;
 using ThesisHub.Infrastructure.Contracts;
 using ThesisHub.Infrastructure.Core;
@@ -45,19 +44,19 @@ namespace ThesisHub.Infrastructure.Repositories
             return entities;
         }
 
-        public async Task<Response<Department>> Add(Request<Department> request)
+        public async Task<bool> Add(Request<Department> request)
         {
             var dbEntity = request.Data;
             return await AddEntityToDb(dbEntity);
         }
 
-        public async Task<Response<Department>> Update(Request<Department> request)
+        public async Task<bool> Update(Request<Department> request)
         {
             var dbEntity = request.Data;
             return await UpdateEntityInDb(dbEntity);
         }
 
-        public async Task<Response<Department>> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var dbEntity = await GetEntity(id);
             return await DeleteEntityFromDb(dbEntity);
