@@ -1,52 +1,58 @@
 ﻿@model StudentViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Student";
 }
 
-<h1>Edit</h1>
+<div class="container mt-5">
+    <div class="card shadow-sm rounded-4">
 
-<h4>Student</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <input type="hidden" id="modelId" value="@Model.Id" />
-
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label class="control-label">First name</label>
-            <input class="form-control" id="firstName" />
+        <div class="card-header bg-warning text-dark">
+            <h3 class="mb-0">Edit Student</h3>
         </div>
 
-        <div class="form-group">
-            <label class="control-label">Last name</label>
-            <input class="form-control" id="lastName" />
-        </div>
+        <div class="card-body">
+            <form>
+                <input type="hidden" id="modelId" value="@Model.Id" />
 
-        <div class="form-group">
-            <label class="control-label">Email</label>
-            <input class="form-control" id="email" />
-        </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                </div>
 
-        <div class="form-group">
-            <label class="control-label">Phone</label>
-            <input class="form-control" id="phone" />
-        </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                </div>
 
-        <div class="form-group">
-            <label class="control-label">Department</label>
-            <select id="departmentId" class="form-control"></select>
-        </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
 
-        @* Save button *@
-        <div class="form-group">
-            <button onclick="updateStudent()" class="btn btn-primary">Update</button>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+                </div>
+
+                <div class="mb-4">
+                    <label for="departmentId" class="form-label">Department</label>
+                    <select id="departmentId" class="form-control"></select>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <button type="button" onclick="updateStudent()" class="btn btn-lg btn-warning px-4 text-white">
+                        <i class="bi bi-pencil-square me-2"></i> Update
+                    </button>
+
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                </div>
+
+            </form>
         </div>
 
     </div>
 </div>
-
-<a asp-action="Index">Back to List</a>
 
 @section Scripts {
 <script>
