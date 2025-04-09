@@ -25,6 +25,6 @@ function loadDepartments() {
             </tr>
         `).join('');
 
-        $("#entityTable").html(rows);
+        $("#departmentsTable").html(rows);
     });
 }

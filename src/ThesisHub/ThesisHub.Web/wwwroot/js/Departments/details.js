@@ -1,4 +1,4 @@
-﻿function loadDetails(id) {
+﻿function loadDepartment(id) {
     $.get(`${departmentAPI}/Get/${id}`, function (entity) {
         $("#deptName").text(entity.deptName);
         $("#facultyHead").text(entity.facultyHead);

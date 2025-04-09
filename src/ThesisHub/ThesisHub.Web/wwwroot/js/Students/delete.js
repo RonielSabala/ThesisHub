@@ -1,19 +1,21 @@
-﻿function loadDepartment(id) {
-    $.get(`${departmentAPI}/Get/${id}`, function (entity) {
-        $("#deptName").html(entity.deptName);
-        $("#facultyHead").html(entity.facultyHead);
+﻿function loadStudent(id) {
+    $.get(`${studentAPI}/Get/${id}`, function (entity) {
+        $("#firstName").html(entity.firstName);
+        $("#lastName").html(entity.lastName);
         $("#email").html(entity.email);
+        $("#phone").html(entity.phone);
+        $("#department").text(entity.department.deptName);
     });
 }
 
-function deleteDepartment(id) {
+function deleteStudent(id) {
     $.ajax({
-        url: `${departmentAPI}/Delete/${id}`,
+        url: `${studentAPI}/Delete/${id}`,
         type: "DELETE",
         contentType: "application/json",
         success: function (response) {
             if (response.success) {
-                window.location.href = "/Departments/Index";
+                window.location.href = "/Students/Index";
             } else {
                 alert("Error: " + response.message);
             }
@@ -23,4 +25,4 @@ function deleteDepartment(id) {
             alert("An error occurred. Please try again.");
         }
     });
-}   
+}

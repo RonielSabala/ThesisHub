@@ -32,7 +32,7 @@
             </dl>
 
             <div class="d-flex justify-content-between align-items-center mt-4">
-                <button onclick="deleteStudent()" class="btn btn-lg btn-danger px-4">
+                <button onclick="deleteStudent(@Model.Id)" class="btn btn-lg btn-danger px-4">
                     <i class="bi bi-trash3-fill me-2"></i> Delete
                 </button>
 
@@ -44,38 +44,10 @@
 </div>
 
 @section Scripts {
-<script>
-    $(document).ready(function () {
-        loadStudent(@Model.Id);
-    });
-
-    function loadStudent(id) {
-        $.get(`${studentAPI}/Get/${id}`, function (entity) {
-            $("#firstName").html(entity.firstName);
-            $("#lastName").html(entity.lastName);
-            $("#email").html(entity.email);
-            $("#phone").html(entity.phone);
-            $("#department").text(entity.department.deptName);
+    <script src="~/js/Students/delete.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadStudent(@Model.Id);
         });
-    }
-
-    function deleteStudent() {
-        $.ajax({
-            url: `${studentAPI}/Delete/${@Model.Id}`,
-            type: "DELETE",
-            contentType: "application/json",
-            success: function (response) {
-                if (response.success) {
-                    window.location.href = "/Students/Index";
-                } else {
-                    alert("Error: " + response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX Error:", status, error);
-                alert("An error occurred. Please try again.");
-            }
-        });
-    }
-</script>
+    </script>
 }
