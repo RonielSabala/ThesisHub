@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm rounded-4 border-danger">
+
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0">Delete @ViewData["Entity"]</h3>
+        </div>
+
+        <div class="card-body">
+            <h5 class="mb-4 text-danger">Are you sure you want to delete this @(ViewData["Entity"])?</h5>
+
+            <dl class="row">
+                
+                @* Fields injection here *@
+                @RenderSection("Fields", required: true)
+
+            </dl>
+
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <button onclick="deleteEntity(@ViewData["ModelId"])" class="btn btn-lg btn-danger px-4">
+                    <i class="bi bi-trash3-fill me-2"></i> Delete
+                </button>
+
+                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/@(ViewData["Entity"])s/delete.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadEntity(@ViewData["ModelId"]);
+        });
+    </script>
+}
+
+@await RenderSectionAsync("Scripts", required: false)

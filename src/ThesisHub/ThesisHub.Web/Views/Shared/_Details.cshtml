@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm rounded-4">
+
+        <div class="card-header bg-info text-black">
+            <h3 class="mb-0">@ViewData["Entity"] Details</h3>
+        </div>
+
+        <div class="card-body">
+            <dl class="row">
+
+                @* Fields injection here *@
+                @RenderSection("Fields", required: true)
+
+            </dl>
+
+            <div class="d-flex justify-content-end mt-4">
+                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/@(ViewData["Entity"])s/details.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadEntity(@ViewData["ModelId"]);
+        });
+    </script>
+}
+
+@await RenderSectionAsync("Scripts", required: false)
