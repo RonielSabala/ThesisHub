@@ -1,54 +1,24 @@
 ﻿@model DepartmentViewModel
 
 @{
-    ViewData["Title"] = "Edit Department";
+    Layout = "_Edit";
+    ViewData["Entity"] = "Department";
+    ViewData["ModelId"] = Model.Id;
 }
 
-<div class="container mt-5">
-    <div class="card shadow-sm rounded-4">
-
-        <div class="card-header bg-warning text-dark">
-            <h3 class="mb-0">Edit Department</h3>
-        </div>
-
-        <div class="card-body">
-            <form>
-                <input type="hidden" id="modelId" value="@Model.Id" />
-
-                <div class="mb-3">
-                    <label for="deptName" class="form-label">Department Name</label>
-                    <input type="text" class="form-control" id="deptName" placeholder="Enter department name">
-                </div>
-
-                <div class="mb-3">
-                    <label for="facultyHead" class="form-label">Faculty Head</label>
-                    <input type="text" class="form-control" id="facultyHead" placeholder="Enter faculty head">
-                </div>
-
-                <div class="mb-4">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email">
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center mt-4">
-                    <button type="button" onclick="updateDepartment()" class="btn btn-lg btn-warning px-4 text-white">
-                        <i class="bi bi-pencil-square me-2"></i> Update
-                    </button>
-
-                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
-                </div>
-
-            </form>
-        </div>
-
+@section Fields {
+    <div class="mb-3">
+        <label for="deptName" class="form-label">Department Name</label>
+        <input type="text" class="form-control" id="deptName" placeholder="Enter department name">
     </div>
-</div>
 
-@section Scripts {
-    <script src="~/js/Departments/edit.js"></script>
-    <script>
-        $(document).ready(function () {
-            loadDepartment(@Model.Id);
-        });
-    </script>
+    <div class="mb-3">
+        <label for="facultyHead" class="form-label">Faculty Head</label>
+        <input type="text" class="form-control" id="facultyHead" placeholder="Enter faculty head">
+    </div>
+
+    <div class="mb-4">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
 }

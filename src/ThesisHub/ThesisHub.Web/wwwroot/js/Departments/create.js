@@ -1,4 +1,4 @@
-﻿function addDepartment() {
+﻿function addEntity() {
     let entity = {
         facultyHead: $("#facultyHead").val(),
         deptName: $("#deptName").val(),

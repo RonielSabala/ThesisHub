@@ -1,41 +1,18 @@
 ﻿@model DepartmentViewModel
 
 @{
-    ViewData["Title"] = "Department Details";
+    Layout = "_Details";
+    ViewData["Entity"] = "Department";
+    ViewData["ModelId"] = Model.Id;
 }
 
-<div class="container mt-5">
-    <div class="card shadow-sm rounded-4">
+@section Fields {
+    <dt class="col-sm-3">Department Name</dt>
+    <dd class="col-sm-9" id="deptName"></dd>
 
-        <div class="card-header bg-info text-black">
-            <h3 class="mb-0">Department Details</h3>
-        </div>
+    <dt class="col-sm-3">Faculty Head</dt>
+    <dd class="col-sm-9" id="facultyHead"></dd>
 
-        <div class="card-body">
-            <dl class="row">
-                <dt class="col-sm-3">Department Name</dt>
-                <dd class="col-sm-9" id="deptName"></dd>
-
-                <dt class="col-sm-3">Faculty Head</dt>
-                <dd class="col-sm-9" id="facultyHead"></dd>
-
-                <dt class="col-sm-3">Email</dt>
-                <dd class="col-sm-9" id="email"></dd>
-            </dl>
-
-            <div class="d-flex justify-content-end mt-4">
-                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-@section Scripts {
-    <script src="~/js/Departments/details.js"></script>
-    <script>
-        $(document).ready(function () {
-            loadDepartment(@Model.Id);
-        });
-    </script>
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9" id="email"></dd>
 }

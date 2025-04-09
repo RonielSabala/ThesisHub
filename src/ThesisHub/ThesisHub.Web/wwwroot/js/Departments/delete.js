@@ -1,4 +1,4 @@
-﻿function loadDepartment(id) {
+﻿function loadEntity(id) {
     $.get(`${departmentAPI}/Get/${id}`, function (entity) {
         $("#deptName").html(entity.deptName);
         $("#facultyHead").html(entity.facultyHead);
@@ -6,7 +6,7 @@
     });
 }
 
-function deleteDepartment(id) {
+function deleteEntity(id) {
     $.ajax({
         url: `${departmentAPI}/Delete/${id}`,
         type: "DELETE",

@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    loadDepartments();
+    loadEntities();
 });
 
-function loadDepartments() {
+function loadEntities() {
     let filter = $("#search").val();
 
     $.get(`${departmentAPI}/GetAll`, { filter: filter }, function (entities) {
@@ -25,6 +25,6 @@ function loadDepartments() {
             </tr>
         `).join('');
 
-        $("#departmentsTable").html(rows);
+        $("#entityTable").html(rows);
     });
 }

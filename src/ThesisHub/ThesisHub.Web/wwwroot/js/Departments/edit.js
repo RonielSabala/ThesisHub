@@ -1,4 +1,4 @@
-﻿function loadDepartment(id) {
+﻿function loadEntity(id) {
     $.get(`${departmentAPI}/Get/${id}`, function (entity) {
         $("#deptName").val(entity.deptName);
         $("#facultyHead").val(entity.facultyHead);
@@ -6,7 +6,7 @@
     });
 }
 
-function updateDepartment() {
+function updateEntity() {
     let entity = {
         id: $("#modelId").val(),
         deptName: $("#deptName").val(),
