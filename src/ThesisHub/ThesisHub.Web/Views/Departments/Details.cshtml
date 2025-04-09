@@ -1,28 +1,35 @@
 ﻿@model DepartmentViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Department Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <div class="card shadow-sm rounded-4">
 
-<div>
-    <h4>Department</h4>
-    <hr />
+        <div class="card-header bg-info text-black">
+            <h3 class="mb-0">Department Details</h3>
+        </div>
 
-    <dl class="row">
-        <dt class="col-sm-2">Dept. name</dt>
-        <dd class="col-sm-10" id="deptName"></dd>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Department Name</dt>
+                <dd class="col-sm-9" id="deptName">Finance</dd>
 
-        <dt class="col-sm-2">Faculty head</dt>
-        <dd class="col-sm-10" id="facultyHead"></dd>
+                <dt class="col-sm-3">Faculty Head</dt>
+                <dd class="col-sm-9" id="facultyHead">Dr. Smith</dd>
 
-        <dt class="col-sm-2">Email</dt>
-        <dd class="col-sm-10" id="email"></dd>
-    </dl>
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9" id="email">finance@university.edu</dd>
+            </dl>
+
+            <div class="d-flex justify-content-end mt-4">
+                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            </div>
+        </div>
+
+    </div>
 </div>
-
-<a asp-action="Index" class="btn btn-secondary">Back to List</a>
 
 @section Scripts {
 <script>
