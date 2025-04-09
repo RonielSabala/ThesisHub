@@ -32,17 +32,10 @@
 </div>
 
 @section Scripts {
-<script>
-    $(document).ready(function () {
-        loadDetails(@Model.Id);
-    });
-
-    function loadDetails(id) {
-        $.get(`${departmentAPI}/Get/${id}`, function (entity) {
-            $("#deptName").text(entity.deptName);
-            $("#facultyHead").text(entity.facultyHead);
-            $("#email").text(entity.email);
+    <script src="~/js/Departments/details.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadDetails(@Model.Id);
         });
-    }
-</script>
+    </script>
 }
