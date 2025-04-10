@@ -1,19 +1,22 @@
 ﻿@{
     Layout = "_Layout";
+    var id = ViewData["ModelId"];
+    var entity = ViewData["Entity"].ToString();
+    var path = $"/js/{entity}s";
 }
 
 <div class="container mt-5">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="mb-0">@(ViewData["Entity"])s</h2>
-        <a class="btn btn-success btn-lg px-4" href="/@(ViewData["Entity"])s/Create">
+        <h2 class="mb-0">@(entity)s</h2>
+        <a class="btn btn-success btn-lg px-4" href="/@(entity)s/Create">
             <i class="bi bi-plus-circle me-1"></i> Create New
         </a>
     </div>
 
     <div class="row mb-4">
         <div class="col-md-4">
-            <input id="search" class="form-control" placeholder="Search a @(ViewData["Entity"].ToString().ToLower())..." onkeyup="loadEntities()" />
+            <input id="search" class="form-control" placeholder="Search a @(entity.ToLower())..." onkeyup="loadEntities()" />
         </div>
     </div>
 
@@ -40,6 +43,7 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/@(ViewData["Entity"])s/index.js"></script>
+    <script src="@(path)/index.js"></script>
+
     @await RenderSectionAsync("AdditionalScripts", required: false)
 }

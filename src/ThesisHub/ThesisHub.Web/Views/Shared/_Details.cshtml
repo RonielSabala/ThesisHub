@@ -1,12 +1,15 @@
 ﻿@{
     Layout = "_Layout";
+    var id = ViewData["ModelId"];
+    var entity = ViewData["Entity"].ToString();
+    var path = $"/js/{entity}s";
 }
 
 <div class="container mt-5">
     <div class="card shadow-sm rounded-4">
 
         <div class="card-header bg-info text-black">
-            <h3 class="mb-0">@ViewData["Entity"] Details</h3>
+            <h3 class="mb-0">@entity Details</h3>
         </div>
 
         <div class="card-body">
@@ -26,10 +29,10 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/@(ViewData["Entity"])s/details.js"></script>
+    <script src="@(path)/common.js"></script>
     <script>
         $(document).ready(function () {
-            loadEntity(@ViewData["ModelId"]);
+            loadEntity(@id);
         });
     </script>
 

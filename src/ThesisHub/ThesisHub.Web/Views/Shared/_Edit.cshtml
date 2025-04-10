@@ -1,17 +1,20 @@
 ﻿@{
     Layout = "_Layout";
+    var id = ViewData["ModelId"];
+    var entity = ViewData["Entity"].ToString();
+    var path = $"/js/{entity}s";
 }
 
 <div class="container mt-5">
     <div class="card shadow-sm rounded-4">
 
         <div class="card-header bg-warning text-dark">
-            <h3 class="mb-0">Edit @ViewData["Entity"]</h3>
+            <h3 class="mb-0">Edit @entity</h3>
         </div>
 
         <div class="card-body">
             <form>
-                <input type="hidden" id="modelId" value="@ViewData["ModelId"]" />
+                <input type="hidden" id="modelId" value="@id" />
 
                 @* Fields injection here *@
                 @RenderSection("Fields", required: true)
@@ -31,10 +34,10 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/@(ViewData["Entity"])s/edit.js"></script>
+    <script src="@(path)/edit.js"></script>
     <script>
         $(document).ready(function () {
-            loadEntity(@ViewData["ModelId"]);
+            loadEntity(@id);
         });
     </script>
 

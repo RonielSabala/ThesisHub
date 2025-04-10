@@ -1,12 +1,4 @@
-﻿function loadEntity(id) {
-    $.get(`${departmentAPI}/Get/${id}`, function (entity) {
-        $("#deptName").text(entity.deptName);
-        $("#facultyHead").text(entity.facultyHead);
-        $("#email").text(entity.email);
-    });
-}
-
-function deleteEntity(id) {
+﻿function deleteEntity(id) {
     $.ajax({
         url: `${departmentAPI}/Delete/${id}`,
         type: "DELETE",
@@ -23,4 +15,4 @@ function deleteEntity(id) {
             alert("An error occurred. Please try again.");
         }
     });
-}   
+}

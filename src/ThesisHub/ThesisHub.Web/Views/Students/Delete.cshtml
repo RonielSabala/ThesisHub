@@ -7,18 +7,5 @@
 }
 
 @section Fields {
-    <dt class="col-sm-3">First name</dt>
-    <dd class="col-sm-9" id="firstName"></dd>
-
-    <dt class="col-sm-3">Last name</dt>
-    <dd class="col-sm-9" id="lastName"></dd>
-
-    <dt class="col-sm-3">Email</dt>
-    <dd class="col-sm-9" id="email"></dd>
-
-    <dt class="col-sm-3">Phone</dt>
-    <dd class="col-sm-9" id="phone"></dd>
-
-    <dt class="col-sm-3">Department</dt>
-    <dd class="col-sm-9" id="department"></dd>
+    @await Html.PartialAsync("_StaticFields")
 }
