@@ -10,7 +10,7 @@
         </div>
 
         <div class="card-body">
-            <h4>@ViewData["Entity"]</h4>
+            <h4>Fields</h4>
             <hr />
             <div class="row">
                 <div class="col-md-12">
@@ -36,6 +36,5 @@
 
 @section Scripts {
     <script src="~/js/@(ViewData["Entity"])s/create.js"></script>
+    @await RenderSectionAsync("AdditionalScripts", required: false)
 }
-
-@await RenderSectionAsync("Scripts", required: false)

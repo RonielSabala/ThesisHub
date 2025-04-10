@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    loadStudents();
+    loadEntities();
 });
 
-function loadStudents() {
+function loadEntities() {
     let filter = $("#search").val();
 
     $.get(`${studentAPI}/GetAll`, { filter: filter }, function (entities) {
@@ -27,6 +27,6 @@ function loadStudents() {
             </tr>
         `).join('');
 
-        $("#studentsTable").html(rows);
+        $("#entityTable").html(rows);
     });
 }

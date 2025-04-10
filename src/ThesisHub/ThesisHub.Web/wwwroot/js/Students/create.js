@@ -14,7 +14,7 @@
     });
 }
 
-function addStudent() {
+function addEntity() {
     let entity = {
         firstName: $("#firstName").val(),
         lastName: $("#lastName").val(),

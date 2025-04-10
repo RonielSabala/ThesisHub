@@ -23,8 +23,8 @@
             <thead class="table-light">
                 <tr class="fs-5">
 
-                    @* Fields injection here *@
-                    @RenderSection("Fields", required: true)
+                    @* Columns injection here *@
+                    @RenderSection("Columns", required: true)
 
                     <th style="width: 400px;">Actions</th>
                 </tr>
@@ -32,7 +32,7 @@
 
             <tbody id="entityTable">
 
-                @* Filled with AJAX *@
+                @* Filled by AJAX *@
 
             </tbody>
         </table>
@@ -41,6 +41,5 @@
 
 @section Scripts {
     <script src="~/js/@(ViewData["Entity"])s/index.js"></script>
+    @await RenderSectionAsync("AdditionalScripts", required: false)
 }
-
-@await RenderSectionAsync("Scripts", required: false)

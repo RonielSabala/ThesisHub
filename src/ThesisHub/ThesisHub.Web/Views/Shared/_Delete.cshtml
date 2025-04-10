@@ -10,7 +10,7 @@
         </div>
 
         <div class="card-body">
-            <h5 class="mb-4 text-danger">Are you sure you want to delete this @(ViewData["Entity"])?</h5>
+            <h5 class="mb-4 text-danger">Are you sure you want to delete this @(ViewData["Entity"].ToString().ToLower())?</h5>
 
             <dl class="row">
                 
@@ -38,6 +38,6 @@
             loadEntity(@ViewData["ModelId"]);
         });
     </script>
-}
 
-@await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("AdditionalScripts", required: false)
+}

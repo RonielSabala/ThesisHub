@@ -1,4 +1,4 @@
-﻿function loadStudent(id) {
+﻿function loadEntity(id) {
     $.get(`${studentAPI}/Get/${id}`, function (entity) {
         $("#firstName").text(entity.firstName);
         $("#lastName").text(entity.lastName);

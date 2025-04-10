@@ -1,4 +1,4 @@
-﻿function loadStudent(id) {
+﻿function loadEntity(id) {
     $.get(`${studentAPI}/Get/${id}`, function (entity) {
         $("#firstName").val(entity.firstName);
         $("#lastName").val(entity.lastName);
@@ -42,7 +42,7 @@ function loadDepartments(mainOption) {
     });
 }
 
-function updateStudent() {
+function updateEntity() {
     let entity = {
         id: $("#modelId").val(),
         firstName: $("#firstName").val(),

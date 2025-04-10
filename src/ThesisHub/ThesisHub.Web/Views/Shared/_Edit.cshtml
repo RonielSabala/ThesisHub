@@ -37,6 +37,6 @@
             loadEntity(@ViewData["ModelId"]);
         });
     </script>
-}
 
-@await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("AdditionalScripts", required: false)
+}

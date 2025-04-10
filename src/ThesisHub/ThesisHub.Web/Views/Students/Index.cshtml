@@ -1,43 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Students";
+    Layout = "_Index";
+    ViewData["Entity"] = "Student";
 }
 
-<div class="container mt-5">
-
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="mb-0">Students</h2>
-        <a class="btn btn-success btn-lg px-4" href="/Students/Create">
-            <i class="bi bi-plus-circle me-1"></i> Create New
-        </a>
-    </div>
-
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <input id="search" class="form-control" placeholder="Search a student..." onkeyup="loadStudents()" />
-        </div>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-hover table-bordered align-middle text-center">
-
-            <thead class="table-light">
-                <tr class="fs-5">
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Department</th>
-                    <th style="width: 400px;">Actions</th>
-                </tr>
-            </thead>
-
-            <tbody id="studentsTable">
-                @* Filled by AJAX *@
-            </tbody>
-        </table>
-    </div>
-</div>
-
-@section Scripts {
-    <script src="~/js/Students/index.js"></script>
+@section Columns {
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Department</th>
 }

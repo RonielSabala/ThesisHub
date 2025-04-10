@@ -1,4 +1,4 @@
-﻿function loadStudent(id) {
+﻿function loadEntity(id) {
     $.get(`${studentAPI}/Get/${id}`, function (entity) {
         $("#firstName").html(entity.firstName);
         $("#lastName").html(entity.lastName);
@@ -8,7 +8,7 @@
     });
 }
 
-function deleteStudent(id) {
+function deleteEntity(id) {
     $.ajax({
         url: `${studentAPI}/Delete/${id}`,
         type: "DELETE",
