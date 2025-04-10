@@ -7,5 +7,6 @@
 }
 
 @section Fields {
-    @await Html.PartialAsync("_DynamicFields")
+    @await Html.PartialAsync("_DynamicFields", Model.DynamicFields)
+    @await Html.PartialAsync("_SelectField", Model.StaticFields.Last())
 }

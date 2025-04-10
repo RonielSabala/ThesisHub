@@ -12,7 +12,7 @@ namespace ThesisHub.Web.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            return View(new StudentViewModel());
         }
 
         public IActionResult Details(int id)

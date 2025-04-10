@@ -3,7 +3,7 @@
         url: `${departmentAPI}/GetAll`,
         type: "GET",
         success: function (departments) {
-            const $select = $("#departmentId");
+            const $select = $("#department");
             $select.empty();
             $select.append('<option value="">-- Select department --</option>');
 
@@ -20,7 +20,7 @@ function addEntity() {
         lastName: $("#lastName").val(),
         email: $("#email").val(),
         phone: $("#phone").val(),
-        departmentId: $("#departmentId").val()
+        departmentId: $("#department").val()
     };
 
     $.ajax({

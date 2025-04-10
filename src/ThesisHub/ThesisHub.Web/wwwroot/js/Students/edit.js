@@ -14,7 +14,7 @@ function loadDepartments(mainOption) {
         url: `${departmentAPI}/GetAll`,
         type: "GET",
         success: function (departments) {
-            const $select = $("#departmentId");
+            const $select = $("#department");
             $select.empty();
 
             let firstOption = "";
@@ -49,7 +49,7 @@ function updateEntity() {
         lastName: $("#lastName").val(),
         email: $("#email").val(),
         phone: $("#phone").val(),
-        departmentId: $("#departmentId").val()
+        departmentId: $("#department").val()
     };
 
     $.ajax({

@@ -1,8 +1,10 @@
-﻿@{
+﻿@model DepartmentViewModel
+
+@{
     Layout = "_Create";
     ViewData["Entity"] = "Department";
 }
 
 @section Fields {
-    @await Html.PartialAsync("_DynamicFields")
+    @await Html.PartialAsync("_DynamicFields", Model.DynamicFields)
 }

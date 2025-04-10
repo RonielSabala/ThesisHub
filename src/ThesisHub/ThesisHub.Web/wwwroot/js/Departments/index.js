@@ -15,7 +15,7 @@ function loadEntities() {
                     <a href="/Departments/Details/${entity.id}" class="btn btn-info me-2">
                         <i class="bi bi-eye me-1"></i> Details
                     </a>
-                    <a href="/Departments/Edit/${entity.id}" class="btn btn-warning me-2 text-white">
+                    <a href="/Departments/Edit/${entity.id}" class="btn btn-warning me-2 text-black">
                         <i class="bi bi-pencil-square me-1"></i> Edit
                     </a>
                     <a href="/Departments/Delete/${entity.id}" class="btn btn-danger">
