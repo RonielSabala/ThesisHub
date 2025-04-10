@@ -8,7 +8,7 @@ namespace ThesisHub.Infrastructure.Core
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ThesisHubContext _context;
+        private readonly DataContext _context;
         private IDbContextTransaction _transaction;
 
         private IRepository<Department> _departments;
@@ -17,7 +17,7 @@ namespace ThesisHub.Infrastructure.Core
         public IRepository<Department> Departments => _departments ??= new DepartmentRepository(_context);
         public IRepository<Student> Students => _students ??= new StudentRepository(_context);
 
-        public UnitOfWork(ThesisHubContext context)
+        public UnitOfWork(DataContext context)
         {
             _context = context;
         }

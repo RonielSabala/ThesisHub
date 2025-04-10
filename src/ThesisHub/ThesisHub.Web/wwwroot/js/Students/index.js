@@ -12,7 +12,7 @@ function loadEntities() {
                 <td>${entity.lastName}</td>
                 <td>${entity.email}</td>
                 <td>${entity.phone}</td>
-                <td>${entity.department.deptName}</td>
+                <td>${entity.deptName}</td>
                 <td>
                     <a href="/Students/Details/${entity.id}" class="btn btn-info me-2">
                         <i class="bi bi-eye me-1"></i> Details

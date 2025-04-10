@@ -1,10 +1,10 @@
 ﻿function loadEntity(id) {
     $.get(`${studentAPI}/Get/${id}`, function (entity) {
-        $("#firstName").html(entity.firstName);
-        $("#lastName").html(entity.lastName);
-        $("#email").html(entity.email);
-        $("#phone").html(entity.phone);
-        $("#department").text(entity.department.deptName);
+        $("#firstName").text(entity.firstName);
+        $("#lastName").text(entity.lastName);
+        $("#email").text(entity.email);
+        $("#phone").text(entity.phone);
+        $("#department").text(entity.deptName);
     });
 }
 

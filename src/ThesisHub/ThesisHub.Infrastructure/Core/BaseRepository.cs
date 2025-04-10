@@ -7,10 +7,10 @@ namespace ThesisHub.Infrastructure.Core
 {
     public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
-        protected readonly ThesisHubContext Context;
+        protected readonly DataContext Context;
         protected readonly DbSet<T> DbSet;
 
-        public BaseRepository(ThesisHubContext context)
+        public BaseRepository(DataContext context)
         {
             Context = context;
             DbSet = context.Set<T>();

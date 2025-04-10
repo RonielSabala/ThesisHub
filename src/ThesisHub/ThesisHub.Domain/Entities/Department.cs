@@ -22,5 +22,7 @@ namespace ThesisHub.Domain.Entities
         [StringLength(50, MinimumLength = 3)]
         [EmailAddress]
         public string Email { get; set; }
+
+        public ICollection<Student> Students { get; set; } = new List<Student>();
     }
 }

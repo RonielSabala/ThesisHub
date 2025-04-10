@@ -33,6 +33,6 @@ namespace ThesisHub.Domain.Entities
         [Range(1, int.MaxValue)]
         public int DepartmentId { get; set; }
 
-        public Department? Department { get; set; }
+        public Department Department { get; set; }
     }
 }

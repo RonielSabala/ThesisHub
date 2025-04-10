@@ -9,7 +9,7 @@ namespace ThesisHub.Infrastructure.Repositories
 {
     public class DepartmentRepository : BaseRepository<Department>, IDepartmentRepository
     {
-        public DepartmentRepository(ThesisHubContext context) : base(context) { }
+        public DepartmentRepository(DataContext context) : base(context) { }
 
         public async Task<DepartmentDto> Get(int id)
         {

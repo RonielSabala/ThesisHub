@@ -1,8 +1,8 @@
 ﻿function loadEntity(id) {
     $.get(`${departmentAPI}/Get/${id}`, function (entity) {
-        $("#deptName").html(entity.deptName);
-        $("#facultyHead").html(entity.facultyHead);
-        $("#email").html(entity.email);
+        $("#deptName").text(entity.deptName);
+        $("#facultyHead").text(entity.facultyHead);
+        $("#email").text(entity.email);
     });
 }
 

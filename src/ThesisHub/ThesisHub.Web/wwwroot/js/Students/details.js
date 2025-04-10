@@ -4,6 +4,6 @@
         $("#lastName").text(entity.lastName);
         $("#email").text(entity.email);
         $("#phone").text(entity.phone);
-        $("#department").text(entity.department.deptName);
+        $("#department").text(entity.deptName);
     });
 }

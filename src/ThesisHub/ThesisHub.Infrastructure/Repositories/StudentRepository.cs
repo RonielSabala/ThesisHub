@@ -9,7 +9,7 @@ namespace ThesisHub.Infrastructure.Repositories
 {
     public class StudentRepository : BaseRepository<Student>, IStudentRepository
     {
-        public StudentRepository(ThesisHubContext context) : base(context) { }
+        public StudentRepository(DataContext context) : base(context) { }
 
         public async Task UpdateEntityDepartment(Student dbEntity)
         {
@@ -33,7 +33,7 @@ namespace ThesisHub.Infrastructure.Repositories
                 Email = dbEntity.Email,
                 Phone = dbEntity.Phone,
                 DepartmentId = dbEntity.DepartmentId,
-                Department = dbEntity.Department,
+                DeptName = dbEntity.Department.DeptName,
             };
         }
 
@@ -63,7 +63,7 @@ namespace ThesisHub.Infrastructure.Repositories
                     Email = dbEntity.Email,
                     Phone = dbEntity.Phone,
                     DepartmentId = dbEntity.DepartmentId,
-                    Department = dbEntity.Department,
+                    DeptName = dbEntity.Department.DeptName,
                 });
             }
 
