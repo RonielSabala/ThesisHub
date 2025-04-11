@@ -1,11 +1,11 @@
 ﻿@model DepartmentViewModel
 
 @{
-    Layout = "_Delete";
+    Layout = "GenericViews/_Delete";
     ViewData["Entity"] = "Department";
     ViewData["ModelId"] = Model.Id;
 }
 
-@section Fields{
-    @await Html.PartialAsync("_StaticFields", Model.StaticFields)
+@section Fields {
+    @await Html.PartialAsync("Fields/_StaticFields", Model.StaticFields)
 }

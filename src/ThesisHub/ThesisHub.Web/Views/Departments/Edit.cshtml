@@ -1,11 +1,11 @@
 ﻿@model DepartmentViewModel
 
 @{
-    Layout = "_Edit";
+    Layout = "GenericViews/_Edit";
     ViewData["Entity"] = "Department";
     ViewData["ModelId"] = Model.Id;
 }
 
 @section Fields {
-    @await Html.PartialAsync("_DynamicFields", Model.DynamicFields)
+    @await Html.PartialAsync("Fields/_DynamicFields", Model.DynamicFields)
 }

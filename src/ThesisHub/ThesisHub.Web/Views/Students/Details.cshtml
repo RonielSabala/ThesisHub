@@ -1,11 +1,11 @@
 ﻿@model StudentViewModel
 
 @{
-    Layout = "_Details";
+    Layout = "GenericViews/_Details";
     ViewData["Entity"] = "Student";
     ViewData["ModelId"] = Model.Id;
 }
 
 @section Fields {
-    @await Html.PartialAsync("_StaticFields", Model.StaticFields)
+    @await Html.PartialAsync("Fields/_StaticFields", Model.StaticFields)
 }
