@@ -2,10 +2,8 @@
 
 @{
     Layout = "GenericViews/_Delete";
-    ViewData["Entity"] = "Department";
-    ViewData["ModelId"] = Model.Id;
+    ViewData["ViewModel"] = Model;
 }
 
-@section Fields {
-    @await Html.PartialAsync("Fields/_StaticFields", Model.StaticFields)
+@section AdditionalFields {
 }

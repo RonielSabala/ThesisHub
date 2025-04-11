@@ -5,6 +5,7 @@ namespace ThesisHub.Web.ViewModels
     public class BaseEntityViewModel
     {
         public int Id { get; set; }
+        public virtual string EntityName { get; set; }
         public virtual List<FieldModel> StaticFields { get; set; } = new List<FieldModel>();
         public virtual List<FieldModel> DynamicFields { get; set; } = new List<FieldModel>();
 
@@ -22,6 +23,11 @@ namespace ThesisHub.Web.ViewModels
                     df.Placeholder = sf.Label.ToLower();
                 }
             }
+
+            string fullClassName = this.GetType().Name;
+            EntityName = fullClassName.EndsWith("ViewModel")
+                ? fullClassName.Substring(0, fullClassName.Length - "ViewModel".Length)
+                : fullClassName;
         }
     }
 }

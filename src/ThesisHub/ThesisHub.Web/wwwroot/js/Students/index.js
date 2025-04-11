@@ -11,5 +11,5 @@ function getEntityRow(entity) {
         entity.deptName,
     ]
 
-    return getRow(fields, "Students", entity.id);
+    return getRow(entity.id, fields, "Students");
 }

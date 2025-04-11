@@ -1,8 +1,8 @@
 ﻿@{
     Layout = "_Layout";
-    var id = ViewData["ModelId"];
-    var entity = ViewData["Entity"].ToString();
-    var path = $"/js/{entity}s";
+    var Model = ViewData["ViewModel"] as BaseEntityViewModel;
+    var entity = Model.EntityName;
+    var routePrefix = $"/js/{entity}s";
 }
 
 <div class="container mt-5">
@@ -16,7 +16,8 @@
             <dl class="row">
 
                 @* Fields injection here *@
-                @RenderSection("Fields", required: true)
+                @await Html.PartialAsync("Fields/_StaticFields", Model.StaticFields)
+                @await RenderSectionAsync("AdditionalFields", required: true)
 
             </dl>
 
@@ -29,11 +30,11 @@
 </div>
 
 @section Scripts {
-    <script src="@(path)/fields.js"></script>
-    <script src="@(path)/load_entity.js"></script>
+    <script src="@(routePrefix)/fields.js"></script>
+    <script src="@(routePrefix)/load_entity.js"></script>
     <script>
         $(document).ready(function () {
-            loadEntity(@id);
+            loadEntity(@Model.Id);
         });
     </script>
 

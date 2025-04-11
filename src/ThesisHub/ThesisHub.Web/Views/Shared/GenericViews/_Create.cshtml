@@ -1,7 +1,8 @@
 ﻿@{
     Layout = "_Layout";
-    var entity = ViewData["Entity"].ToString();
-    var path = $"/js/{entity}s";
+    var Model = ViewData["ViewModel"] as BaseEntityViewModel;
+    var entity = Model.EntityName;
+    var routePrefix = $"/js/{entity}s";
 }
 
 <div class="container mt-5">
@@ -19,7 +20,8 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     @* Fields injection here *@
-                    @RenderSection("Fields", required: true)
+                    @await Html.PartialAsync("Fields/_DynamicFields", Model.DynamicFields)
+                    @await RenderSectionAsync("AdditionalFields", required: true)
 
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <button onclick="addEntity()" class="btn btn-lg btn-success px-4">
@@ -39,8 +41,8 @@
 @section Scripts {
     <script src="/js/Generics/create.js"></script>
     <script src="/js/Generics/selects.js"></script>
-    <script src="@(path)/fields.js"></script>
-    <script src="@(path)/create.js"></script>
+    <script src="@(routePrefix)/fields.js"></script>
+    <script src="@(routePrefix)/create.js"></script>
 
     @await RenderSectionAsync("AdditionalScripts", required: false)
 }

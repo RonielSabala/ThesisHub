@@ -2,11 +2,9 @@
 
 @{
     Layout = "GenericViews/_Edit";
-    ViewData["Entity"] = "Student";
-    ViewData["ModelId"] = Model.Id;
+    ViewData["ViewModel"] = Model;
 }
 
-@section Fields {
-    @await Html.PartialAsync("Fields/_DynamicFields", Model.DynamicFields)
+@section AdditionalFields {
     @await Html.PartialAsync("Fields/_Select", Model.StaticFields.Last())
 }

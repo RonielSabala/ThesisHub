@@ -7,7 +7,7 @@ namespace ThesisHub.Web.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new DepartmentViewModel());
         }
 
         public IActionResult Create()

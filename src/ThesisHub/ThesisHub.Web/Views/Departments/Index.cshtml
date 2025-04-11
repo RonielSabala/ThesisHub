@@ -1,10 +1,9 @@
-﻿@{
+﻿@model DepartmentViewModel
+
+@{
     Layout = "GenericViews/_Index";
-    ViewData["Entity"] = "Department";
+    ViewData["ViewModel"] = Model;
 }
 
-@section Columns {
-    <th>Dept. Name</th>
-    <th>Faculty Head</th>
-    <th>Email</th>
+@section AdditionalFields {
 }

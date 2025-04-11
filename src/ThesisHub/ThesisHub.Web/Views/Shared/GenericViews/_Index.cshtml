@@ -1,8 +1,8 @@
 ﻿@{
     Layout = "_Layout";
-    var id = ViewData["ModelId"];
-    var entity = ViewData["Entity"].ToString();
-    var path = $"/js/{entity}s";
+    var Model = ViewData["ViewModel"] as BaseEntityViewModel;
+    var entity = Model.EntityName;
+    var routePrefix = $"/js/{entity}s";
 }
 
 <div class="container mt-5">
@@ -26,8 +26,13 @@
             <thead class="table-light">
                 <tr class="fs-5">
 
-                    @* Columns injection here *@
-                    @RenderSection("Columns", required: true)
+                    @* Columns *@
+                    @foreach (var field in Model.StaticFields)
+                    {
+                        <th>@field.Label</th>
+                    }
+
+                    @await RenderSectionAsync("AdditionalFields", required: true)
 
                     <th style="width: 400px;">Actions</th>
                 </tr>
@@ -44,7 +49,7 @@
 
 @section Scripts {
     <script src="/js/Generics/index.js"></script>
-    <script src="@(path)/index.js"></script>
+    <script src="@(routePrefix)/index.js"></script>
 
     @await RenderSectionAsync("AdditionalScripts", required: false)
 }

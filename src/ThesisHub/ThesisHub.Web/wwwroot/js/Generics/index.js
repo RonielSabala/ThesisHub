@@ -1,11 +1,9 @@
-﻿function getRow(fields, routePrefix, entityId) {
-    const columns = fields.map(data => `
-        <td>${data}</td>
-    `).join('');
-
+﻿function getRow(entityId, Entityfields, routePrefix) {
     return `
         <tr>
-            ${columns}
+            ${Entityfields.map(field => `
+                <td>${field}</td>
+            `).join('')}
             <td>
                 <a href="/${routePrefix}/Details/${entityId}" class="btn btn-info me-2">
                     <i class="bi bi-eye me-1"></i> Details

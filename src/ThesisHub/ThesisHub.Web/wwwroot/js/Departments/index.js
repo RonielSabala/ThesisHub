@@ -9,5 +9,5 @@ function getEntityRow(entity) {
         entity.email,
     ]
 
-    return getRow(fields, "Departments", entity.id);
+    return getRow(entity.id, fields, "Departments");
 }
