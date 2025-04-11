@@ -37,6 +37,9 @@
 </div>
 
 @section Scripts {
+    <script src="/js/Generics/create.js"></script>
+    <script src="/js/Generics/selects.js"></script>
+    <script src="@(path)/fields.js"></script>
     <script src="@(path)/create.js"></script>
 
     @await RenderSectionAsync("AdditionalScripts", required: false)

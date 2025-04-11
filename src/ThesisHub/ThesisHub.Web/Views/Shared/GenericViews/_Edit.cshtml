@@ -14,13 +14,12 @@
 
         <div class="card-body">
             <form>
-                <input type="hidden" id="modelId" value="@id" />
 
                 @* Fields injection here *@
                 @RenderSection("Fields", required: true)
 
                 <div class="d-flex justify-content-between align-items-center mt-4">
-                    <button type="button" onclick="updateEntity()" class="btn btn-lg btn-warning px-4 text-white">
+                    <button type="button" onclick="updateEntity(@id)" class="btn btn-lg btn-warning px-4 text-black">
                         <i class="bi bi-pencil-square me-2"></i> Update
                     </button>
 
@@ -34,10 +33,13 @@
 </div>
 
 @section Scripts {
+    <script src="/js/Generics/edit.js"></script>
+    <script src="/js/Generics/selects.js"></script>
+    <script src="@(path)/fields.js"></script>
     <script src="@(path)/edit.js"></script>
     <script>
         $(document).ready(function () {
-            loadEntity(@id);
+            loadFormEntity(@id);
         });
     </script>
 
