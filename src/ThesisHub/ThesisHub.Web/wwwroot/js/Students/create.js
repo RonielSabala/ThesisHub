@@ -7,13 +7,13 @@
         departmentId: $department.val()
     };
 
-    return genericAddEntity(entity, studentAPI, "Students");
+    return genericAddEntity(entity, localAPI, localRoute);
 }
 
 function loadSelect() {
     return genericBuildSelect(
         $department,
-        departmentAPI,
+        localForeignKeyAPI,
         (department) => department.deptName
    );
 }

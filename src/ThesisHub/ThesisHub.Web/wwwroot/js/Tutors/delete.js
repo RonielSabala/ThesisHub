@@ -1,3 +1,3 @@
 ﻿function deleteEntity(id) {
-    return genericDeleteEntity(id, tutorAPI, "Tutors");
+    return genericDeleteEntity(id, localAPI, localRoute);
 }

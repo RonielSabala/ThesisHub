@@ -1,5 +1,5 @@
 ﻿function loadEntity(id) {
-    $.get(`${studentAPI}/Get/${id}`, function (entity) {
+    $.get(`${localAPI}/Get/${id}`, function (entity) {
         $firstName.text(entity.firstName);
         $lastName.text(entity.lastName);
         $email.text(entity.email);

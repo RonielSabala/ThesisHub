@@ -3,7 +3,7 @@
 });
 
 function loadEntities() {
-    return genericLoadEntities(tutorAPI, getEntityRow);
+    return genericLoadEntities(localAPI, getEntityRow);
 }
 
 function getEntityRow(entity) {
@@ -15,5 +15,5 @@ function getEntityRow(entity) {
         entity.deptName,
     ]
 
-    return getRow(entity.id, fields, "Tutors");
+    return getRow(entity.id, fields, localRoute);
 }

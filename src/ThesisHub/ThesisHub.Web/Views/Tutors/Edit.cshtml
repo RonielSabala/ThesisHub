@@ -8,3 +8,7 @@
 @section AdditionalFields {
     @await Html.PartialAsync("Fields/_Select", Model.StaticFields.Last())
 }
+
+@section AdditionalScripts {
+    <script src="/js/Generics/selects.js"></script>
+}

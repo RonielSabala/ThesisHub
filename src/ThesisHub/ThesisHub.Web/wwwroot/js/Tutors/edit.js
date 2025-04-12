@@ -1,5 +1,5 @@
 ﻿function loadFormEntity(id) {
-    $.get(`${tutorAPI}/Get/${id}`, function (entity) {
+    $.get(`${localAPI}/Get/${id}`, function (entity) {
         $firstName.val(entity.firstName);
         $lastName.val(entity.lastName);
         $email.val(entity.email);
@@ -13,7 +13,7 @@ function loadSelect(mainOption) {
     return genericLoadSelect(
         mainOption,
         $department,
-        departmentAPI,
+        localForeignKeyAPI,
         (department) => department.deptName
     );
 }
@@ -28,5 +28,5 @@ function updateEntity(id) {
         departmentId: $department.val()
     };
 
-    return genericUpdateEntity(entity, tutorAPI, "Tutors");
+    return genericUpdateEntity(entity, localAPI, localRoute);
 }

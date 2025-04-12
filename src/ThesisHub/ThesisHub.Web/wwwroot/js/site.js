@@ -1,6 +1,5 @@
-﻿const API = "https://localhost:7149";
-
-// API's
+﻿// API's
+const API = "https://localhost:7149";
 const departmentAPI = `${API}/Departments`;
 const studentAPI = `${API}/Students`;
 const tutorAPI = `${API}/Tutors`;
