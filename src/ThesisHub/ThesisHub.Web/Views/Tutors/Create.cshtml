@@ -1,0 +1,16 @@
+﻿@model TutorViewModel
+
+@{
+    Layout = "GenericViews/_Create";
+    ViewData["ViewModel"] = Model;
+}
+
+@section AdditionalFields {
+    @await Html.PartialAsync("Fields/_Select", Model.StaticFields.Last())
+}
+
+@section AdditionalScripts {
+    <script>
+        loadSelect();
+    </script>
+}

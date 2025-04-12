@@ -2,14 +2,14 @@
 
 namespace ThesisHub.Web.ViewModels
 {
-    public class StudentViewModel : BaseEntityViewModel
+    public class TutorViewModel : BaseEntityViewModel
     {
         public override List<FieldModel> StaticFields { get; set; } = new List<FieldModel>
         {
             new FieldModel { Id = "firstName", Label = "First Name" },
             new FieldModel { Id = "lastName", Label = "Last Name" },
             new FieldModel { Id = "email", Label = "Email" },
-            new FieldModel { Id = "phone", Label = "Phone" },
+            new FieldModel { Id = "specialization", Label = "Specialization" },
             new FieldModel { Id = "department", Label = "Department"},
         };
 
@@ -18,7 +18,7 @@ namespace ThesisHub.Web.ViewModels
             new FieldModel { Type = "text" },
             new FieldModel { Type = "text" },
             new FieldModel { Type = "email" },
-            new FieldModel { Type = "text", Placeholder="phone number"},
+            new FieldModel { Type = "text" },
         };
     }
 }

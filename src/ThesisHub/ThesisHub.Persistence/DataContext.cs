@@ -9,6 +9,7 @@ namespace ThesisHub.Persistence
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Tutor> Tutors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,6 +18,12 @@ namespace ThesisHub.Persistence
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Department)
                 .WithMany(d => d.Students)
+                .HasForeignKey(s => s.DepartmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Tutor>()
+                .HasOne(s => s.Department)
+                .WithMany(d => d.Tutors)
                 .HasForeignKey(s => s.DepartmentId)
                 .OnDelete(DeleteBehavior.Cascade);
         }

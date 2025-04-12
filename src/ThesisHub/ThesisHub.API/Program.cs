@@ -18,15 +18,16 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 // Repositories
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ITutorRepository, TutorRepository>();
 
 // Services
-builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<DepartmentService>();
+builder.Services.AddScoped<StudentService>();
+builder.Services.AddScoped<TutorService>();
 
 var MyAllowSpecificOrigins = "AllowSpecificOrigins";
 builder.Services.AddCors(

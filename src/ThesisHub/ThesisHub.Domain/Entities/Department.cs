@@ -24,5 +24,6 @@ namespace ThesisHub.Domain.Entities
         public string Email { get; set; }
 
         public ICollection<Student> Students { get; set; } = new List<Student>();
+        public ICollection<Tutor> Tutors { get; set; } = new List<Tutor>();
     }
 }

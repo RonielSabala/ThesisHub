@@ -1,8 +1,9 @@
 ﻿const API = "https://localhost:7149";
 
 // API's
-const studentAPI = `${API}/Students`;
 const departmentAPI = `${API}/Departments`;
+const studentAPI = `${API}/Students`;
+const tutorAPI = `${API}/Tutors`;
 
 
 function succesResponse(response, routePrefix) {

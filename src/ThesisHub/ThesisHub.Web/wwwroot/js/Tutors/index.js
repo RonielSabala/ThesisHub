@@ -3,7 +3,7 @@
 });
 
 function loadEntities() {
-    return genericLoadEntities(studentAPI, getEntityRow);
+    return genericLoadEntities(tutorAPI, getEntityRow);
 }
 
 function getEntityRow(entity) {
@@ -11,9 +11,9 @@ function getEntityRow(entity) {
         entity.firstName,
         entity.lastName,
         entity.email,
-        entity.phone,
+        entity.specialization,
         entity.deptName,
     ]
 
-    return getRow(entity.id, fields, "Students");
+    return getRow(entity.id, fields, "Tutors");
 }

@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
-    genericLoadEntities(departmentAPI, getEntityRow);
+    loadEntities();
 });
+
+function loadEntities() {
+    return genericLoadEntities(departmentAPI, getEntityRow);
+}
 
 function getEntityRow(entity) {
     const fields = [

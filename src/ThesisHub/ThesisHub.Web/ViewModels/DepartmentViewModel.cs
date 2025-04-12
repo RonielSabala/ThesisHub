@@ -17,7 +17,5 @@ namespace ThesisHub.Web.ViewModels
             new FieldModel { Type = "text" },
             new FieldModel { Type = "email" }
         };
-
-        public DepartmentViewModel() : base() { }
     }
 }
