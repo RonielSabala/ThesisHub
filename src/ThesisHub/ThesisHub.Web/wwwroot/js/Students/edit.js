@@ -1,12 +1,10 @@
-﻿function loadFormEntity(id) {
-    $.get(`${localAPI}/Get/${id}`, function (entity) {
-        $firstName.val(entity.firstName);
-        $lastName.val(entity.lastName);
-        $email.val(entity.email);
-        $phone.val(entity.phone);
+﻿function fillEntityField(entity) {
+    $firstName.val(entity.firstName);
+    $lastName.val(entity.lastName);
+    $email.val(entity.email);
+    $phone.val(entity.phone);
 
-        loadSelect(entity.departmentId);
-    });
+    loadSelect(entity.departmentId);
 }
 
 function loadSelect(mainOption) {
@@ -28,5 +26,5 @@ function updateEntity(id) {
         departmentId: $department.val()
     };
 
-    return genericUpdateEntity(entity, localAPI, localRoute);
+    return genericUpdateEntity(entity);
 }

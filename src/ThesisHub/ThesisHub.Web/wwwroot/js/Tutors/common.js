@@ -1,7 +1,7 @@
 ﻿// Local data
 localAPI = tutorAPI;
 localForeignKeyAPI = departmentAPI;
-localRoute = "Tutors";
+localRoutePrefix = "Tutors";
 
 // Fields
 $firstName = $("#firstName");

@@ -1,9 +1,9 @@
-﻿function genericDeleteEntity(id, apiUrl, routePrefix) {
+﻿function DeleteEntity(id) {
     $.ajax({
-        url: `${apiUrl}/Delete/${id}`,
+        url: `${localAPI}/Delete/${id}`,
         type: "DELETE",
         contentType: "application/json",
-        success: (response) => succesResponse(response, routePrefix),
+        success: (response) => succesResponse(response, localRoutePrefix),
         error: (xhr, status, error) => showError(xhr, status, error)
     });
 }

@@ -1,6 +1,6 @@
 ﻿// Local data
 localAPI = departmentAPI;
-localRoute = "Departments";
+localRoutePrefix = "Departments";
 
 // Fields
 $deptName = $("#deptName");

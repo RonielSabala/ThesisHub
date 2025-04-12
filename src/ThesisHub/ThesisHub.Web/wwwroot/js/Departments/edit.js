@@ -1,9 +1,7 @@
-﻿function loadFormEntity(id) {
-    $.get(`${localAPI}/Get/${id}`, function (entity) {
-        $deptName.val(entity.deptName);
-        $facultyHead.val(entity.facultyHead);
-        $email.val(entity.email);
-    });
+﻿function fillEntityField(entity) {
+    $deptName.val(entity.deptName);
+    $facultyHead.val(entity.facultyHead);
+    $email.val(entity.email);
 }
 
 function updateEntity(id) {
@@ -14,5 +12,5 @@ function updateEntity(id) {
         email: $email.val()
     };
 
-    return genericUpdateEntity(entity, localAPI, localRoute);
+    return genericUpdateEntity(entity);
 }

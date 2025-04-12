@@ -1,12 +1,4 @@
-﻿$(document).ready(function () {
-    loadEntities();
-});
-
-function loadEntities() {
-    return genericLoadEntities(localAPI, getEntityRow);
-}
-
-function getEntityRow(entity) {
+﻿function getEntityRow(entity) {
     const fields = [
         entity.firstName,
         entity.lastName,
@@ -15,5 +7,5 @@ function getEntityRow(entity) {
         entity.deptName,
     ]
 
-    return getRow(entity.id, fields, localRoute);
+    return getRow(entity.id, fields);
 }

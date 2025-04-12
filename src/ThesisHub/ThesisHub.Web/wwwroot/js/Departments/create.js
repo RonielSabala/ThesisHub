@@ -5,5 +5,5 @@
         email: $email.val()
     };
 
-    return genericAddEntity(entity, localAPI, localRoute);
+    return genericAddEntity(entity);
 }

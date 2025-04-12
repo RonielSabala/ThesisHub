@@ -7,7 +7,7 @@
         departmentId: $department.val()
     };
 
-    return genericAddEntity(entity, localAPI, localRoute);
+    return genericAddEntity(entity);
 }
 
 function loadSelect() {
