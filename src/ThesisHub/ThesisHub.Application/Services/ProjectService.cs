@@ -6,33 +6,33 @@ using ThesisHub.Infrastructure.Contracts;
 
 namespace ThesisHub.Application.Services
 {
-    public class TutorService : ITutorService
+    public class ProjectService : IProjectService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ITutorRepository _repo;
+        private readonly IProjectRepository _repo;
 
-        public TutorService(IUnitOfWork unitOfWork, ITutorRepository repo)
+        public ProjectService(IUnitOfWork unitOfWork, IProjectRepository repo)
         {
             _unitOfWork = unitOfWork;
             _repo = repo;
         }
 
-        private Request<Tutor> GetRequestFromDto(TutorDto dto)
+        private Request<Project> GetRequestFromDto(ProjectDto dto)
         {
-            var dbEntity = new Tutor
+            var dbEntity = new Project
             {
                 Id = dto.Id,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                Email = dto.Email,
-                Specialization = dto.Specialization,
-                DepartmentId = dto.DepartmentId
+                Title = dto.Title,
+                ProjectDescription = dto.ProjectDescription,
+                RegistrationDate = dto.RegistrationDate,
+                ProjectStatus = _repo.GetProjectStatusEnum(dto.ProjectStatus),
+                StudentId = dto.Id,
             };
 
-            return new Request<Tutor> { Data = dbEntity };
+            return new Request<Project> { Data = dbEntity };
         }
 
-        public async Task<TutorDto> Get(int id)
+        public async Task<ProjectDto> Get(int id)
         {
             await _unitOfWork.BeginTransactionAsync();
 
@@ -44,7 +44,7 @@ namespace ThesisHub.Application.Services
             return dto;
         }
 
-        public async Task<List<TutorDto>> GetAll(string filter = "")
+        public async Task<List<ProjectDto>> GetAll(string filter = "")
         {
             await _unitOfWork.BeginTransactionAsync();
 
@@ -56,7 +56,7 @@ namespace ThesisHub.Application.Services
             return dtos;
         }
 
-        public async Task<bool> Add(TutorDto dto)
+        public async Task<bool> Add(ProjectDto dto)
         {
             bool response = false;
 
@@ -78,7 +78,7 @@ namespace ThesisHub.Application.Services
             return response;
         }
 
-        public async Task<bool> Update(TutorDto dto)
+        public async Task<bool> Update(ProjectDto dto)
         {
             bool response = false;
 

@@ -34,13 +34,7 @@ namespace ThesisHub.Infrastructure.Core
 
         public async Task<List<T>> GetAllEntities()
         {
-            var entitiesDb = await DbSet.ToListAsync();
-            if (!entitiesDb.Any())
-            {
-                throw new Exception("No data found");
-            }
-
-            return entitiesDb;
+            return await DbSet.ToListAsync();
         }
 
         public async Task<bool> AddEntityToDb(T dbEntity)

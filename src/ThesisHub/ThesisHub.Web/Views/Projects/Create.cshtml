@@ -1,0 +1,17 @@
+﻿@model ProjectViewModel
+
+@{
+    Layout = "GenericViews/_Create";
+    ViewData["ViewModel"] = Model;
+}
+
+@section AdditionalFields {
+    @await Html.PartialAsync("Fields/_Select", Model.StaticFields.Last())
+}
+
+@section AdditionalScripts {
+    <script src="/js/Generics/selects.js"></script>
+    <script>
+        loadSelect();
+    </script>
+}

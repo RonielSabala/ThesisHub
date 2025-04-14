@@ -11,20 +11,21 @@ namespace ThesisHub.Infrastructure.Repositories
     {
         public StudentRepository(DataContext context) : base(context) { }
 
-        public async Task UpdateEntityDepartment(Student dbEntity)
+
+        public async Task<Department> GetDepartment(Student dbEntity)
         {
-            var department = await Context.Departments.FindAsync(dbEntity.DepartmentId);
-            dbEntity.Department = department;
+            return await Context.Departments.FindAsync(dbEntity.DepartmentId);
         }
 
-        public async Task<StudentDto> Get(int id)
+        public async Task<StudentDto> GetDtoFromEntity(Student dbEntity)
         {
-            var dbEntity = await GetEntity(id);
-            if (dbEntity.Department == null)
+            var department = dbEntity.Department;
+            if (department == null)
             {
-                await UpdateEntityDepartment(dbEntity);
+                department = await GetDepartment(dbEntity);
+                dbEntity.Department = department;
             }
-            
+
             return new StudentDto
             {
                 Id = dbEntity.Id,
@@ -32,15 +33,20 @@ namespace ThesisHub.Infrastructure.Repositories
                 LastName = dbEntity.LastName,
                 Email = dbEntity.Email,
                 Phone = dbEntity.Phone,
-                DepartmentId = dbEntity.DepartmentId,
-                DeptName = dbEntity.Department.DeptName,
+                DepartmentId = department.Id,
+                DeptName = department.DeptName,
             };
+        }
+
+        public async Task<StudentDto> Get(int id)
+        {
+            var dbEntity = await GetEntity(id);
+            return await GetDtoFromEntity(dbEntity);
         }
 
         public async Task<List<StudentDto>> GetAll(string filter = "")
         {
             var dbEntities = await GetAllEntities();
-
             if (!string.IsNullOrEmpty(filter))
             {
                 filter = filter.ToLower();
@@ -50,21 +56,7 @@ namespace ThesisHub.Infrastructure.Repositories
             var entities = new List<StudentDto>();
             foreach (var dbEntity in dbEntities)
             {
-                if (dbEntity.Department == null)
-                {
-                    await UpdateEntityDepartment(dbEntity);
-                }
-
-                entities.Add(new StudentDto
-                {
-                    Id = dbEntity.Id,
-                    FirstName = dbEntity.FirstName,
-                    LastName = dbEntity.LastName,
-                    Email = dbEntity.Email,
-                    Phone = dbEntity.Phone,
-                    DepartmentId = dbEntity.DepartmentId,
-                    DeptName = dbEntity.Department.DeptName,
-                });
+                entities.Add(await GetDtoFromEntity(dbEntity));
             }
 
             return entities;
@@ -73,14 +65,14 @@ namespace ThesisHub.Infrastructure.Repositories
         public async Task<bool> Add(Request<Student> request)
         {
             var dbEntity = request.Data;
-            await UpdateEntityDepartment(dbEntity);
+            dbEntity.Department = await GetDepartment(dbEntity);
             return await AddEntityToDb(dbEntity);
         }
 
         public async Task<bool> Update(Request<Student> request)
         {
             var dbEntity = request.Data;
-            await UpdateEntityDepartment(dbEntity);
+            dbEntity.Department = await GetDepartment(dbEntity);
             return await UpdateEntityInDb(dbEntity);
         }
 

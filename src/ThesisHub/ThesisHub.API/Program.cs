@@ -23,11 +23,13 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<ITutorRepository, TutorRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
 // Services
 builder.Services.AddScoped<DepartmentService>();
 builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<TutorService>();
+builder.Services.AddScoped<ProjectService>();
 
 var MyAllowSpecificOrigins = "AllowSpecificOrigins";
 builder.Services.AddCors(

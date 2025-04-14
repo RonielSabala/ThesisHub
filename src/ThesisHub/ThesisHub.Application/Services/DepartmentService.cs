@@ -17,14 +17,14 @@ namespace ThesisHub.Application.Services
             _repo = repo;
         }
 
-        private static Request<Department> GetRequestFromDto(DepartmentDto request)
+        private Request<Department> GetRequestFromDto(DepartmentDto dto)
         {
             var dbEntity = new Department
             {
-                Id = request.Id,
-                DeptName = request.DeptName,
-                FacultyHead = request.FacultyHead,
-                Email = request.Email,
+                Id = dto.Id,
+                DeptName = dto.DeptName,
+                FacultyHead = dto.FacultyHead,
+                Email = dto.Email,
             };
 
             return new Request<Department> { Data = dbEntity };

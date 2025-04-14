@@ -11,9 +11,8 @@ namespace ThesisHub.Infrastructure.Repositories
     {
         public DepartmentRepository(DataContext context) : base(context) { }
 
-        public async Task<DepartmentDto> Get(int id)
+        public DepartmentDto GetDtoFromEntity(Department dbEntity)
         {
-            var dbEntity = await GetEntity(id);
             return new DepartmentDto
             {
                 Id = dbEntity.Id,
@@ -23,10 +22,15 @@ namespace ThesisHub.Infrastructure.Repositories
             };
         }
 
+        public async Task<DepartmentDto> Get(int id)
+        {
+            var dbEntity = await GetEntity(id);
+            return GetDtoFromEntity(dbEntity);
+        }
+
         public async Task<List<DepartmentDto>> GetAll(string filter = "")
         {
             var dbEntities = await GetAllEntities();
-
             if (!string.IsNullOrEmpty(filter))
             {
                 filter = filter.ToLower();
@@ -36,13 +40,7 @@ namespace ThesisHub.Infrastructure.Repositories
             var entities = new List<DepartmentDto>();
             foreach (var dbEntity in dbEntities)
             {
-                entities.Add(new DepartmentDto
-                {
-                    Id = dbEntity.Id,
-                    DeptName = dbEntity.DeptName,
-                    FacultyHead = dbEntity.FacultyHead,
-                    Email = dbEntity.Email,
-                });
+                entities.Add(GetDtoFromEntity(dbEntity));
             }
 
             return entities;

@@ -14,6 +14,7 @@ function loadSelect() {
     return genericBuildSelect(
         $department,
         localForeignKeyAPI,
-        (department) => department.deptName
+        (department) => department.deptName,
+        "a department"
    );
 }

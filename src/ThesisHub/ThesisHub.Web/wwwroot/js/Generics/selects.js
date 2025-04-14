@@ -4,7 +4,7 @@
     `;
 }
 
-function genericBuildSelect(select, apiUrl, valueGetter) {
+function genericBuildSelect(select, apiUrl, valueGetter, selectText) {
     $.ajax({
         url: `${apiUrl}/GetAll`,
         type: "GET",
@@ -12,7 +12,7 @@ function genericBuildSelect(select, apiUrl, valueGetter) {
             select.empty();
 
             // Append options
-            select.append('<option value="">-- Select department --</option>');
+            select.append(`<option value="">-- Select ${selectText} --</option>`);
             $.each(entities, function (i, entity) {
                 select.append(getOption(entity, valueGetter));
             });

@@ -1,4 +1,4 @@
-﻿function DeleteEntity(id) {
+﻿function deleteEntity(id) {
     $.ajax({
         url: `${localAPI}/Delete/${id}`,
         type: "DELETE",
