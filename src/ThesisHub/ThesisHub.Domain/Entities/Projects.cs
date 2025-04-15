@@ -14,7 +14,7 @@ namespace ThesisHub.Domain.Entities
 
         [Column("project_description")]
         [StringLength(250)]
-        public string? ProjectDescription { get; set; }
+        public string ProjectDescription { get; set; }
 
         [Required]
         [Column("registration_date")]

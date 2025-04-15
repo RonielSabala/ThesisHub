@@ -2,6 +2,11 @@
 
 @foreach (var field in Model)
 {
+    @if (field.IsHidden)
+    {
+        continue;
+    }
+
     <div class="mb-3">
         <label for="@field.Id" class="form-label">@field.Label</label>
         <input type="@field.Type" class="form-control" id="@field.Id" placeholder="Enter @field.Placeholder" />

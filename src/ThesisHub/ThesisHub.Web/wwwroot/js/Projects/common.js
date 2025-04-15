@@ -9,3 +9,11 @@ $projectDescription = $("#projectDescription");
 $registrationDate = $("#registrationDate");
 $projectStatus = $("#projectStatus");
 $student = $("#student");
+
+statusOptions = [
+    ["in progress", "In Progress"],
+    ["completed", "Completed"],
+    ["under review", "Under Review"],
+    ["approved", "Approved"],
+    ["rejected", "Rejected"]
+];

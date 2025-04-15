@@ -1,6 +1,6 @@
-﻿function getOption(entity, valueGetter) {
+﻿function getOption(value, label) {
     return `
-        <option value="${entity.id}">${valueGetter(entity)}</option>
+        <option value="${value}">${label}</option>
     `;
 }
 
@@ -12,9 +12,9 @@ function genericBuildSelect(select, apiUrl, valueGetter, selectText) {
             select.empty();
 
             // Append options
-            select.append(`<option value="">-- Select ${selectText} --</option>`);
+            select.append(getOption("", `-- Select ${selectText} --`));
             $.each(entities, function (i, entity) {
-                select.append(getOption(entity, valueGetter));
+                select.append(getOption(entity.id, valueGetter(entity)));
             });
         },
         error: (xhr, status, error) => showError(xhr, status, error)
@@ -32,7 +32,7 @@ function genericLoadSelect(mainOption, select, apiUrl, valueGetter) {
             let Options = [];
 
             $.each(entities, function (i, entity) {
-                let option = getOption(entity, valueGetter);
+                let option = getOption(entity.id, valueGetter(entity));
 
                 if (entity.id == mainOption) {
                     firstOption = option;

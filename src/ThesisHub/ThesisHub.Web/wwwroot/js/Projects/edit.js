@@ -2,12 +2,34 @@
     $title.val(entity.title);
     $projectDescription.val(entity.projectDescription);
     $registrationDate.val(entity.registrationDate);
-    $projectStatus.val(entity.projectStatus);
 
-    loadSelect(entity.studentId);
+    loadStatusSelect(entity.projectStatus);
+    loadStudentSelect(entity.studentId);
 }
 
-function loadSelect(mainOption) {
+function loadStatusSelect(mainOption) {
+    $projectStatus.empty();
+
+    let firstOption = "";
+    let Options = [];
+
+    $.each(statusOptions, function (i, status) {
+        let option = getOption(status[0], status[1]);
+
+        if (status[0] == mainOption) {
+            firstOption = option;
+        } else {
+            Options.push(option);
+        }
+    });
+
+    $projectStatus.append(firstOption);
+    $.each(Options, function (i, option) {
+        $projectStatus.append(option);
+    });
+}
+
+function loadStudentSelect(mainOption) {
     return genericLoadSelect(
         mainOption,
         $student,

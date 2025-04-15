@@ -26,7 +26,7 @@ namespace ThesisHub.Domain.Entities
         [Required]
         [Column("specialization")]
         [StringLength(50, MinimumLength = 3)]
-        public string? Specialization { get; set; }
+        public string Specialization { get; set; }
 
         [Required]
         [Column("department_id")]

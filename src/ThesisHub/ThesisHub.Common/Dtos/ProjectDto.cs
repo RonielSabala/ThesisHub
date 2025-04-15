@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string? ProjectDescription { get; set; } = "N/A";
+        public string ProjectDescription { get; set; } = "N/A";
         public DateTime RegistrationDate { get; set; }
         public string ProjectStatus { get; set; }
         public int StudentId { get; set; }

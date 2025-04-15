@@ -6,5 +6,6 @@
         public string Type { get; set; }
         public string Label { get; set; }
         public string Placeholder { get; set; }
+        public bool IsHidden { get; set; } = false;
     }
 }
