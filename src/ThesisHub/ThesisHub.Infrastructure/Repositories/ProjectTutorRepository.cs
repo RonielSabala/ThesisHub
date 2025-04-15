@@ -58,20 +58,20 @@ namespace ThesisHub.Infrastructure.Repositories
         public async Task<List<ProjectTutorDto>> GetAll(string filter = "", bool filterProject = true)
         {
             var dbEntities = await GetAllEntities();
-            if (!string.IsNullOrEmpty(filter))
-            {
-                filter = filter.ToLower();
-                dbEntities = dbEntities.Where(d =>
-                    (filterProject ? d.Project.Title : d.Tutor.FirstName)
-                    .ToLower()
-                    .Contains(filter)
-                ).ToList();
-            }
-
             var entities = new List<ProjectTutorDto>();
             foreach (var dbEntity in dbEntities)
             {
                 entities.Add(await GetDtoFromEntity(dbEntity));
+            }
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                filter = filter.ToLower();
+                entities = entities.Where(d =>
+                    (filterProject ? d.ProjectTitle : d.TutorName)
+                    .ToLower()
+                    .Contains(filter)
+                ).ToList();
             }
 
             return entities;

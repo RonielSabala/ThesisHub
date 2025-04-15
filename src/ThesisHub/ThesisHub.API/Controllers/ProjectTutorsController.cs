@@ -1,4 +1,3 @@
-using System.ComponentModel.Design.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using ThesisHub.Application.Services;
 using ThesisHub.Common.Dtos;
@@ -23,9 +22,9 @@ namespace ThesisHub.API.Controllers
         }
 
         [HttpGet(nameof(GetAll))]
-        public async Task<List<ProjectTutorDto>> GetAll(string filter = "")
+        public async Task<List<ProjectTutorDto>> GetAll(string filter = "", bool filterProject = true)
         {
-            return await _service.GetAll(filter);
+            return await _service.GetAll(filter, filterProject);
         }
 
         [HttpPost(nameof(Add))]

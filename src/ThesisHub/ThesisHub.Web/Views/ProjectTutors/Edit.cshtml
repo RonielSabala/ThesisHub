@@ -5,13 +5,13 @@
     ViewData["ViewModel"] = Model;
     var project = Model.StaticFields[0];
     var tutor = Model.StaticFields[1];
-    var tutorRole = Model.StaticFields[1];
+    var tutorRole = Model.StaticFields[2];
 }
 
 @section AdditionalFields {
     @await Html.PartialAsync("Fields/_Select", project)
     @await Html.PartialAsync("Fields/_Select", tutor)
-    @await Html.PartialAsync("Fields/_DynamicFields", tutorRole)
+    @await Html.PartialAsync("Fields/_DynamicFields", new List<FieldModel> { tutorRole })
 }
 
 @section AdditionalScripts {

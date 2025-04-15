@@ -11,13 +11,13 @@
 @section AdditionalFields {
     @await Html.PartialAsync("Fields/_Select", project)
     @await Html.PartialAsync("Fields/_Select", tutor)
-    @await Html.PartialAsync("Fields/_DynamicFields", tutorRole)
+    @await Html.PartialAsync("Fields/_DynamicFields", new List<FieldModel> { tutorRole })
 }
 
 @section AdditionalScripts {
     <script src="/js/Generics/selects.js"></script>
     <script>
         loadProjectSelect();
-        loadTutorSelect;
+        loadTutorSelect();
     </script>
 }

@@ -1,8 +1,8 @@
 ﻿@{
     Layout = "_Layout";
     var Model = ViewData["ViewModel"] as BaseEntityViewModel;
-    var entity = Model.EntityName;
-    var routePrefix = $"/js/{entity}s";
+    var entity = Model.EntityPageName;
+    var routePrefix = $"/js/{Model.EntityName}s";
 }
 
 <div class="container mt-5">
