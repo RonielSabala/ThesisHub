@@ -7,11 +7,11 @@
         departmentId: $department.val()
     };
 
-    return genericAddEntity(entity);
+    genericAddEntity(entity);
 }
 
 function loadSelect() {
-    return genericBuildSelect(
+   genericBuildSelect(
         $department,
         localForeignKeyAPI,
         (department) => department.deptName,

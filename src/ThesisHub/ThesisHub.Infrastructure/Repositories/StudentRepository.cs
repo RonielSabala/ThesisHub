@@ -11,7 +11,6 @@ namespace ThesisHub.Infrastructure.Repositories
     {
         public StudentRepository(DataContext context) : base(context) { }
 
-
         public async Task<Department> GetDepartment(Student dbEntity)
         {
             return await Context.Departments.FindAsync(dbEntity.DepartmentId);

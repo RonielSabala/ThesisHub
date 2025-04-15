@@ -7,7 +7,7 @@
         studentId: $student.val()
     };
 
-    return genericAddEntity(entity);
+    genericAddEntity(entity);
 }
 
 function formatDate(date) {
@@ -22,7 +22,7 @@ function formatDate(date) {
 }
 
 function loadStudentSelect() {
-    return genericBuildSelect(
+    genericBuildSelect(
         $student,
         localForeignKeyAPI,
         (student) => student.firstName + " " + student.lastName,

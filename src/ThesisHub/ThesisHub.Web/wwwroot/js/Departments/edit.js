@@ -12,5 +12,5 @@ function updateEntity(id) {
         email: $email.val()
     };
 
-    return genericUpdateEntity(entity);
+    genericUpdateEntity(entity);
 }

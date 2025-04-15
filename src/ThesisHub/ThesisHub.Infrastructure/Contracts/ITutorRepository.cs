@@ -8,7 +8,7 @@ namespace ThesisHub.Infrastructure.Contracts
     {
         Task<TutorDto> Get(int id);
 
-        Task<List<TutorDto>> GetAll(string filter = "");
+        Task<List<TutorDto>> GetAll(string filter);
 
         Task<bool> Add(Request<Tutor> request);
 

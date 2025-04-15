@@ -4,7 +4,12 @@
     $registrationDate.val(entity.registrationDate);
 
     loadStatusSelect(entity.projectStatus);
-    loadStudentSelect(entity.studentId);
+    genericLoadSelect(
+        entity.studentId,
+        $student,
+        localForeignKeyAPI,
+        (student) => student.firstName + " " + student.lastName
+    );
 }
 
 function loadStatusSelect(mainOption) {
@@ -29,15 +34,6 @@ function loadStatusSelect(mainOption) {
     });
 }
 
-function loadStudentSelect(mainOption) {
-    return genericLoadSelect(
-        mainOption,
-        $student,
-        localForeignKeyAPI,
-        (student) => student.firstName + " " + student.lastName
-    );
-}
-
 function updateEntity(id) {
     let entity = {
         id: id,
@@ -48,5 +44,5 @@ function updateEntity(id) {
         studentId: $student.val()
     };
 
-    return genericUpdateEntity(entity);
+    genericUpdateEntity(entity);
 }

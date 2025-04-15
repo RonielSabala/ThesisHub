@@ -4,12 +4,8 @@
     $email.val(entity.email);
     $phone.val(entity.phone);
 
-    loadSelect(entity.departmentId);
-}
-
-function loadSelect(mainOption) {
-    return genericLoadSelect(
-        mainOption,
+    genericLoadSelect(
+        entity.departmentId,
         $department,
         localForeignKeyAPI,
         (department) => department.deptName
@@ -26,5 +22,5 @@ function updateEntity(id) {
         departmentId: $department.val()
     };
 
-    return genericUpdateEntity(entity);
+    genericUpdateEntity(entity);
 }
