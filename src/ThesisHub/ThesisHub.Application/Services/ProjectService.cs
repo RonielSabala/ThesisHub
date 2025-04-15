@@ -25,8 +25,8 @@ namespace ThesisHub.Application.Services
                 Title = dto.Title,
                 ProjectDescription = dto.ProjectDescription,
                 RegistrationDate = dto.RegistrationDate,
-                ProjectStatus = _repo.GetProjectStatusEnum(dto.ProjectStatus),
-                StudentId = dto.Id,
+                ProjectStatus = dto.ProjectStatus,
+                StudentId = dto.StudentId,
             };
 
             return new Request<Project> { Data = dbEntity };

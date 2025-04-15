@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using ThesisHub.Domain.Entities;
 using ThesisHub.Infrastructure.Contracts;
-using ThesisHub.Infrastructure.Repositories;
 using ThesisHub.Persistence;
 
 namespace ThesisHub.Infrastructure.Core
@@ -10,12 +8,6 @@ namespace ThesisHub.Infrastructure.Core
     {
         private readonly DataContext _context;
         private IDbContextTransaction _transaction;
-
-        private IRepository<Department> _departments;
-        private IRepository<Student> _students;
-
-        public IRepository<Department> Departments => _departments ??= new DepartmentRepository(_context);
-        public IRepository<Student> Students => _students ??= new StudentRepository(_context);
 
         public UnitOfWork(DataContext context)
         {

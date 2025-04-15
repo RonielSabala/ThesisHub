@@ -8,7 +8,7 @@ const projectAPI = `${API}/Projects`;
 
 function succesResponse(response, routePrefix) {
     if (response.success) {
-        //window.location.href = `/${routePrefix}/Index`;
+        window.location.href = `/${routePrefix}/Index`;
     } else {
         alert("Error: " + response.message);
     }

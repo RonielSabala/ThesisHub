@@ -11,44 +11,6 @@ namespace ThesisHub.Infrastructure.Repositories
     {
         public ProjectRepository(DataContext context) : base(context) { }
 
-        public string GetProjectStatusString(ProjectStatusEnum status)
-        {
-            switch (status)
-            {
-                case ProjectStatusEnum.InProgress:
-                    return "in progress";
-                case ProjectStatusEnum.Completed:
-                    return "completed";
-                case ProjectStatusEnum.UnderReview:
-                    return "under review";
-                case ProjectStatusEnum.Approved:
-                    return "approved";
-                case ProjectStatusEnum.Rejected:
-                    return "rejected";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(status), status, "Unknown project status.");
-            }
-        }
-
-        public ProjectStatusEnum GetProjectStatusEnum(string status)
-        {
-            switch (status.ToLowerInvariant())
-            {
-                case "in progress":
-                    return ProjectStatusEnum.InProgress;
-                case "completed":
-                    return ProjectStatusEnum.Completed;
-                case "under review":
-                    return ProjectStatusEnum.UnderReview;
-                case "approved":
-                    return ProjectStatusEnum.Approved;
-                case "rejected":
-                    return ProjectStatusEnum.Rejected;
-                default:
-                    throw new ArgumentException("Invalid project status.");
-            }
-        }
-
         public async Task<Student> GetStudent(Project dbEntity)
         {
             return await Context.Students.FindAsync(dbEntity.StudentId);
@@ -69,7 +31,7 @@ namespace ThesisHub.Infrastructure.Repositories
                 Title = dbEntity.Title,
                 ProjectDescription = dbEntity.ProjectDescription,
                 RegistrationDate = dbEntity.RegistrationDate,
-                ProjectStatus = GetProjectStatusString(dbEntity.ProjectStatus),
+                ProjectStatus = dbEntity.ProjectStatus,
                 StudentId = student.Id,
                 StudentName = $"{student.FirstName} {student.LastName}",
             };

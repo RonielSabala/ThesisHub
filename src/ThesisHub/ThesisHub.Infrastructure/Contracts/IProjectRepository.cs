@@ -6,10 +6,6 @@ namespace ThesisHub.Infrastructure.Contracts
 {
     public interface IProjectRepository
     {
-        string GetProjectStatusString(ProjectStatusEnum status);
-
-        ProjectStatusEnum GetProjectStatusEnum(string status);
-
         Task<ProjectDto> Get(int id);
 
         Task<List<ProjectDto>> GetAll(string filter = "");

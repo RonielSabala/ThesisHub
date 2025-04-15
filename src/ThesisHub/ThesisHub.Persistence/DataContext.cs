@@ -31,18 +31,6 @@ namespace ThesisHub.Persistence
                 .HasForeignKey(s => s.DepartmentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Project config
-
-            var projectStatusConverter = new ValueConverter<ProjectStatusEnum, string>(
-                v => v.ToString(),
-                v => (ProjectStatusEnum)System.Enum.Parse(typeof(ProjectStatusEnum), v)
-            );
-
-            modelBuilder.Entity<Project>()
-                .Property(p => p.ProjectStatus)
-                .HasConversion(projectStatusConverter)
-                .HasMaxLength(20);
-
             // Project & Student config
             modelBuilder.Entity<Project>()
                 .HasOne(p => p.Student)

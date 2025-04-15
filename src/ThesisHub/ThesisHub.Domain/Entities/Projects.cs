@@ -4,15 +4,6 @@ using ThesisHub.Domain.Core;
 
 namespace ThesisHub.Domain.Entities
 {
-    public enum ProjectStatusEnum
-    {
-        InProgress,
-        Completed,
-        UnderReview,
-        Approved,
-        Rejected
-    }
-
     [Table("projects")]
     public class Project : BaseEntity
     {
@@ -31,7 +22,7 @@ namespace ThesisHub.Domain.Entities
 
         [Required]
         [Column("project_status")]
-        public ProjectStatusEnum ProjectStatus { get; set; }
+        public string ProjectStatus { get; set; }
 
         [Required]
         [Column("student_id")]
