@@ -15,7 +15,7 @@
         <div class="card-body">
             <dl class="row">
 
-                @* Fields injection here *@
+                <!-- Fields injection here -->
                 @await Html.PartialAsync("Fields/_StaticFields", Model.StaticFields)
                 @await RenderSectionAsync("AdditionalFields", required: true)
 

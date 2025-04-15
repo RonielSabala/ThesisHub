@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    @* Fields injection here *@
+                    <!-- Fields injection here -->
                     @await Html.PartialAsync("Fields/_DynamicFields", Model.DynamicFields)
                     @await RenderSectionAsync("AdditionalFields", required: true)
 

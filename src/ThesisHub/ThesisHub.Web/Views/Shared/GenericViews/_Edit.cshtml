@@ -15,7 +15,7 @@
         <div class="card-body">
             <form>
 
-                @* Fields injection here *@
+                <!-- Fields injection here -->
                 @await Html.PartialAsync("Fields/_DynamicFields", Model.DynamicFields)
                 @await RenderSectionAsync("AdditionalFields", required: true)
 

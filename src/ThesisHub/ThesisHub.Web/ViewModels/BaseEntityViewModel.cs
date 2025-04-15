@@ -8,6 +8,7 @@ namespace ThesisHub.Web.ViewModels
         public int Id { get; set; }
         public string EntityName { get; set; }
         public virtual string EntityPageName { get; set; }
+        public virtual string EntityArticle { get; set; } = "a";
         public virtual List<FieldModel> StaticFields { get; set; } = new List<FieldModel>();
         public virtual List<FieldModel> DynamicFields { get; set; } = new List<FieldModel>();
 

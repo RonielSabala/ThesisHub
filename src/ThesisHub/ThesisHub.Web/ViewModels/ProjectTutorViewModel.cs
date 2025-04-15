@@ -4,6 +4,7 @@ namespace ThesisHub.Web.ViewModels
 {
     public class ProjectTutorViewModel : BaseEntityViewModel
     {
+        public override string EntityArticle { get; set; } = "an";
         public override string EntityPageName { get; set; } = "Assignment";
         public override List<FieldModel> StaticFields { get; set; } = new List<FieldModel>
         {

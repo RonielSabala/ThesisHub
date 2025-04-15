@@ -1,4 +1,18 @@
-﻿$(document).ready(function () {
+﻿const searchInput = document.getElementById("search");
+searchInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        loadEntities();
+    }
+});
+
+searchInput.addEventListener("input", function () {
+    if (this.value.trim() === "") {
+        loadEntities();
+    }
+});
+
+$(document).ready(function () {
     loadEntities();
 });
 
@@ -25,7 +39,6 @@ function getRow(entityId, Entityfields) {
 
 function loadEntities() {
     let filter = $("#search").val();
-
     $.get(
         `${localAPI}/GetAll`,
         { filter: filter },
