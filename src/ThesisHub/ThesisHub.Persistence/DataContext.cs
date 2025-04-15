@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ThesisHub.Domain.Entities;
 
 namespace ThesisHub.Persistence
@@ -12,6 +11,7 @@ namespace ThesisHub.Persistence
         public DbSet<Student> Students { get; set; }
         public DbSet<Tutor> Tutors { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Project> ProjectTutors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,20 @@ namespace ThesisHub.Persistence
                 .HasOne(p => p.Student)
                 .WithMany(s => s.Projects)
                 .HasForeignKey(p => p.StudentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // ProjectTutors & Project config
+            modelBuilder.Entity<ProjectTutor>()
+                .HasOne(pt => pt.Project)
+                .WithMany(p => p.ProjectTutors)
+                .HasForeignKey(pt => pt.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // ProjectTutors & Tutor config
+            modelBuilder.Entity<ProjectTutor>()
+                .HasOne(pt => pt.Tutor)
+                .WithMany(t => t.ProjectTutors)
+                .HasForeignKey(pt => pt.TutorId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

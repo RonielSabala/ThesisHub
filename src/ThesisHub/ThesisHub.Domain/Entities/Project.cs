@@ -30,5 +30,6 @@ namespace ThesisHub.Domain.Entities
         public int StudentId { get; set; }
 
         public Student Student { get; set; }
+        public ICollection<ProjectTutor> ProjectTutors { get; set; }
     }
 }

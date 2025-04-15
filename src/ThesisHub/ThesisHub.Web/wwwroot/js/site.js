@@ -4,6 +4,7 @@ const departmentAPI = `${API}/Departments`;
 const studentAPI = `${API}/Students`;
 const tutorAPI = `${API}/Tutors`;
 const projectAPI = `${API}/Projects`;
+const projectTutorAPI = `${API}/ProjectTutors`;
 
 
 function succesResponse(response, routePrefix) {

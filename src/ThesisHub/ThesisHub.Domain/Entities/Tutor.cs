@@ -34,5 +34,6 @@ namespace ThesisHub.Domain.Entities
         public int DepartmentId { get; set; }
 
         public Department Department { get; set; }
+        public ICollection<ProjectTutor> ProjectTutors { get; set; }
     }
 }

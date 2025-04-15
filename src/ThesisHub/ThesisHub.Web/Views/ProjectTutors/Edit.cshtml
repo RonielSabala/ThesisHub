@@ -1,0 +1,19 @@
+﻿@model ProjectTutorViewModel
+
+@{
+    Layout = "GenericViews/_Edit";
+    ViewData["ViewModel"] = Model;
+    var project = Model.StaticFields[0];
+    var tutor = Model.StaticFields[1];
+    var tutorRole = Model.StaticFields[1];
+}
+
+@section AdditionalFields {
+    @await Html.PartialAsync("Fields/_Select", project)
+    @await Html.PartialAsync("Fields/_Select", tutor)
+    @await Html.PartialAsync("Fields/_DynamicFields", tutorRole)
+}
+
+@section AdditionalScripts {
+    <script src="/js/Generics/selects.js"></script>
+}
