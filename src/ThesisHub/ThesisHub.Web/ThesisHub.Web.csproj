@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Views\Shared\GenericViews\" />
     <Folder Include="Views\Shared\Fields\" />
+    <Folder Include="wwwroot\js\App\" />
   </ItemGroup>
 
 </Project>

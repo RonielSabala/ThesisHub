@@ -1,4 +1,8 @@
-﻿const searchInput = document.getElementById("search");
+﻿$(document).ready(function () {
+    loadEntities();
+});
+
+const searchInput = document.getElementById("search");
 searchInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
         e.preventDefault();
@@ -10,10 +14,6 @@ searchInput.addEventListener("input", function () {
     if (this.value.trim() === "") {
         loadEntities();
     }
-});
-
-$(document).ready(function () {
-    loadEntities();
 });
 
 function getRow(entityId, Entityfields) {
