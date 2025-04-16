@@ -1,0 +1,18 @@
+﻿@model DocumentViewModel
+
+@{
+    Layout = "GenericViews/_Edit";
+    ViewData["ViewModel"] = Model;
+    Model.DynamicFields[2].IsHidden = false;
+    var status = Model.StaticFields[3];
+    var project = Model.StaticFields[4];
+}
+
+@section AdditionalFields {
+    @await Html.PartialAsync("Fields/_Select", status)
+    @await Html.PartialAsync("Fields/_Select", project)
+}
+
+@section AdditionalScripts {
+    <script src="/js/Generics/selects.js"></script>
+}

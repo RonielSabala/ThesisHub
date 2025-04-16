@@ -25,6 +25,7 @@ builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<ITutorRepository, TutorRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IProjectTutorRepository, ProjectTutorRepository>();
+builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 
 // Services
 builder.Services.AddScoped<DepartmentService>();
@@ -32,6 +33,7 @@ builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<TutorService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ProjectTutorService>();
+builder.Services.AddScoped<DocumentService>();
 
 var MyAllowSpecificOrigins = "AllowSpecificOrigins";
 builder.Services.AddCors(

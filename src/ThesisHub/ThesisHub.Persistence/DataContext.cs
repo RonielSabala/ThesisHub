@@ -12,6 +12,7 @@ namespace ThesisHub.Persistence
         public DbSet<Tutor> Tutors { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Project> ProjectTutors { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,6 +51,13 @@ namespace ThesisHub.Persistence
                 .HasOne(pt => pt.Tutor)
                 .WithMany(t => t.ProjectTutors)
                 .HasForeignKey(pt => pt.TutorId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Document & Project config
+            modelBuilder.Entity<Document>()
+                .HasOne(d => d.Project)
+                .WithMany(p => p.Documents)
+                .HasForeignKey(d => d.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
