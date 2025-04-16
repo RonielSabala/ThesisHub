@@ -21,7 +21,7 @@ function genericBuildSelect(select, apiUrl, valueGetter, selectText) {
     });
 }
 
-function genericLoadSelect(mainOption, select, apiUrl, valueGetter) {
+function genericLoadSelect(select, mainOption, apiUrl, valueGetter) {
     $.ajax({
         url: `${apiUrl}/GetAll`,
         type: "GET",
@@ -47,5 +47,27 @@ function genericLoadSelect(mainOption, select, apiUrl, valueGetter) {
             });
         },
         error: (xhr, status, error) => showError(xhr, status, error)
+    });
+}
+
+function genericLoadStatusSelect(select, mainOption) {
+    select.empty();
+
+    let firstOption = "";
+    let Options = [];
+
+    $.each(statusOptions, function (i, status) {
+        let option = getOption(status[0], status[1]);
+
+        if (status[0] == mainOption) {
+            firstOption = option;
+        } else {
+            Options.push(option);
+        }
+    });
+
+    select.append(firstOption);
+    $.each(Options, function (i, option) {
+        select.append(option);
     });
 }

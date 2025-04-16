@@ -1,14 +1,14 @@
 ﻿function fillEntityField(entity) {
     genericLoadSelect(
-        entity.projectId,
         $project,
+        entity.projectId,
         localForeignKeyAPI1,
         (project) => project.title
     );
 
     genericLoadSelect(
-        entity.tutorId,
         $tutor,
+        entity.tutorId,
         localForeignKeyAPI2,
         (tutor) => tutor.firstName + " " + tutor.lastName
     );

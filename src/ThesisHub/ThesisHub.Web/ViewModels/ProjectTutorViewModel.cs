@@ -10,7 +10,7 @@ namespace ThesisHub.Web.ViewModels
         {
             new FieldModel { Id = "project", Label = "Project", Placeholder = "a project" },
             new FieldModel { Id = "tutor", Label = "Tutor", Placeholder = "a tutor" },
-            new FieldModel { Id = "tutorRole", Label = "Tutor Role", Placeholder = "the tutor role" },
+            new FieldModel { Id = "tutorRole", Label = "Tutor role", Placeholder = "the tutor's role" },
         };
     }
 }

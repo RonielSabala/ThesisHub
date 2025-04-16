@@ -3,35 +3,13 @@
     $filePath.val(entity.filePath);
     $uploadDate.val(entity.uploadDate);
 
-    loadStatusSelect(entity.docStatus);
+    genericLoadStatusSelect($docStatus, entity.docStatus);
     genericLoadSelect(
-        entity.projectId,
         $project,
+        entity.projectId,
         localForeignKeyAPI,
         (project) => project.title,
     );
-}
-
-function loadStatusSelect(mainOption) {
-    $docStatus.empty();
-
-    let firstOption = "";
-    let Options = [];
-
-    $.each(statusOptions, function (i, status) {
-        let option = getOption(status[0], status[1]);
-
-        if (status[0] == mainOption) {
-            firstOption = option;
-        } else {
-            Options.push(option);
-        }
-    });
-
-    $docStatus.append(firstOption);
-    $.each(Options, function (i, option) {
-        $docStatus.append(option);
-    });
 }
 
 function updateEntity(id) {

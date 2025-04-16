@@ -13,7 +13,7 @@ function loadProjectSelect() {
         $project,
         localForeignKeyAPI1,
         (project) => project.title,
-        "a project"
+        "the project"
     );
 }
 
@@ -22,6 +22,6 @@ function loadTutorSelect() {
         $tutor,
         localForeignKeyAPI2,
         (tutor) => tutor.firstName + " " + tutor.lastName,
-        "a tutor"
+        "the tutor"
     );
 }

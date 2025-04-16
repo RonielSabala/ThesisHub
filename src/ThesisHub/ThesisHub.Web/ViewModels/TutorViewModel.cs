@@ -15,10 +15,10 @@ namespace ThesisHub.Web.ViewModels
 
         public override List<FieldModel> DynamicFields { get; set; } = new List<FieldModel>
         {
-            new FieldModel { Type = "text" },
-            new FieldModel { Type = "text" },
-            new FieldModel { Type = "email" },
-            new FieldModel { Type = "text" },
+            new FieldModel { Type = "text", Placeholder = "the tutor's first name" },
+            new FieldModel { Type = "text", Placeholder = "the tutor's last name" },
+            new FieldModel { Type = "email", Placeholder = "an email" },
+            new FieldModel { Type = "text", Placeholder = "the tutor's specialization" },
         };
     }
 }

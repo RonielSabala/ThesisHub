@@ -5,8 +5,8 @@
     $specialization.val(entity.specialization);
 
     genericLoadSelect(
-        entity.departmentId,
         $department,
+        entity.departmentId,
         localForeignKeyAPI,
         (department) => department.deptName
     );

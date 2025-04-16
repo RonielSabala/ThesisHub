@@ -5,8 +5,8 @@
     $phone.val(entity.phone);
 
     genericLoadSelect(
-        entity.departmentId,
         $department,
+        entity.departmentId,
         localForeignKeyAPI,
         (department) => department.deptName
     );
