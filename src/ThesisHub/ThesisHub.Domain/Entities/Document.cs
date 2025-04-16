@@ -28,8 +28,10 @@ namespace ThesisHub.Domain.Entities
 
         [Required]
         [Column("project_id")]
+        [Range(1, int.MaxValue)]
         public int ProjectId { get; set; }
 
         public Project Project { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

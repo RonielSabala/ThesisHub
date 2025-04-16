@@ -26,6 +26,7 @@ builder.Services.AddScoped<ITutorRepository, TutorRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IProjectTutorRepository, ProjectTutorRepository>();
 builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 // Services
 builder.Services.AddScoped<DepartmentService>();
@@ -34,6 +35,7 @@ builder.Services.AddScoped<TutorService>();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<ProjectTutorService>();
 builder.Services.AddScoped<DocumentService>();
+builder.Services.AddScoped<CommentService>();
 
 var MyAllowSpecificOrigins = "AllowSpecificOrigins";
 builder.Services.AddCors(

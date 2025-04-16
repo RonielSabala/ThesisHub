@@ -1,0 +1,22 @@
+﻿@model CommentViewModel
+
+@{
+    Layout = "GenericViews/_Create";
+    ViewData["ViewModel"] = Model;
+    Model.DynamicFields[1].IsHidden = true;
+    var document = Model.StaticFields[2];
+    var tutor = Model.StaticFields[3];
+}
+
+@section AdditionalFields {
+    @await Html.PartialAsync("Fields/_Select", document)
+    @await Html.PartialAsync("Fields/_Select", tutor)
+}
+
+@section AdditionalScripts {
+    <script src="/js/Generics/selects.js"></script>
+    <script>
+        loadDocumentSelect();
+        loadTutorSelect();
+    </script>
+}

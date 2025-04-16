@@ -13,6 +13,7 @@ namespace ThesisHub.Persistence
         public DbSet<Project> Projects { get; set; }
         public DbSet<Project> ProjectTutors { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,6 +59,20 @@ namespace ThesisHub.Persistence
                 .HasOne(d => d.Project)
                 .WithMany(p => p.Documents)
                 .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Comment & Document config
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Document)
+                .WithMany(d => d.Comments)
+                .HasForeignKey(c => c.DocumentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Comment & Tutor config
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Tutor)
+                .WithMany(t => t.Comments)
+                .HasForeignKey(c => c.TutorId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

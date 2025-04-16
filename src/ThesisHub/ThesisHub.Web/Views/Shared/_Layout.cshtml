@@ -63,6 +63,11 @@
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Documents" ? "active" : "")"
                                asp-area="" asp-controller="Documents" asp-action="Index">Documents</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Comments" ? "active" : "")"
+                               asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -6,6 +6,7 @@ const tutorAPI = `${API}/Tutors`;
 const projectAPI = `${API}/Projects`;
 const projectTutorAPI = `${API}/ProjectTutors`;
 const documentAPI = `${API}/Documents`;
+const commentAPI = `${API}/Comments`;
 
 
 function succesResponse(response, routePrefix) {
