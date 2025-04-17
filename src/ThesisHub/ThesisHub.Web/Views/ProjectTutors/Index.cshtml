@@ -6,13 +6,15 @@
 }
 
 @section AdditionalFields {
-    <div class="py-3">
-        <div class="d-flex align-items-center mb-0">
-            <select id="searchCategory" class="form-select me-2" style="display: inline-block; width: auto;">
+    <div class="py-3 d-flex justify-content-left">
+        <div class="input-group input-group-sm rounded-pill border overflow-hidden" style="max-width: 300px;">
+            <span class="input-group-text bg-transparent border-0 fw-semibold text-secondary">
+                Filter by
+            </span>
+            <select id="searchCategory" class="form-select border-0">
                 <option value="true">Project</option>
                 <option value="false">Tutor</option>
             </select>
-            <label class="form-label mb-0">Filter</label>
         </div>
     </div>
 }

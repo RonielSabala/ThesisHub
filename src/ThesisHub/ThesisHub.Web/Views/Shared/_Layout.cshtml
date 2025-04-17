@@ -26,47 +26,57 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
-                               asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                               asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house"></i> Home
+                            </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Privacy" ? "active" : "")"
-                               asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                               asp-area="" asp-controller="Home" asp-action="Privacy">
+                                <i class="bi bi-shield-lock"></i> Privacy
+                            </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Departments" ? "active" : "")"
-                               asp-area="" asp-controller="Departments" asp-action="Index">Departments</a>
+                               asp-area="" asp-controller="Departments" asp-action="Index">
+                                <i class="bi bi-building"></i> Departments
+                            </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Students" ? "active" : "")"
-                               asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                               asp-area="" asp-controller="Students" asp-action="Index">
+                                <i class="bi bi-people"></i> Students
+                            </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Tutors" ? "active" : "")"
-                               asp-area="" asp-controller="Tutors" asp-action="Index">Tutors</a>
+                               asp-area="" asp-controller="Tutors" asp-action="Index">
+                                <i class="bi bi-person-lines-fill"></i> Tutors
+                            </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Projects" ? "active" : "")"
-                               asp-area="" asp-controller="Projects" asp-action="Index">Projects</a>
+                               asp-area="" asp-controller="Projects" asp-action="Index">
+                                <i class="bi bi-folder"></i> Projects
+                            </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "ProjectTutors" ? "active" : "")"
-                               asp-area="" asp-controller="ProjectTutors" asp-action="Index">Assign tutor</a>
+                               asp-area="" asp-controller="ProjectTutors" asp-action="Index">
+                                <i class="bi bi-person-plus"></i> Assign tutor
+                            </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Documents" ? "active" : "")"
-                               asp-area="" asp-controller="Documents" asp-action="Index">Documents</a>
+                               asp-area="" asp-controller="Documents" asp-action="Index">
+                                <i class="bi bi-file-earmark"></i> Documents
+                            </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Comments" ? "active" : "")"
-                               asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
+                               asp-area="" asp-controller="Comments" asp-action="Index">
+                                <i class="bi bi-chat-left-text"></i> Comments
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -83,7 +93,7 @@
 
     <footer class="border-top py-3 text-center text-muted mt-auto">
         <div class="container">
-            &copy; 2025 - ThesisHub.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-muted">Privacy</a>
+            &copy; 2025 - ThesisHub - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-muted">Privacy</a>
         </div>
     </footer>
 

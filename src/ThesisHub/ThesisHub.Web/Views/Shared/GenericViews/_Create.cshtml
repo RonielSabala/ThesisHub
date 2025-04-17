@@ -5,36 +5,56 @@
     var routePrefix = $"/js/App/{Model.EntityName}s";
 }
 
-<div class="container mt-5">
-    <div class="card shadow-sm rounded-4">
+<style>
+    .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: auto;
+    }
 
+    .entity-card {
+        border-radius: 1rem;
+    }
+
+    .entity-card .card-header {
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+    .entity-card .card-body {
+        padding: 2rem;
+    }
+
+    .action-buttons .btn {
+        min-width: 120px;
+    }
+</style>
+
+<div class="container center-screen py-5">
+    <div class="card shadow-sm entity-card w-100" style="max-width: 1000px;">
         <div class="card-header bg-success text-white">
             <h3 class="mb-0">Create New @entity</h3>
         </div>
-
         <div class="card-body">
-            <h4>Fields</h4>
+            <h5 class="text-secondary mb-3">Complete the form below</h5>
             <hr />
-            <div class="row">
-                <div class="col-md-12">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <!-- Fields injection here -->
-                    @await Html.PartialAsync("Fields/_DynamicFields", Model.DynamicFields)
-                    @await RenderSectionAsync("AdditionalFields", required: true)
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
 
-                    <div class="d-flex justify-content-between align-items-center mt-4">
-                        <button onclick="addEntity()" class="btn btn-lg btn-success px-4">
-                            <i class="bi bi-plus-circle me-2"></i> Create
-                        </button>
+            <!-- Fields injection here -->
+            @await Html.PartialAsync("Fields/_DynamicFields", Model.DynamicFields)
+            @await RenderSectionAsync("AdditionalFields", required: true)
 
-                        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
-                    </div>
-
-                </div>
+            <div class="d-flex justify-content-between align-items-center mt-4 action-buttons">
+                <button onclick="addEntity()" class="btn btn-success btn-lg">
+                    <i class="bi bi-plus-circle me-2"></i> Create
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-arrow-left-circle me-2"></i> Back to List
+                </a>
             </div>
         </div>
-
     </div>
 </div>
 

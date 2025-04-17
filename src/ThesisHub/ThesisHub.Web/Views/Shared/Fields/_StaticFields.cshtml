@@ -1,7 +1,54 @@
 ﻿@model List<FieldModel>
 
-@foreach (var field in Model)
-{
-    <dt class="col-sm-3">@field.Label</dt>
-    <dd class="col-sm-9" id="@field.Id"></dd>
-}
+<style>
+    .fields-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
+    }
+
+    @@media (min-width: 768px) {
+        .fields-grid
+        {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .field-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .field-label {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.25rem;
+    }
+
+    .field-value {
+        font-size: 1.05rem;
+        font-weight: 400;
+        color: #000;
+        min-height: 1.5em;
+        position: relative;
+    }
+
+    .field-value:empty::after {
+        content: 'Loading…';
+        color: #aaa;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+</style>
+
+<div class="fields-grid">
+    @foreach (var field in Model)
+    {
+        <div class="field-item">
+            <label for="@field.Id" class="field-label">@field.Label</label>
+            <div id="@field.Id" class="field-value"></div>
+        </div>
+    }
+</div>

@@ -1,6 +1,40 @@
 ﻿@model FieldModel
 
-<div class="mb-4">
-    <label class="form-label">@Model.Label</label>
-    <select id="@Model.Id" class="form-select"></select>
+<style>
+    .select-item {
+        display: flex;
+        flex-direction: column;
+        margin: 1.5rem 0;
+    }
+
+    .select-item .form-label {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-select {
+        border-radius: 2rem;
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+    }
+
+    .form-select:focus {
+        box-shadow: 0 0 0 0.2rem rgba(100, 149, 237, 0.25);
+        border-color: #6495ED;
+    }
+
+    .field-error {
+        color: #d9534f;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+</style>
+
+<div class="select-item">
+    <label for="@Model.Id" class="form-label">@Model.Label</label>
+    <select id="@Model.Id" name="@Model.Label" class="form-select">
+        <option value="" disabled selected hidden>Select @Model.Label...</option>
+    </select>
+    <span asp-validation-for="@Model.Id" class="field-error"></span>
 </div>
