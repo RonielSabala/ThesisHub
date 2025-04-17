@@ -6,11 +6,11 @@ namespace ThesisHub.Web.ViewModels
     {
         public override List<FieldModel> StaticFields { get; set; } = new List<FieldModel>
         {
-            new FieldModel { Id = "docName", Label = "Doc. Name" },
-            new FieldModel { Id = "filePath", Label = "Link" },
-            new FieldModel { Id = "uploadDate", Label = "Uploaded at" },
+            new FieldModel { Id = "docName", Label = "File Name" },
+            new FieldModel { Id = "filePath", Label = "URL" },
+            new FieldModel { Id = "uploadDate", Label = "Upload Date" },
             new FieldModel { Id = "docStatus", Label = "Status", Placeholder = "under review" },
-            new FieldModel { Id = "project", Label = "Parent Project"},
+            new FieldModel { Id = "project", Label = "Associated Project"},
         };
 
         public override List<FieldModel> DynamicFields { get; set; } = new List<FieldModel>

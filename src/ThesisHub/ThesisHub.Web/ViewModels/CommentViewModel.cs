@@ -7,9 +7,9 @@ namespace ThesisHub.Web.ViewModels
         public override List<FieldModel> StaticFields { get; set; } = new List<FieldModel>
         {
             new FieldModel { Id = "commentText", Label = "Comment" },
-            new FieldModel { Id = "uploadDate", Label = "Uploaded at" },
-            new FieldModel { Id = "document", Label = "Document" },
-            new FieldModel { Id = "tutor", Label = "Posted by" },
+            new FieldModel { Id = "uploadDate", Label = "Published at" },
+            new FieldModel { Id = "document", Label = "Project File" },
+            new FieldModel { Id = "tutor", Label = "Tutor Reviewer" },
         };
 
         public override List<FieldModel> DynamicFields { get; set; } = new List<FieldModel>
