@@ -1,0 +1,125 @@
+﻿@{
+    Layout = "_Layout";
+    var Model = ViewData["ViewModel"] as BaseEntityViewModel;
+    var entity = Model.EntityPageName;
+    var routePrefix = $"/js/App/{Model.EntityName}s";
+}
+
+<style>
+    .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 3rem 0;
+    }
+
+    .entity-card {
+        border-radius: 1rem;
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    .entity-card .card-body {
+        padding: 2rem;
+    }
+
+    .sticky-header thead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: #fff;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f5f9;
+    }
+
+    .search-group .form-control {
+        border-radius: 2rem 0 0 2rem;
+    }
+
+    .search-group .btn {
+        border-radius: 0 2rem 2rem 0;
+    }
+
+    .action-buttons .btn {
+        margin-right: 0.5rem;
+        border-radius: 1rem;
+    }
+
+    @@media (max-width: 767px) {
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .action-buttons .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+    }
+
+    .no-data {
+        text-align: center;
+        padding: 2rem;
+        color: #888;
+    }
+</style>
+
+<div class="container center-screen">
+    <div class="card shadow-sm entity-card">
+        <div class="card-body">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0 text-dark">@(entity)s<span class="text-muted"></span></h2>
+                <a asp-action="Create" class="btn btn-success btn-lg">
+                    <i class="bi bi-plus-circle-fill me-2"></i> Create New
+                </a>
+            </div>
+
+            <!-- Search -->
+            <div class="row mb-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="input-group search-group">
+                        <input type="text" id="search" class="form-control" placeholder="Search @entity.ToLower()..." />
+                        <button id="btnSearch" class="btn btn-primary" onclick="loadEntities()">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-responsive">
+                <table class="table table-hover align-middle text-center sticky-header">
+                    <thead class="table-light">
+                        <tr class="fs-6 text-uppercase">
+                            @foreach (var field in Model.StaticFields)
+                            {
+                                <th>@field.Label</th>
+                            }
+                            @await RenderSectionAsync("AdditionalFields", required: true)
+                            <th class="text-nowrap">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="entityTable">
+
+                        <!-- Data rows injected via AJAX -->
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- No data state -->
+            <div id="noData" class="no-data d-none">
+                <i class="bi bi-inbox-fill fs-1 mb-2"></i>
+                <div>No @entity.ToLower()s found.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/Generics/index.js"></script>
+    <script src="@(routePrefix)/common.js"></script>
+    <script src="@(routePrefix)/index.js"></script>
+    @await RenderSectionAsync("AdditionalScripts", required: false)
+}

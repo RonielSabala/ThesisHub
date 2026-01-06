@@ -1,0 +1,21 @@
+﻿@model ProjectViewModel
+
+@{
+    Layout = "GenericViews/_Create";
+    ViewData["ViewModel"] = Model;
+    Model.DynamicFields[2].IsHidden = true;
+    var status = Model.StaticFields[3];
+    var student = Model.StaticFields[4];
+}
+
+@section AdditionalFields {
+    <input type="hidden" id="@status.Id" value="@status.Placeholder" />
+    @await Html.PartialAsync("Fields/_Select", student)
+}
+
+@section AdditionalScripts {
+    <script src="/js/Generics/selects.js"></script>
+    <script>
+        loadStudentSelect();
+    </script>
+}

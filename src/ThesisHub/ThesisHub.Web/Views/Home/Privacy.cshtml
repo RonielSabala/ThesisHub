@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<style>
+    .privacy-content {
+        max-width: 800px;
+    }
+
+        .privacy-content p {
+            margin-bottom: 1rem;
+        }
+</style>
+
+<main class="container py-5">
+
+    <!-- Page Title & Update Date -->
+    <h1 class="text-center mb-2">@ViewData["Title"]</h1>
+    <p class="text-center text-muted mb-5">Last updated: April 16, 2025</p>
+
+    <!-- Privacy Sections Accordion -->
+    <section class="mx-auto privacy-content">
+        <div class="accordion" id="privacyAccordion">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingInfo">
+                    <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo">
+                        Information We Collect
+                    </button>
+                </h2>
+                <div id="collapseInfo" class="accordion-collapse collapse" aria-labelledby="headingInfo" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        We may collect personal details such as your name, email, university ID, and project information when you register and use our platform.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingUse">
+                    <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUse" aria-expanded="false" aria-controls="collapseUse">
+                        How We Use Your Information
+                    </button>
+                </h2>
+                <div id="collapseUse" class="accordion-collapse collapse" aria-labelledby="headingUse" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        Your data is used strictly for academic and administrative purposes, including managing thesis projects, assigning advisors, and tracking progress. We do not sell or share your information with third parties.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSecurity">
+                    <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSecurity" aria-expanded="false" aria-controls="collapseSecurity">
+                        Data Security
+                    </button>
+                </h2>
+                <div id="collapseSecurity" class="accordion-collapse collapse" aria-labelledby="headingSecurity" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        We implement technical and organizational measures to ensure the security of your data and prevent unauthorized access, disclosure, or loss.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingRights">
+                    <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRights" aria-expanded="false" aria-controls="collapseRights">
+                        User Rights
+                    </button>
+                </h2>
+                <div id="collapseRights" class="accordion-collapse collapse" aria-labelledby="headingRights" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        You have the right to access, update, or request deletion of your personal information at any time. If you have any concerns about your data, please reach out to our support team.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingChanges">
+                    <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChanges" aria-expanded="false" aria-controls="collapseChanges">
+                        Changes to This Policy
+                    </button>
+                </h2>
+                <div id="collapseChanges" class="accordion-collapse collapse" aria-labelledby="headingChanges" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        We may update this Privacy Policy as needed. All changes will be reflected on this page, and we encourage users to review it regularly.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>

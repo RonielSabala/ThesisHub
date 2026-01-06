@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "_Layout";
+    var Model = ViewData["ViewModel"] as BaseEntityViewModel;
+    var entity = Model.EntityPageName;
+    var routePrefix = $"/js/App/{Model.EntityName}s";
+}
+
+<style>
+    .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .entity-card {
+        border-radius: 1rem;
+    }
+
+    .entity-card .card-header {
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+    .entity-card .card-body {
+        padding: 2rem;
+    }
+
+    .action-buttons .btn {
+        min-width: 120px;
+    }
+</style>
+
+<div class="container center-screen py-5">
+    <div class="card shadow-sm entity-card w-100" style="max-width: 1000px;">
+        <div class="card-header bg-warning text-dark">
+            <h3 class="mb-0">Edit @entity</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="text-secondary mb-3">Update the necessary fields</h5>
+            <hr />
+
+            <form>
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                @await Html.PartialAsync("Fields/_DynamicFields", Model.DynamicFields)
+                @await RenderSectionAsync("AdditionalFields", required: true)
+
+                <div class="d-flex justify-content-between align-items-center mt-4 action-buttons">
+                    <button type="button" onclick="updateEntity(@Model.Id)" class="btn btn-warning btn-lg text-black">
+                        <i class="bi bi-pencil-square me-2"></i> Update
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-arrow-left-circle me-2"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/Generics/edit.js"></script>
+    <script src="@(routePrefix)/common.js"></script>
+    <script src="@(routePrefix)/edit.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadFormEntity(@Model.Id);
+        });
+    </script>
+
+    @await RenderSectionAsync("AdditionalScripts", required: false)
+}

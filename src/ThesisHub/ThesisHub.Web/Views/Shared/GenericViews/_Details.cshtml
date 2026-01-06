@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "_Layout";
+    var Model = ViewData["ViewModel"] as BaseEntityViewModel;
+    var entity = Model.EntityPageName;
+    var routePrefix = $"/js/App/{Model.EntityName}s";
+}
+
+<style>
+    .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .entity-card {
+        border-radius: 1rem;
+    }
+
+    .entity-card .card-header {
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+    .entity-card .card-body {
+        padding: 2rem;
+    }
+
+    .field-label {
+        font-weight: 500;
+        color: #555;
+    }
+
+    .field-value {
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 1rem;
+    }
+
+    .action-buttons .btn {
+        min-width: 120px;
+    }
+</style>
+
+<div class="container center-screen py-5">
+    <div class="card shadow-sm entity-card w-100" style="max-width: 1000px;">
+        <div class="card-header bg-info text-black">
+            <h3 class="mb-0">@entity Details</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="text-secondary mb-3">Fields</h5>
+            <hr />
+
+            <dl class="row">
+                @await Html.PartialAsync("Fields/_StaticFields", Model.StaticFields)
+                @await RenderSectionAsync("AdditionalFields", required: true)
+            </dl>
+
+            <div class="d-flex justify-content-end mt-4 action-buttons">
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-arrow-left-circle me-2"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/Generics/load_entity.js"></script>
+    <script src="@(routePrefix)/common.js"></script>
+    <script src="@(routePrefix)/load_entity.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadEntity(@Model.Id);
+        });
+    </script>
+
+    @await RenderSectionAsync("AdditionalScripts", required: false)
+}
