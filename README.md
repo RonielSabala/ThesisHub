@@ -1,6 +1,6 @@
 # ThesisHub
 
-**University Thesis Control System**
+## University Thesis Control System
 
 ThesisHub is a web application built with **C#** and **ASP.NET MVC** to register, manage and monitor university theses. The system allows students to submit thesis files, tutors to review and comment on submissions, and administrators to track thesis status. Each thesis can have multiple documents attached; documents belong to a student and can be reviewed by assigned tutors.
 
@@ -13,9 +13,7 @@ ThesisHub is a web application built with **C#** and **ASP.NET MVC** to register
 * [Requirements](#requirements)
 * [Quick Setup](#quick-setup)
 * [Run Locally](#run-locally)
-* [Troubleshooting](#troubleshooting)
 * [Contributing](#contributing)
-* [Authors](#authors)
 * [License](#license)
 
 ---
@@ -42,6 +40,8 @@ The database schema implements entities for `Students`, `Tutors`, `Departments`,
 * `Tutors` can be assigned to many `Theses` through `ThesisTutors` with a `tutor_role`.
 * `Comments` are made by tutors on documents.
 
+See `db/diagrams/ER-diagram.pdf` for the full diagram.
+
 ---
 
 ## Requirements
@@ -57,20 +57,20 @@ The database schema implements entities for `Students`, `Tutors`, `Departments`,
 
 1. Clone the repository and open the solution in Visual Studio, or use the command line:
 
-```bash
-git clone <repo-url>
-cd <repo-folder>
-```
+    ```bash
+    git clone <repo-url>
+    cd <repo-folder>
+    ```
 
 2. Restore NuGet packages (Visual Studio does this automatically) or run:
 
-```bash
-dotnet restore
-```
+    ```bash
+    dotnet restore
+    ```
 
 3. Configure the database connection and other settings in `appsettings.json` (see next section).
 
-4. Run `creation.sql` to create the database schema.
+4. Run `db/scripts/creation.sql` to create the database schema.
 
 5. Build and run the application.
 
