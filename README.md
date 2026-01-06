@@ -46,10 +46,9 @@ See `db/diagrams/ER-diagram.pdf` for the full diagram.
 
 ## Requirements
 
-* .NET SDK 6.0 or newer
+* .NET SDK 9.0 or newer
 * Visual Studio 2022 / Visual Studio Code
 * SQL Server
-* Optional: `dotnet-ef` tool for migrations
 
 ---
 
@@ -68,7 +67,7 @@ See `db/diagrams/ER-diagram.pdf` for the full diagram.
     dotnet restore
     ```
 
-3. Configure the database connection and other settings in `appsettings.json` (see next section).
+3. Configure the database connection in `appsettings.json`.
 
 4. Run `db/scripts/creation.sql` to create the database schema.
 
