@@ -1,16 +1,19 @@
-# ThesisHub - University Thesis Control System
+# ThesisHub
 
-ThesisHub is a web application built with **C#** and **ASP.NET MVC** to register, manage and monitor university theses. The system allows students to submit thesis files, tutors to review, comment on submissions, and administrators to track thesis status.
+ThesisHub is a web application built with **C#** and **ASP.NET MVC** to register, manage and monitor university theses. It provides a workflow for students to submit thesis files, tutors to review, comment on submissions, and administrators to manage the thesis lifecycle and users.
 
 ---
 
 ## Table of Contents
 
 * [Features](#features)
-* [Architecture / Data Model](#architecture--data-model)
+* [Architecture & Data Model](#architecture--data-model)
 * [Requirements](#requirements)
-* [Quick Setup](#quick-setup)
-* [Run Locally](#run-locally)
+* [Quick Start](#quick-start)
+  * [Clone the repository](#clone-the-repository)
+  * [Restore & Build](#restore--build)
+  * [Database setup](#database-setup)
+  * [Run locally](#run-locally)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -18,78 +21,78 @@ ThesisHub is a web application built with **C#** and **ASP.NET MVC** to register
 
 ## Features
 
-* Register and manage **theses**, **students**, **tutors**, and **departments**.
-* Assign tutors to theses with a specific role such as "Advisor", "Co-Advisor", etc.
+* Register and manage **Theses**, **Students**, **Tutors**, and **Departments**.
+* Assign tutors to theses with roles (e.g., `Advisor`, `Co-Advisor`).
 * Upload multiple document links per thesis.
-* Tutors can review and comment on documents.
-* Track thesis lifecycle status: **Open**, **Closed**, **Approved**, **Rejected**.
+* Tutors review and comment on documents.
+* Track thesis lifecycle statuses: `Open`, `Closed`, `Approved`, `Rejected`.
 * Simple admin dashboard to view theses by status and assigned tutors.
 
 ---
 
-## Architecture / Data Model
+## Architecture & Data Model
 
-The database schema implements entities for `Students`, `Tutors`, `Departments`, `Projects`, `ProjectTutors`, `Documents`, and `Comments`. The relationships are:
+Primary entities and relationships:
 
 * A `Department` has many `Students` and many `Tutors`.
 * A `Student` can create many `Theses`.
-* A `Thesis` can have many `Documents`.
-* A `Document` belongs to a single `Student` and a single `Thesis`.
-* `Tutors` can be assigned to many `Theses` through `ProjectTutors` with a `tutor_role`.
-* `Comments` are made by tutors on documents.
+* A `Thesis` belongs to a `Student`, has many `Documents`, and connects to `Tutors` via `ProjectTutors` that stores `tutor_role`.
+* A `Document` belongs to a single `Thesis` and is authored/owned by a `Student`.
+* A `Tutor` can have many assigned `Theses`; can comment on `Documents`.
+* A `Comment` is attached to a `Document`, authored by a `Tutor`.
 
-Go to `db/diagrams/ER-diagram.pdf` to see the full diagram.
+> For a full ER diagram, see `db/diagrams/ER-diagram.pdf`
 
 ---
 
 ## Requirements
 
 * .NET SDK 9.0 or newer
-* Visual Studio 2022
-* SQL Server
+* Visual Studio
+* SQL Server (Express or full)
+* sqlcmd
 
 ---
 
-## Quick Setup
+## Quick Start
 
-1. Clone the repository and open the solution in Visual Studio, or use the command line:
+### Clone the repository
 
-    ```bash
-    git clone <repo-url>
-    cd <repo-folder>
-    ```
+```bash
+git clone <repo-url>
+cd <repo-folder>
+```
 
-2. Restore NuGet packages or run:
+### Restore & Build
 
-    ```bash
-    dotnet restore
-    ```
+Restore NuGet packages and build the solution:
 
-3. Run `db/scripts/creation.sql` to create the database schema.
+```bash
+dotnet restore
+dotnet build --configuration Debug
+```
 
-    ```bash
-    sqlcmd -S .\SQLEXPRESS -i db/scripts/creation.sql
-    ```
+### Database setup
 
-4. Configure the database connection in `ThesisHub.API/appsettings.json`.
+From the repository root, run the DB install script:
 
-5. Configure the startup projects.
-* In Visual Studio:
-    - Right-click the solution → Set Startup Projects...
-      
-    - Select Multiple startup projects.
-        
-    - Set the action to Start for both ThesisHub.API and ThesisHub.Web.
-        
-    - Save and run the solution (F5).
-   
-6. Open your browser using the URLs displayed in the console.
+```bash
+sqlcmd -S .\SQLEXPRESS -i db/scripts/creation.sql
+```
 
----
+> This script will create required tables and sample data.
 
-## Run Locally
+### Run locally
 
-From Visual Studio: press F5 or run the project as a Console application.
+1. Open the solution in Visual Studio.
+
+2. Right-click the solution > **Configure Startup Projects...**
+
+3. Select **Multiple startup projects** and set both `ThesisHub.Web` and `ThesisHub.API` to **Start**.
+
+4. Save and run (F5).
+
+> Visual Studio will launch both projects and open the configured URLs.
 
 ---
 
@@ -99,7 +102,7 @@ Contributions are welcome. Suggested workflow:
 
 1. Fork the repository.
 2. Create a feature branch: `feature/my-change`.
-3. Commit changes and open a pull request describing the change and reason.
+3. Commit, push, and open a pull request describing the change and reason.
 
 ---
 
